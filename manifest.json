@@ -4,55 +4,55 @@
     "version": "v5.0",
     "url": "https://skills.sa.gov.au/assets/uploads/downloads/supportingSkilledCareers/Training-Fee-Framework-v5.0.pdf",
     "sha256": "ce6346208247de447ce6ec47e88deaafb800f304bbe7c8ef2e524a6a33dbbfff",
-    "fetched_at": "2026-09-30T15:58:13"
+    "fetched_at": "2026-09-30T16:32:25"
   },
   "Training-Fee-Framework-Attachment-1-Base-Rates-v5.0_2026-07-08-052439_tift.pdf": {
     "kind": "base_rates",
     "version": "v5.0",
     "url": "https://skills.sa.gov.au/assets/uploads/downloads/supportingSkilledCareers/Training-Fee-Framework-Attachment-1-Base-Rates-v5.0_2026-07-08-052439_tift.pdf",
     "sha256": "428356ea1ae6cfab148a1ceb7546dc44ab3553f4b60ac8809b4585e0ca8a4dbf",
-    "fetched_at": "2026-09-30T15:58:13"
+    "fetched_at": "2026-09-30T16:32:25"
   },
   "Training-Fee-Framework-Attachment-2-Course-Adjustments-v5.0.pdf": {
     "kind": "course_adjustments",
     "version": "v5.0",
     "url": "https://skills.sa.gov.au/assets/uploads/downloads/supportingSkilledCareers/Training-Fee-Framework-Attachment-2-Course-Adjustments-v5.0.pdf",
     "sha256": "51812dd42d4e33cbc51a9dba0cb28259e2ef9865e726cc4dc2db362042b1fa63",
-    "fetched_at": "2026-09-30T15:58:13"
+    "fetched_at": "2026-09-30T16:32:25"
   },
   "Training-Fee-Framework-Attachment-3-Post-Code-Mapping-v5.0.pdf": {
     "kind": "postcode_loading",
     "version": "v5.0",
     "url": "https://skills.sa.gov.au/assets/uploads/downloads/supportingSkilledCareers/Training-Fee-Framework-Attachment-3-Post-Code-Mapping-v5.0.pdf",
     "sha256": "269992fd0cb3677ccc0780cc352068853614bad61330aef053c588b02f3477c0",
-    "fetched_at": "2026-09-30T15:58:13"
+    "fetched_at": "2026-09-30T16:32:25"
   },
   "STL-12.0-TPL.pdf": {
     "kind": "stl_tpl",
     "version": "12.0",
     "url": "https://skills.sa.gov.au/assets/uploads/downloads/myTraining/STL-12.0-TPL.pdf",
     "sha256": "78c0253d8e983136777872a5fbb3c302013c22cedf4d292d4dff701cb4822728",
-    "fetched_at": "2026-09-30T15:58:13"
+    "fetched_at": "2026-09-30T16:32:25"
   },
   "STL-12.0-VSS-List.pdf": {
     "kind": "stl_vss-list",
     "version": "12.0",
     "url": "https://skills.sa.gov.au/assets/uploads/downloads/myTraining/STL-12.0-VSS-List.pdf",
     "sha256": "7515bc73b0c0b94855354b4d556f482af1105d7e2568852b383f556021a8c107",
-    "fetched_at": "2026-09-30T15:58:13"
+    "fetched_at": "2026-09-30T16:32:25"
   },
   "STL-12.0-STAL.pdf": {
     "kind": "stl_stal",
     "version": "12.0",
     "url": "https://skills.sa.gov.au/assets/uploads/downloads/STL-12.0-STAL.pdf",
     "sha256": "fa37feb0b33cfccb44f38385674c0113c3ac79b306419adec50517d08c927c74",
-    "fetched_at": "2026-09-30T15:58:13"
+    "fetched_at": "2026-09-30T16:32:25"
   },
   "managed-course-list-STL-12.0.pdf": {
     "kind": "managed_course_list",
     "version": "12.0",
     "url": "https://providers.skills.sa.gov.au/file/tools/managed-course-list",
     "sha256": "b8af902d23f4501069a6451e0841108af1b43ede1f7dd9392cfa2991498f2f02",
-    "fetched_at": "2026-09-30T15:58:13"
+    "fetched_at": "2026-09-30T16:32:25"
   }
 }

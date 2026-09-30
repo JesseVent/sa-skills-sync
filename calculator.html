@@ -105,6 +105,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1
     <button role="tab" data-tab="estimate">Estimate</button>
     <button role="tab" data-tab="bulk">Bulk claims</button>
     <button role="tab" data-tab="budget">Budget &amp; scenarios</button>
+    <button role="tab" data-tab="courses">Courses &amp; optimiser</button>
     <button role="tab" data-tab="data">Data &amp; rules</button>
   </nav>
 </header>
@@ -201,6 +202,61 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1
   </div>
 </section>
 
+<!-- ============ COURSES & OPTIMISER ============ -->
+<section id="tab-courses" role="tabpanel" hidden>
+  <div class="cols">
+    <div class="card">
+      <h2>Course data</h2>
+      <p class="sub" id="optDataInfo"></p>
+      <div class="row">
+        <button class="btn ghost" id="optProfilesBtn">Upload course profiles</button>
+        <button class="btn ghost" id="optOutcomesBtn">Upload course outcomes</button>
+        <input type="file" id="fileProfiles" accept=".csv,.xlsx" hidden><input type="file" id="fileOutcomes" accept=".csv,.xlsx" hidden>
+      </div>
+      <div class="hint">Profiles: <code>course_code, unit_code[, hours]</code> to cost courses with no history. Outcomes: <code>course_code, completion_rate, employment_rate, priority_weight</code>.</div>
+      <div class="status" id="optDataStatus"></div>
+      <h3>Plan</h3>
+      <div class="row">
+        <button class="btn ghost" id="optSave">Save plan (JSON)</button>
+        <button class="btn ghost" id="optLoad">Open plan (JSON)</button>
+        <input type="file" id="filePlan" accept=".json" hidden>
+        <button class="btn ghost" id="optExport">Export (XLSX)</button>
+        <button class="btn ghost" id="optClear">Clear course edits</button>
+      </div>
+      <div class="hint">Plans saved by Claude through the local MCP tool (<code>plans/*.json</code>) open here too.</div>
+    </div>
+    <div class="card">
+      <h2>Objective</h2>
+      <div class="levers">
+        <div><label for="oMode">Mode</label><select id="oMode"><option value="maximise">Best outcome for the budget</option><option value="min_cost">Value for money: cheapest way to hit targets</option></select></div>
+        <div><label for="oBudget">Budget ($)</label><input id="oBudget" type="number" step="1000" placeholder="baseline spend"></div>
+        <div><label for="oHead">Max growth per course (%)</label><input id="oHead" type="number" step="5" value="20"></div>
+        <div><label for="oFloor">Floor: min % of baseline</label><input id="oFloor" type="number" step="5" min="0" max="100" value="0"></div>
+        <div><label for="oNew">Max seats, new course</label><input id="oNew" type="number" step="5" value="50"></div>
+        <div><label for="oRto">RTO count if unknown</label><input id="oRto" type="number" step="1" min="1" value="1"></div>
+      </div>
+      <h3 id="oWeightsH">Weights per seat</h3>
+      <div class="levers" id="oWeights"></div>
+      <h3 id="oTargetsH">Targets (% of baseline; blank = no target)</h3>
+      <div class="levers" id="oTargets"></div>
+      <div class="row" style="margin-top:14px"><button class="btn" id="optRun">Optimise</button><span class="sub" id="optStatus"></span></div>
+    </div>
+  </div>
+  <div id="optTiles"></div>
+  <div class="card">
+    <h2>Courses <span class="sub" id="optCount"></span></h2>
+    <div class="row" style="margin-bottom:10px">
+      <select id="fStatus" style="width:auto"><option value="">All statuses</option><option value="demand">Demand driven</option><option value="managed">Managed</option><option value="off">Off-list</option></select>
+      <select id="fList" style="width:auto"><option value="">All lists</option><option>TPL</option><option>STAL</option><option>VSS</option></select>
+      <input id="fSearch" placeholder="Search code or title" style="width:220px">
+      <label class="check" style="margin:0"><input type="checkbox" id="fCosted" checked>Costed only</label>
+      <label class="check" style="margin:0"><input type="checkbox" id="fChanged">Changed only</label>
+    </div>
+    <div id="optTable"></div>
+    <div class="row" style="margin-top:8px"><button class="btn ghost" id="pgPrev">‹ Prev</button><span class="sub" id="pgInfo"></span><button class="btn ghost" id="pgNext">Next ›</button></div>
+  </div>
+</section>
+
 <!-- ============ DATA ============ -->
 <section id="tab-data" role="tabpanel" hidden>
   <div class="cols">
@@ -244,6 +300,8 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1
 <script src="vendor/xlsx.full.min.js"></script>
 <script src="data/rates.js"></script>
 <script src="calc.js"></script>
+<script src="data/stl.js"></script>
+<script src="sim.js"></script>
 <script>
 "use strict";
 const R = window.SA_RATES, C = window.SACalc;
@@ -263,8 +321,8 @@ const signed = (v) => (v > 0 ? "+" : v < 0 ? "−" : "±") + aud.format(Math.abs
 const pctChange = (a, b) => (a ? ((b - a) / a) * 100 : 0);
 const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
-if (!R || !C || !window.XLSX) {
-  document.querySelector("main").innerHTML = '<div class="fatal">Missing ' + [!R && "data/rates.js (run <code>python3 fetch.py</code>)", !C && "calc.js", !window.XLSX && "vendor/xlsx.full.min.js"].filter(Boolean).join(", ") + ". Keep calculator.html in the sa-skills-sync folder.</div>";
+if (!R || !C || !window.XLSX || !window.SASim || !window.SA_STL) {
+  document.querySelector("main").innerHTML = '<div class="fatal">Missing ' + [!R && "data/rates.js (run <code>python3 fetch.py</code>)", !C && "calc.js", !window.XLSX && "vendor/xlsx.full.min.js", !window.SASim && "sim.js", !window.SA_STL && "data/stl.js (run <code>python3 fetch.py</code>)"].filter(Boolean).join(", ") + ". Keep calculator.html in the sa-skills-sync folder.</div>";
   throw new Error("missing dependencies");
 }
 
@@ -278,6 +336,7 @@ function showTab(name) {
   store.set("sa-calc-tab", name);
   if (name === "budget") renderBudget();
   if (name === "data") renderData();
+  if (name === "courses") renderCourses();
 }
 document.querySelectorAll("nav button").forEach((b) => b.addEventListener("click", () => showTab(b.dataset.tab)));
 
@@ -417,6 +476,7 @@ wireDrop("dropClaims", "fileClaims", async (file) => {
 });
 function recomputeBulk() {
   state.baseline = null;
+  if (window.opt) { opt.dirty = true; opt.result = null; }
   if (!state.claimRows) { state.bulk = null; $("bulkOut").innerHTML = ""; return; }
   const out = (state.bulk = C.priceRows(C.makeContext(R), state.units, state.claimRows)), t = out.totals;
   const errs = out.results.filter((r) => !r.ok || r.errors.length);
@@ -566,6 +626,197 @@ function renderData() {
   ];
   $("dataKv").innerHTML = kv.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
 }
+
+// ---------- COURSES & OPTIMISER ----------
+const Sim = window.SASim, STL = window.SA_STL;
+const METRIC_LABEL = { places: "Places", completions: "Completions", employment: "Employment outcomes", priority: "Priority places" };
+window.opt = { plan: Sim.newPlan(), profiles: [], outcomes: [], table: null, dirty: true, result: null, page: 0, savedNote: "" };
+const pct = (v) => (Number.isFinite(v) ? numf(v * 100, 0) + "%" : "");
+async function getHighs() {
+  if (opt.highs) return opt.highs;
+  const load = (src) => new Promise((ok, bad) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = () => bad(new Error("could not load " + src)); document.head.appendChild(s); });
+  if (!window.Module) await load("vendor/highs.js");
+  if (!window.HIGHS_WASM_B64) await load("vendor/highs-wasm.js");
+  const bin = Uint8Array.from(atob(window.HIGHS_WASM_B64), (c) => c.charCodeAt(0));
+  // This HiGHS build ignores wasmBinary; instantiateWasm hands it the embedded bytes (no fetch, works on file://).
+  return (opt.highs = await window.Module({ instantiateWasm: (imports, done) => { WebAssembly.instantiate(bin, imports).then((r) => done(r.instance, r.module)); return {}; } }));
+}
+function optTable() {
+  if (opt.dirty || !opt.table) {
+    opt.table = Sim.buildCourseTable({ rates: R, stl: STL, units: state.units, priced: state.bulk, profiles: opt.profiles, outcomes: opt.outcomes, cfg: opt.plan.config });
+    opt.dirty = false;
+  }
+  return opt.table;
+}
+$("oWeights").innerHTML = Sim.METRICS.map((m) => `<div><label>${METRIC_LABEL[m]}</label><input type="number" step="0.1" min="0" data-w="${m}"></div>`).join("");
+$("oTargets").innerHTML = Sim.METRICS.map((m) => `<div><label>${METRIC_LABEL[m]}</label><input type="number" step="1" min="0" data-t="${m}" placeholder="—"></div>`).join("");
+function writeOptConfig() {
+  const c = opt.plan.config;
+  $("oMode").value = c.mode; $("oBudget").value = c.budget ?? ""; $("oHead").value = c.headroomPct; $("oFloor").value = c.floorPct || 0;
+  $("oNew").value = c.newCourseMaxSeats; $("oRto").value = c.defaultRtoCount;
+  document.querySelectorAll("[data-w]").forEach((i) => (i.value = c.weights[i.dataset.w]));
+  document.querySelectorAll("[data-t]").forEach((i) => (i.value = c.targets[i.dataset.t] ?? ""));
+  modeUI();
+}
+function readOptConfig() {
+  const c = opt.plan.config, n = (id, d) => ($(id).value === "" ? d : +$(id).value);
+  c.mode = $("oMode").value; c.budget = $("oBudget").value === "" ? null : +$("oBudget").value;
+  c.headroomPct = n("oHead", 20); c.floorPct = n("oFloor", 0); c.newCourseMaxSeats = n("oNew", 50); c.defaultRtoCount = n("oRto", 1);
+  document.querySelectorAll("[data-w]").forEach((i) => (c.weights[i.dataset.w] = i.value === "" ? 0 : +i.value));
+  c.targets = {}; document.querySelectorAll("[data-t]").forEach((i) => { if (i.value !== "") c.targets[i.dataset.t] = +i.value; });
+}
+function modeUI() {
+  const min = $("oMode").value === "min_cost";
+  $("oWeights").style.opacity = min ? 0.45 : 1; $("oTargets").style.opacity = min ? 1 : 0.45; $("oBudget").disabled = min;
+}
+document.querySelector("#tab-courses .cols .card:nth-child(2)").addEventListener("input", () => { readOptConfig(); modeUI(); });
+
+function resolvedRows() { return Sim.resolve(optTable(), opt.plan.courses, opt.plan.config); }
+function renderCourses() {
+  let rows;
+  try { rows = resolvedRows(); } catch (e) { $("optTable").innerHTML = `<p class="err-text">${esc(e.message)}</p>`; return; }
+  const costed = rows.filter((r) => Number.isFinite(r.cost_per_seat));
+  $("optDataInfo").textContent = `${rows.length} courses (STL ${STL.version}) · ${rows.filter((r) => r.source === "history").length} with claims history · ${rows.filter((r) => r.source === "profile").length} from profiles · ${costed.length} costed` + (state.bulk ? "" : " · load unit data and claims on the Bulk tab for history");
+  renderOptTiles(rows);
+  renderOptTable(rows);
+}
+function renderOptTiles(rows) {
+  const maxPri = Math.max(0, ...rows.map((r) => r.priority_weight || 0));
+  const base = Sim.evaluate(rows, (r) => r.baseline_seats, maxPri).totals;
+  const man = Sim.evaluate(rows, (r) => (r.planned_seats != null && !isNaN(r.planned_seats) ? r.planned_seats : r.baseline_seats), maxPri);
+  const res = opt.result, o = res && res.optimised;
+  const arrow = (k, fmt) => (o ? `${fmt(base[k])} → ${fmt(o[k])}` : `baseline ${fmt(base[k])}`);
+  const val = (k, fmt) => fmt(o ? o[k] : base[k]);
+  const d = (k) => (o && base[k] ? ` (${(o[k] >= base[k] ? "+" : "") + numf(pctChange(base[k], o[k]), 1)}%)` : "");
+  const shadow = res && res.shadow ? (res.shadow.value_per_million != null ? `${numf(res.shadow.value_per_million, 1)} outcome points per extra $1M`
+    : Object.entries(res.shadow).map(([k, v]) => `${money(v)} per extra ${k.replace("cost_per_extra_", "")}`).join(" · ")) : "";
+  const manualChanged = Object.values(opt.plan.courses).some((c) => c.planned_seats != null);
+  $("optTiles").innerHTML = `<div class="tiles">
+      ${tile(o ? "Optimised completions" : "Baseline completions", val("completions", (v) => numf(v, 1)), arrow("completions", (v) => numf(v, 1)) + d("completions"), true)}
+      ${tile("Employment outcomes", val("employment", (v) => numf(v, 1)), arrow("employment", (v) => numf(v, 1)) + d("employment"))}
+      ${tile("Seats", val("seats", (v) => numf(v)), arrow("seats", (v) => numf(v)) + d("seats"))}
+      ${tile("Spend", compact(o ? o.spend : base.spend), arrow("spend", compact) + d("spend"))}
+      ${tile("Cost per completion", money(o ? o.cost_per_completion : base.cost_per_completion), arrow("cost_per_completion", money))}
+      ${tile(res ? "Solver" : "Status", res ? res.status : "not optimised yet", res ? (res.message || shadow) : "press Optimise")}
+      ${manualChanged ? tile("Manual plan (planned seats)", compact(man.totals.spend), `${numf(man.totals.completions, 1)} completions · ${man.violations.length} cap breach(es)`) : ""}
+    </div>${man.violations.length ? `<div class="card"><h2>${manualChanged ? "Manual plan breaches" : "Current seats that break this plan's rules"} <span class="sub">${manualChanged ? "planned seats (baseline where not planned) above a course's limit" : "baseline enrolments above the new caps; the optimiser will reduce them"}</span></h2><ul class="plain err-text">${man.violations.slice(0, 20).map((v) => `<li>${esc(v)}</li>`).join("")}</ul></div>` : ""}`;
+}
+const PAGE = 100;
+function renderOptTable(rows) {
+  const f = { status: $("fStatus").value, list: $("fList").value, q: $("fSearch").value.trim().toLowerCase(), costed: $("fCosted").checked, changed: $("fChanged").checked };
+  const res = opt.result ? Object.fromEntries(opt.result.courses.map((c) => [c.course_code, c])) : {};
+  let list = rows.filter((r) => (!f.status || r.status === f.status) && (!f.list || r.lists.split("/").includes(f.list)) &&
+    (!f.q || (r.course_code + " " + r.title).toLowerCase().includes(f.q)) && (!f.costed || Number.isFinite(r.cost_per_seat)) &&
+    (!f.changed || opt.plan.courses[r.course_code] || (res[r.course_code] && res[r.course_code].delta)));
+  if (opt.result) list.sort((a, b) => Math.abs((res[b.course_code] || {}).delta || 0) * (b.cost_per_seat || 0) - Math.abs((res[a.course_code] || {}).delta || 0) * (a.cost_per_seat || 0));
+  opt.page = Math.min(opt.page, Math.max(0, Math.ceil(list.length / PAGE) - 1));
+  const page = list.slice(opt.page * PAGE, opt.page * PAGE + PAGE);
+  $("optCount").textContent = `${list.length} shown`;
+  $("pgInfo").textContent = list.length ? `${opt.page * PAGE + 1}–${opt.page * PAGE + page.length} of ${list.length}` : "";
+  const ov = (c, k) => (opt.plan.courses[c] || {})[k];
+  const inp = (r, k, v, w = 64) => `<input data-c="${esc(r.course_code)}" data-k="${k}" type="number" min="0" style="width:${w}px;padding:3px 5px" value="${ov(r.course_code, k) ?? ""}" placeholder="${v ?? ""}">`;
+  const head = ["Course", "AQF", "Lists", "Status", "RTO limit", "RTOs", "Baseline", "Min", "Max", "Planned", "Cost/seat", "Compl.", "Empl.", "Priority", "Optimised", "Change", "Binding", "Flags"];
+  const body = page.map((r) => {
+    const x = res[r.course_code] || {}, edited = !!opt.plan.courses[r.course_code];
+    return `<tr${edited ? ' style="font-weight:600"' : ""}>
+      <td title="${esc(r.title)}">${esc(r.course_code)}<div class="sub" style="max-width:260px;overflow:hidden;text-overflow:ellipsis;font-weight:400">${esc(r.title)}</div></td>
+      <td>${esc(r.aqf)}</td><td>${esc(r.lists)}</td>
+      <td><select data-c="${esc(r.course_code)}" data-k="status" style="width:auto;padding:3px">${["demand", "managed", "off"].map((s) => `<option${r.status === s ? " selected" : ""}>${s}</option>`).join("")}</select></td>
+      <td>${inp(r, "rto_limit", r.rto_limit, 56)}</td><td>${inp(r, "rto_count", r.rto_count ?? "?", 48)}</td>
+      <td class="n">${numf(r.baseline_seats)}</td><td>${inp(r, "min_seats", r.lb, 52)}</td><td>${inp(r, "max_seats", r.ub, 56)}</td><td>${inp(r, "planned_seats", "", 60)}</td>
+      <td class="n">${money(r.cost_per_seat)}</td><td class="n">${pct(r.completion_rate)}</td><td class="n">${pct(r.employment_rate)}</td>
+      <td>${inp(r, "priority_weight", r.priority_weight, 48)}</td>
+      <td class="n">${x.seats ?? ""}</td><td class="n">${x.delta ? (x.delta > 0 ? "+" : "") + x.delta : ""}</td><td>${esc(x.binding || "")}</td>
+      <td class="sub" title="${esc(r.flags.join("; "))}" style="max-width:180px;overflow:hidden;text-overflow:ellipsis">${esc(r.flags.join("; "))}</td></tr>`;
+  }).join("");
+  $("optTable").innerHTML = `<div class="table-wrap scroll"><table><thead><tr>${head.map((h, i) => `<th class="${[6, 10, 11, 12, 14, 15].includes(i) ? "n" : ""}">${h}</th>`).join("")}</tr></thead><tbody>${body}</tbody></table></div>`;
+}
+$("optTable").addEventListener("change", (e) => {
+  const el = e.target, c = el.dataset.c, k = el.dataset.k;
+  if (!c || !k) return;
+  const cur = Object.assign({}, opt.plan.courses[c]);
+  if (el.value === "" || (k === "status" && el.value === (optTable().find((r) => r.course_code === c) || {}).stl_status)) delete cur[k];
+  else cur[k] = k === "status" ? el.value : +el.value;
+  if (Object.keys(cur).length) opt.plan.courses[c] = cur; else delete opt.plan.courses[c];
+  $("optStatus").textContent = opt.result ? "Course edits changed; press Optimise to re-solve." : "";
+  renderCourses();
+});
+["fStatus", "fList", "fCosted", "fChanged"].forEach((id) => $(id).addEventListener("change", () => { opt.page = 0; renderCourses(); }));
+$("fSearch").addEventListener("input", () => { opt.page = 0; renderCourses(); });
+$("pgPrev").addEventListener("click", () => { opt.page = Math.max(0, opt.page - 1); renderCourses(); });
+$("pgNext").addEventListener("click", () => { opt.page += 1; renderCourses(); });
+
+$("optRun").addEventListener("click", async () => {
+  readOptConfig();
+  $("optRun").disabled = true; $("optStatus").textContent = opt.highs ? "Solving…" : "Loading solver (first run)…";
+  try {
+    const highs = await getHighs();
+    $("optStatus").textContent = "Solving…";
+    await new Promise((r) => setTimeout(r, 20));
+    const t0 = performance.now();
+    opt.result = Sim.optimise(optTable(), opt.plan, highs);
+    $("optStatus").textContent = `${opt.result.status}${opt.result.message ? ": " + opt.result.message : ""} · ${numf((performance.now() - t0) / 1000, 2)}s`;
+  } catch (e) {
+    if (e.solverDead) opt.highs = null;
+    $("optStatus").innerHTML = `<span class="err-text">${esc(e.message)}</span>`;
+  }
+  $("optRun").disabled = false; opt.page = 0;
+  renderCourses();
+});
+
+async function optUpload(inputId, btnId, kind) {
+  $(btnId).addEventListener("click", () => $(inputId).click());
+  $(inputId).addEventListener("change", async () => {
+    const f = $(inputId).files[0]; $(inputId).value = ""; if (!f) return;
+    const t = await readTable(f), n = (h) => h.toLowerCase().replace(/[^a-z]/g, "");
+    const col = (...names) => t.headers.find((h) => names.includes(n(h)));
+    const cc = col("coursecode", "course", "qualificationcode");
+    if (!cc) { $("optDataStatus").innerHTML = `<span class="err-text">${esc(f.name)}: needs a course_code column</span>`; return; }
+    if (kind === "profiles") {
+      const uc = col("unitcode", "unit"), hc = col("hours", "paymenthours", "nominalhours");
+      if (!uc) { $("optDataStatus").innerHTML = `<span class="err-text">${esc(f.name)}: needs a unit_code column</span>`; return; }
+      opt.profiles = t.rows.map((r) => ({ course_code: r[cc], unit_code: r[uc], hours: hc ? r[hc] : "" }));
+    } else {
+      const c1 = col("completionrate", "completion"), c2 = col("employmentrate", "employment", "employed"), c3 = col("priorityweight", "priority", "weight");
+      opt.outcomes = t.rows.map((r) => ({ course_code: r[cc], completion_rate: c1 ? r[c1] : "", employment_rate: c2 ? r[c2] : "", priority_weight: c3 ? r[c3] : "" }));
+    }
+    opt.dirty = true; opt.result = null;
+    $("optDataStatus").className = "status ok";
+    $("optDataStatus").textContent = `✓ ${f.name}: ${t.rows.length} rows (${kind})`;
+    renderCourses();
+  });
+}
+optUpload("fileProfiles", "optProfilesBtn", "profiles"); optUpload("fileOutcomes", "optOutcomesBtn", "outcomes");
+
+$("optSave").addEventListener("click", () => {
+  readOptConfig();
+  const r = opt.result;
+  const out = Object.assign({}, opt.plan, { saved: new Date().toISOString(), result: r && r.optimised ? { status: r.status, baseline: r.baseline, optimised: r.optimised, shadow: r.shadow,
+    seats: Object.fromEntries(r.courses.filter((c) => c.seats).map((c) => [c.course_code, c.seats])) } : null });
+  download("plan.json", JSON.stringify(out, null, 2), "application/json");
+});
+$("optLoad").addEventListener("click", () => $("filePlan").click());
+$("filePlan").addEventListener("change", async () => {
+  const f = $("filePlan").files[0]; $("filePlan").value = ""; if (!f) return;
+  try {
+    const p = JSON.parse(await f.text());
+    opt.plan = { version: 1, created: p.created, config: Object.assign(Sim.newPlan().config, p.config), courses: p.courses || {} };
+    opt.result = null; opt.dirty = true; writeOptConfig();
+    $("optStatus").textContent = `Opened ${f.name}${p.name ? " (" + p.name + ")" : ""}: ${Object.keys(opt.plan.courses).length} course edit(s). Press Optimise to solve against the loaded data.`;
+    renderCourses();
+  } catch (e) { $("optStatus").innerHTML = `<span class="err-text">Could not open plan: ${esc(e.message)}</span>`; }
+});
+$("optClear").addEventListener("click", () => { opt.plan.courses = {}; opt.result = null; renderCourses(); });
+$("optExport").addEventListener("click", () => {
+  const wb = XLSX.utils.book_new(), r = opt.result;
+  const courses = r ? r.courses : resolvedRows().map((x) => ({ course_code: x.course_code, title: x.title, aqf: x.aqf, lists: x.lists, status: x.status, baseline_seats: x.baseline_seats, cost_per_seat: x.cost_per_seat, flags: x.flags.join("; ") }));
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(courses.map((c) => Object.fromEntries(Object.entries(c).map(([k, v]) => [k, typeof v === "number" ? +v.toFixed(4) : v])))), "Courses");
+  if (r) XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(["baseline", "planned", "optimised"].filter((k) => r[k]).map((k) => ({ scenario: k, ...Object.fromEntries(Object.entries(r[k]).map(([a, b]) => [a, +(+b).toFixed(2)])) }))), "Totals");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(Object.entries(opt.plan.config).map(([k, v]) => ({ setting: k, value: typeof v === "object" ? JSON.stringify(v) : v }))), "Config");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(Object.entries(opt.plan.courses).map(([c, o]) => ({ course_code: c, ...o }))), "Course edits");
+  XLSX.writeFile(wb, "course-plan.xlsx");
+});
+writeOptConfig();
 
 showTab(store.get("sa-calc-tab") || "estimate");
 renderEstimate();

@@ -39,6 +39,7 @@
       qualification_issued: ["qualificationissued", "completed", "completion", "qualissued", "issued"],
       volume: ["volume", "count", "weight", "multiplier", "students", "enrolments", "n"],
       aqf_level: ["aqflevel", "aqf", "level"],
+      provider_id: ["providerid", "provider", "rto", "rtoid", "rtocode", "tradingname", "organisationid", "toid"],
     },
   };
   const REQUIRED = { units: ["unit_code", "foe_code", "payment_hours"], claims: ["course_code", "unit_code", "postcode"] };
@@ -152,7 +153,7 @@
     const rplFactor = rpl ? (RPL_HALF.has(course.aqf) ? ctx.rplFactor : 0) : 1;
 
     const out = {
-      student_id: raw.student_id == null ? "" : String(raw.student_id), course_code: course.code, course_name: course.name,
+      student_id: raw.student_id == null ? "" : String(raw.student_id), provider_id: raw.provider_id == null ? "" : String(raw.provider_id).trim(), course_code: course.code, course_name: course.name,
       aqf: course.aqf || "", unit_code: code(raw.unit_code), unit_name: u ? u.name : "", foe: u ? u.foe : "",
       postcode: pc(raw.postcode), location: loc.location, region: loc.region || "", loading_pct: loc.loading == null ? "" : loc.loading * 100,
       hours, volume, result_code: result, rpl, concession, exempt,
