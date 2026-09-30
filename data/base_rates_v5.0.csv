@@ -1,0 +1,357 @@
+foe_code,foe_name,rate_per_hour,effective_from,rate_2026-27_indexed
+010101,ASCED6 - Mathematics,10.90,9/09/2022,11.83
+010103,ASCED6 - Statistics,10.61,9/09/2022,11.51
+010199,"ASCED6 - Mathematical Sciences, N.e.c.",10.61,9/09/2022,11.51
+010301,ASCED6 - Physics,9.43,9/09/2022,10.23
+010303,ASCED6 - Astronomy,9.43,9/09/2022,10.23
+010501,ASCED6 - Organic Chemistry,9.43,9/09/2022,10.23
+010503,ASCED6 - Inorganic Chemistry,9.43,9/09/2022,10.23
+010599,"ASCED6 - Chemical Sciences, N.e.c.",9.43,9/09/2022,10.23
+010701,ASCED6 - Atmospheric Sciences,9.43,9/09/2022,10.23
+010703,ASCED6 - Geology,10.61,9/09/2022,11.51
+010705,ASCED6 - Geophysics,10.02,9/09/2022,10.87
+010707,ASCED6 - Geochemistry,9.43,9/09/2022,10.23
+010709,ASCED6 - Soil Science,10.02,9/09/2022,10.87
+010711,ASCED6 - Hydrology,10.61,9/09/2022,11.51
+010713,ASCED6 - Oceanography,9.43,9/09/2022,10.23
+010799,"ASCED6 - Earth Sciences, N.e.c.",9.43,9/09/2022,10.23
+010901,ASCED6 - Biochemistry And Cell Biology,9.43,9/09/2022,10.23
+010903,ASCED6 - Botany,10.02,9/09/2022,10.87
+010905,ASCED6 - Ecology And Evolution,9.43,9/09/2022,10.23
+010907,ASCED6 - Marine Science,9.43,9/09/2022,10.23
+010909,ASCED6 - Genetics,9.43,9/09/2022,10.23
+010911,ASCED6 - Microbiology,9.43,9/09/2022,10.23
+010913,ASCED6 - Human Biology,8.84,9/09/2022,9.59
+010915,ASCED6 - Zoology,9.43,9/09/2022,10.23
+010999,"ASCED6 - Biological Sciences, N.e.c.",9.43,9/09/2022,10.23
+019901,ASCED6 - Medical Science,9.43,9/09/2022,10.23
+019903,ASCED6 - Forensic Science,9.43,9/09/2022,10.23
+019905,ASCED6 - Food Science And Biotechnology,10.02,9/09/2022,10.87
+019907,ASCED6 - Pharmacology,9.43,9/09/2022,10.23
+019909,ASCED6 - Laboratory Technology,11.79,9/09/2022,12.79
+019999,"ASCED6 - Natural And Physical Sciences, N.e.c.",9.43,9/09/2022,10.23
+020101,ASCED6 - Formal Language Theory,8.25,9/09/2022,8.95
+020103,ASCED6 - Programming,8.84,9/09/2022,9.59
+020105,ASCED6 - Computational Theory,8.25,9/09/2022,8.95
+020107,ASCED6 - Compiler Construction,8.25,9/09/2022,8.95
+020109,ASCED6 - Algorithms,8.25,9/09/2022,8.95
+020111,ASCED6 - Data Structures,8.25,9/09/2022,8.95
+020113,ASCED6 - Networks And Communications,8.25,9/09/2022,8.95
+020115,ASCED6 - Computer Graphics,9.43,9/09/2022,10.23
+020117,ASCED6 - Operating Systems,8.25,9/09/2022,8.95
+020119,ASCED6 - Artificial Intelligence,8.55,9/09/2022,9.28
+020199,"ASCED6 - Computer Science, N.e.c.",8.25,9/09/2022,8.95
+020301,ASCED6 - Conceptual Modelling,8.25,9/09/2022,8.95
+020303,ASCED6 - Database Management,8.25,9/09/2022,8.95
+020305,ASCED6 - Systems Analysis And Design,9.73,9/09/2022,10.56
+020307,ASCED6 - Decision Support Systems,8.25,9/09/2022,8.95
+020399,"ASCED6 - Information Systems, N.e.c.",7.66,9/09/2022,8.31
+029901,ASCED6 - Security Science,8.25,9/09/2022,8.95
+029999,"ASCED6 - Information Technology, N.e.c.",8.25,9/09/2022,8.95
+030101,ASCED6 - Manufacturing Engineering,17.68,9/09/2022,19.18
+030103,ASCED6 - Printing,17.68,9/09/2022,19.18
+030105,ASCED6 - Textile Making,10.90,9/09/2022,11.83
+030107,ASCED6 - Garment Making,10.02,9/09/2022,10.87
+030109,ASCED6 - Footwear Making,11.20,9/09/2022,12.15
+030111,ASCED6 - Wood Machining And Turning,17.09,9/09/2022,18.54
+030113,ASCED6 - Cabinet Making,13.56,9/09/2022,14.71
+030115,ASCED6 - Furniture Upholstery And Renovation,15.92,9/09/2022,17.27
+030117,ASCED6 - Furniture Polishing,13.56,9/09/2022,14.71
+030199,"ASCED6 - Manufacturing Engineering And Technology, N.e.c.",14.15,9/09/2022,15.35
+030301,ASCED6 - Chemical Engineering,11.79,9/09/2022,12.79
+030303,ASCED6 - Mining Engineering,14.15,9/09/2022,15.35
+030305,ASCED6 - Materials Engineering,17.68,9/09/2022,19.18
+030307,ASCED6 - Food Processing Technology,14.74,9/09/2022,15.99
+030399,"ASCED6 - Process And Resources Engineering, N.e.c.",16.50,9/09/2022,17.90
+030501,ASCED6 - Automotive Engineering,12.97,9/09/2022,14.07
+030503,ASCED6 - Vehicle Mechanics,14.44,9/09/2022,15.67
+030505,ASCED6 - Automotive Electrics And Electronics,14.44,9/09/2022,15.67
+030507,ASCED6 - Automotive Vehicle Refinishing,15.92,9/09/2022,17.27
+030509,ASCED6 - Automotive Body Construction,15.62,9/09/2022,16.95
+030511,ASCED6 - Panel Beating,15.92,9/09/2022,17.27
+030513,ASCED6 - Upholstery And Vehicle Trimming,11.79,9/09/2022,12.79
+030515,ASCED6 - Automotive Vehicle Operations,12.97,9/09/2022,14.07
+030599,"ASCED6 - Automotive Engineering And Technology, N.e.c.",9.43,9/09/2022,10.23
+030701,ASCED6 - Mechanical Engineering,17.68,9/09/2022,19.18
+030703,ASCED6 - Industrial Engineering,15.92,9/09/2022,17.27
+030705,ASCED6 - Toolmaking,16.50,9/09/2022,17.90
+030707,"ASCED6 - Metal Fitting, Turning And MacHining",18.86,9/09/2022,20.46
+030709,ASCED6 - Sheetmetal Working,18.27,9/09/2022,19.82
+030711,ASCED6 - Boilermaking And Welding,18.86,9/09/2022,20.46
+030713,ASCED6 - Metal Casting And Patternmaking,18.27,9/09/2022,19.82
+030715,ASCED6 - Precision Metalworking,18.27,9/09/2022,19.82
+030717,ASCED6 - Plant And Machine Operations,18.27,9/09/2022,19.82
+030799,N.e.c.,18.27,9/09/2022,19.82
+030901,ASCED6 - Construction Engineering,18.86,9/09/2022,20.46
+030903,ASCED6 - Structural Engineering,9.43,9/09/2022,10.23
+030905,ASCED6 - Building Services Engineering,11.79,9/09/2022,12.79
+030907,ASCED6 - Water And Sanitary Engineering,13.56,9/09/2022,14.71
+030909,ASCED6 - Transport Engineering,11.79,9/09/2022,12.79
+030911,ASCED6 - Geotechnical Engineering,11.79,9/09/2022,12.79
+030913,ASCED6 - Ocean Engineering,9.43,9/09/2022,10.23
+030999,"ASCED6 - Civil Engineering, N.e.c.",11.79,9/09/2022,12.79
+031101,ASCED6 - Surveying,11.20,9/09/2022,12.15
+031103,ASCED6 - Mapping Science,10.61,9/09/2022,11.51
+031199,"ASCED6 - Geomatic Engineering, N.e.c.",11.20,9/09/2022,12.15
+031301,ASCED6 - Electrical Engineering,15.62,9/09/2022,16.95
+031303,ASCED6 - Electronic Engineering,18.00,9/09/2022,19.53
+031305,ASCED6 - Computer Engineering,14.74,9/09/2022,15.99
+031307,ASCED6 - Communications Technologies,13.56,9/09/2022,14.71
+031309,ASCED6 - Communications Equipment Installation And Maintenance,18.59,9/09/2022,20.17
+031311,ASCED6 - Powerline Installation And Maintenance,17.41,9/09/2022,18.89
+031313,"ASCED6 - Electrical Fitting, Electrical Mechanics",20.06,9/09/2022,21.76
+031315,ASCED6 - Refrigeration And Air Conditioning Mechanics,20.06,9/09/2022,21.76
+031317,ASCED6 - Electronic Equipment Servicing,20.36,9/09/2022,22.09
+031399,"ASCED6 - Electrical And Electronic Engineering And Technology, N.e.c.",19.18,9/09/2022,20.81
+031501,ASCED6 - Aerospace Engineering,15.33,9/09/2022,16.63
+031503,ASCED6 - Aircraft Maintenance Engineering,20.04,9/09/2022,21.74
+031505,ASCED6 - Aircraft Operation,18.86,9/09/2022,20.46
+031507,ASCED6 - Air Traffic Control,10.61,9/09/2022,11.51
+031599,"ASCED6 - Aerospace Engineering And Technology, N.e.c.",15.33,9/09/2022,16.63
+031701,ASCED6 - Maritime Engineering,15.03,9/09/2022,16.31
+031703,ASCED6 - Marine Construction,15.92,9/09/2022,17.27
+031705,ASCED6 - Marine Craft Operation,16.21,9/09/2022,17.59
+031799,"ASCED6 - Maritime Engineering And Technology, N.e.c.",14.15,9/09/2022,15.35
+039901,ASCED6 - Environmental Engineering,10.61,9/09/2022,11.51
+039903,ASCED6 - Biomedical Engineering,11.20,9/09/2022,12.15
+039905,ASCED6 - Fire Technology,14.15,9/09/2022,15.35
+039907,ASCED6 - Rail Operations,10.61,9/09/2022,11.51
+039909,ASCED6 - Cleaning,7.96,9/09/2022,8.64
+039999,"ASCED6 - Engineering And Related Technologies, N.e.c.",10.61,9/09/2022,11.51
+040101,ASCED6 - Architecture,10.02,9/09/2022,10.87
+040103,ASCED6 - Urban Design And Regional Planning,10.02,9/09/2022,10.87
+040105,ASCED6 - Landscape Architecture,11.20,9/09/2022,12.15
+040107,ASCED6 - Interior And Environmental Design,9.43,9/09/2022,10.23
+040199,"ASCED6 - Architecture And Urban Environment, N.e.c.",9.43,9/09/2022,10.23
+040301,ASCED6 - Building Science And Technology,14.74,9/09/2022,15.99
+040303,ASCED6 - Building Construction Management,10.61,9/09/2022,11.51
+040305,ASCED6 - Building Surveying,10.61,9/09/2022,11.51
+040307,ASCED6 - Building Construction Economics,10.61,9/09/2022,11.51
+040309,ASCED6 - Bricklaying And Stonemasonry,16.50,9/09/2022,17.90
+040311,ASCED6 - Carpentry And Joinery,18.27,9/09/2022,19.82
+040313,"ASCED6 - Ceiling, Wall And Floor Fixing",16.21,9/09/2022,17.59
+040315,ASCED6 - Roof Fixing,15.33,9/09/2022,16.63
+040317,ASCED6 - Plastering,16.21,9/09/2022,17.59
+040319,ASCED6 - Furnishing Installation,10.61,9/09/2022,11.51
+040321,ASCED6 - Floor Coverings,15.03,9/09/2022,16.31
+040323,ASCED6 - Glazing,14.15,9/09/2022,15.35
+040325,"ASCED6 - Painting, Decorating And Sign Writing",14.74,9/09/2022,15.99
+040327,ASCED6 - Plumbing,21.69,9/09/2022,23.53
+040329,ASCED6 - Scaffolding And Rigging,14.15,9/09/2022,15.35
+040399,"ASCED6 - Building, N.e.c.",16.50,9/09/2022,17.90
+050101,ASCED6 - Agricultural Science,11.20,9/09/2022,12.15
+050103,ASCED6 - Wool Science,10.90,9/09/2022,11.83
+050105,ASCED6 - Animal Husbandry,12.97,9/09/2022,14.07
+050199,"ASCED6 - Agriculture, N.e.c.",10.61,9/09/2022,11.51
+050301,ASCED6 - Horticulture,12.38,9/09/2022,13.43
+050303,ASCED6 - Viticulture,10.32,9/09/2022,11.20
+050501,ASCED6 - Forestry Studies,17.68,9/09/2022,19.18
+050701,ASCED6 - Aquaculture,13.26,9/09/2022,14.39
+050799,"ASCED6 - Fisheries Studies, N.e.c.",13.26,9/09/2022,14.39
+050901,"ASCED6 - Land, Parks And Wildlife Management",10.61,9/09/2022,11.51
+050999,"ASCED6 - Environmental Studies, N.e.c.",8.84,9/09/2022,9.59
+059901,ASCED6 - Pest And Weed Control,10.90,9/09/2022,11.83
+059999,"ASCED6 - Agriculture, Environmental And Related Studies, N.e.c.",8.84,9/09/2022,9.59
+060101,ASCED6 - General Medicine,8.84,9/09/2022,9.59
+060103,ASCED6 - Surgery,9.43,9/09/2022,10.23
+060105,ASCED6 - Psychiatry,9.43,9/09/2022,10.23
+060107,ASCED6 - Obstetrics And Gynaecology,9.43,9/09/2022,10.23
+060109,ASCED6 - Paediatrics,9.43,9/09/2022,10.23
+060111,ASCED6 - Anaesthesiology,9.43,9/09/2022,10.23
+060113,ASCED6 - Pathology,9.43,9/09/2022,10.23
+060115,ASCED6 - Radiology,9.43,9/09/2022,10.23
+060117,ASCED6 - Internal Medicine,9.43,9/09/2022,10.23
+060119,ASCED6 - General Practice,9.43,9/09/2022,10.23
+060199,"ASCED6 - Medical Studies, N.e.c.",9.43,9/09/2022,10.23
+060301,ASCED6 - General Nursing,10.02,9/09/2022,10.87
+060303,ASCED6 - Midwifery,10.02,9/09/2022,10.87
+060305,ASCED6 - Mental Health Nursing,10.02,9/09/2022,10.87
+060307,ASCED6 - Community Nursing,10.02,9/09/2022,10.87
+060309,ASCED6 - Critical Care Nursing,10.02,9/09/2022,10.87
+060311,ASCED6 - Aged Care Nursing,10.02,9/09/2022,10.87
+060313,ASCED6 - Palliative Care Nursing,10.02,9/09/2022,10.87
+060315,ASCED6 - Mothercraft Nursing And Family And Child Health Nursing,10.02,9/09/2022,10.87
+060399,"ASCED6 - Nursing, N.e.c.",10.02,9/09/2022,10.87
+060501,ASCED6 - Pharmacy,9.43,9/09/2022,10.23
+060701,ASCED6 - Dentistry,18.86,9/09/2022,20.46
+060703,ASCED6 - Dental Assisting,18.86,9/09/2022,20.46
+060705,ASCED6 - Dental Technology,16.50,9/09/2022,17.90
+060799,"ASCED6 - Dental Studies, N.e.c.",10.61,9/09/2022,11.51
+060901,ASCED6 - Optometry,8.84,9/09/2022,9.59
+060903,ASCED6 - Optical Technology,8.84,9/09/2022,9.59
+060999,"ASCED6 - Optical Science, N.e.c.",8.84,9/09/2022,9.59
+061101,ASCED6 - Veterinary Science,10.61,9/09/2022,11.51
+061103,ASCED6 - Veterinary Assisting,13.56,9/09/2022,14.71
+061199,"ASCED6 - Veterinary Studies, N.e.c.",9.43,9/09/2022,10.23
+061301,ASCED6 - Occupational Health And Safety,8.84,9/09/2022,9.59
+061303,ASCED6 - Environmental Health,8.55,9/09/2022,9.28
+061305,ASCED6 - Indigenous Health,10.02,9/09/2022,10.87
+061307,ASCED6 - Health Promotion,9.43,9/09/2022,10.23
+061309,ASCED6 - Community Health,10.02,9/09/2022,10.87
+061311,ASCED6 - Epidemiology,8.84,9/09/2022,9.59
+061399,"ASCED6 - Public Health, N.e.c.",8.84,9/09/2022,9.59
+061501,ASCED6 - Radiography,9.43,9/09/2022,10.23
+061701,ASCED6 - Physiotherapy,9.43,9/09/2022,10.23
+061703,ASCED6 - Occupational Therapy,8.25,9/09/2022,8.95
+061705,ASCED6 - Chiropractic And Osteopathy,9.43,9/09/2022,10.23
+061707,ASCED6 - Speech Pathology,8.84,9/09/2022,9.59
+061709,ASCED6 - Audiology,8.84,9/09/2022,9.59
+061711,ASCED6 - Massage Therapy,11.38,9/09/2022,12.35
+061713,ASCED6 - Podiatry,10.02,9/09/2022,10.87
+061799,"ASCED6 - Rehabilitation Therapies, N.e.c.",9.43,9/09/2022,10.23
+061901,ASCED6 - Naturopathy,8.84,9/09/2022,9.59
+061903,ASCED6 - Acupuncture,8.84,9/09/2022,9.59
+061905,ASCED6 - Traditional Chinese Medicine,8.84,9/09/2022,9.59
+061999,"ASCED6 - Complementary Therapies, N.e.c.",8.84,9/09/2022,9.59
+069901,ASCED6 - Nutrition And Dietetics,10.02,9/09/2022,10.87
+069903,ASCED6 - Human Movement,8.25,9/09/2022,8.95
+069905,ASCED6 - Paramedical Studies,9.43,9/09/2022,10.23
+069907,ASCED6 - First Aid,10.02,9/09/2022,10.87
+069999,"ASCED6 - Health, N.e.c.",8.25,9/09/2022,8.95
+070101,ASCED6 - Teacher Education: Early Childhood,9.43,9/09/2022,10.23
+070103,ASCED6 - Teacher Education: Primary,9.43,9/09/2022,10.23
+070105,ASCED6 - Teacher Education: Secondary,8.25,9/09/2022,8.95
+070107,ASCED6 - Teacher-Librarianship,8.25,9/09/2022,8.95
+070109,ASCED6 - Teacher Education: Vocational Education And Training,9.14,9/09/2022,9.92
+070111,ASCED6 - Teacher Education: Higher Education,8.25,9/09/2022,8.95
+070113,ASCED6 - Teacher Education: Special Education,8.84,9/09/2022,9.59
+070115,ASCED6 - English As A Second Language Teaching,8.84,9/09/2022,9.59
+070117,ASCED6 - Nursing Education Teacher Training,8.84,9/09/2022,9.59
+070199,"ASCED6 - Teacher Education, N.e.c.",8.84,9/09/2022,9.59
+070301,ASCED6 - Curriculum Studies,8.25,9/09/2022,8.95
+070303,ASCED6 - Education Studies,8.25,9/09/2022,8.95
+079999,"ASCED6 - Education, N.e.c.",8.25,9/09/2022,8.95
+080101,ASCED6 - Accounting,8.25,9/09/2022,8.95
+080301,ASCED6 - Business Management,7.07,9/09/2022,7.67
+080303,ASCED6 - Human Resource Management,7.66,9/09/2022,8.31
+080305,ASCED6 - Personal Management Training,7.07,9/09/2022,7.67
+080307,ASCED6 - Organisation Management,7.66,9/09/2022,8.31
+080309,ASCED6 - Industrial Relations,7.66,9/09/2022,8.31
+080311,ASCED6 - International Business,7.07,9/09/2022,7.67
+080313,ASCED6 - Public And Health Care Administration,7.66,9/09/2022,8.31
+080315,ASCED6 - Project Management,7.07,9/09/2022,7.67
+080317,ASCED6 - Quality Management,9.43,9/09/2022,10.23
+080319,ASCED6 - Hospitality Management,7.66,9/09/2022,8.31
+080321,ASCED6 - Farm Management And Agribusiness,8.84,9/09/2022,9.59
+080323,ASCED6 - Tourism Management,7.07,9/09/2022,7.67
+080399,"ASCED6 - Business And Management, N.e.c.",7.66,9/09/2022,8.31
+080501,ASCED6 - Sales,7.07,9/09/2022,7.67
+080503,ASCED6 - Real Estate,7.07,9/09/2022,7.67
+080505,ASCED6 - Marketing,7.07,9/09/2022,7.67
+080507,ASCED6 - Advertising,7.07,9/09/2022,7.67
+080509,ASCED6 - Public Relations,7.07,9/09/2022,7.67
+080599,"ASCED6 - Sales And Marketing, N.e.c.",7.07,9/09/2022,7.67
+080701,ASCED6 - Tourism,7.07,9/09/2022,7.67
+080901,ASCED6 - Secretarial And Clerical Studies,7.07,9/09/2022,7.67
+080903,ASCED6 - Keyboard Skills,7.07,9/09/2022,7.67
+080905,ASCED6 - Practical Computing Skills,8.55,9/09/2022,9.28
+080999,"ASCED6 - Office Studies, N.e.c.",7.07,9/09/2022,7.67
+081101,ASCED6 - Banking And Finance,7.07,9/09/2022,7.67
+081103,ASCED6 - Insurance And Actuarial Studies,7.07,9/09/2022,7.67
+081105,ASCED6 - Investment And Securities,7.07,9/09/2022,7.67
+081199,"ASCED6 - Banking, Finance And Related Fields, N.e.c.",7.66,9/09/2022,8.31
+089901,"ASCED6 - Purchasing, Warehousing And Distribution",8.25,9/09/2022,8.95
+089903,ASCED6 - Valuation,7.07,9/09/2022,7.67
+089999,"ASCED6 - Management And Commerce, N.e.c.",7.07,9/09/2022,7.67
+090101,ASCED6 - Political Science,8.25,9/09/2022,8.95
+090103,ASCED6 - Policy Studies,8.25,9/09/2022,8.95
+090301,ASCED6 - Sociology,7.66,9/09/2022,8.31
+090303,ASCED6 - Anthropology,7.66,9/09/2022,8.31
+090305,ASCED6 - History,7.66,9/09/2022,8.31
+090307,ASCED6 - Archaeology,7.66,9/09/2022,8.31
+090309,ASCED6 - Human Geography,7.66,9/09/2022,8.31
+090311,ASCED6 - Indigenous Studies,10.02,9/09/2022,10.87
+090313,ASCED6 - Gender Specific Studies,8.25,9/09/2022,8.95
+090399,"ASCED6 - Studies In Human Society, N.e.c.",8.25,9/09/2022,8.95
+090501,ASCED6 - Social Work,10.02,9/09/2022,10.87
+090503,ASCED6 - Children’s Services,10.02,9/09/2022,10.87
+090505,ASCED6 - Youth Work,10.02,9/09/2022,10.87
+090507,ASCED6 - Care For The Aged,10.02,9/09/2022,10.87
+090509,ASCED6 - Care For The Disabled,10.02,9/09/2022,10.87
+090511,ASCED6 - Residential Client Care,10.02,9/09/2022,10.87
+090513,ASCED6 - Counselling,10.02,9/09/2022,10.87
+090515,ASCED6 - Welfare Studies,10.02,9/09/2022,10.87
+090599,"ASCED6 - Human Welfare Studies And Services, N.e.c.",10.02,9/09/2022,10.87
+090701,ASCED6 - Psychology,9.43,9/09/2022,10.23
+090799,"ASCED6 - Behavioural Science, N.e.c.",9.43,9/09/2022,10.23
+090901,ASCED6 - Business And Commercial Law,7.66,9/09/2022,8.31
+090903,ASCED6 - Constitutional Law,7.07,9/09/2022,7.67
+090905,ASCED6 - Criminal Law,7.07,9/09/2022,7.67
+090907,ASCED6 - Family Law,8.25,9/09/2022,8.95
+090909,ASCED6 - International Law,7.07,9/09/2022,7.67
+090911,ASCED6 - Taxation Law,7.07,9/09/2022,7.67
+090913,ASCED6 - Legal Practice,7.66,9/09/2022,8.31
+090999,"ASCED6 - Law, N.e.c.",7.07,9/09/2022,7.67
+091101,ASCED6 - Justice Administration,8.25,9/09/2022,8.95
+091103,ASCED6 - Legal Studies,8.25,9/09/2022,8.95
+091105,ASCED6 - Police Studies,8.84,9/09/2022,9.59
+091199,"ASCED6 - Justice And Law Enforcement, N.e.c.",8.25,9/09/2022,8.95
+091301,ASCED6 - Librarianship And Information Management,7.66,9/09/2022,8.31
+091303,ASCED6 - Curatorial Studies,7.66,9/09/2022,8.31
+091501,ASCED6 - English Language,9.43,9/09/2022,10.23
+091503,ASCED6 - Northern European Languages,8.84,9/09/2022,9.59
+091505,ASCED6 - Southern European Languages,8.84,9/09/2022,9.59
+091507,ASCED6 - Eastern European Languages,8.84,9/09/2022,9.59
+091509,ASCED6 - Southwest Asian And North African Languages,8.84,9/09/2022,9.59
+091511,ASCED6 - Southern Asian Languages,8.84,9/09/2022,9.59
+091513,ASCED6 - Southeast Asian Languages,8.84,9/09/2022,9.59
+091515,ASCED6 - Eastern Asian Languages,8.84,9/09/2022,9.59
+091517,ASCED6 - Australian Indigenous Languages,9.43,9/09/2022,10.23
+091519,ASCED6 - Translating And Interpreting,9.43,9/09/2022,10.23
+091521,ASCED6 - Linguistics,9.14,9/09/2022,9.92
+091523,ASCED6 - Literature,7.07,9/09/2022,7.67
+091599,"ASCED6 - Language And Literature, N.e.c.",9.43,9/09/2022,10.23
+091701,ASCED6 - Philosophy,8.25,9/09/2022,8.95
+091703,ASCED6 - Religious Studies,8.25,9/09/2022,8.95
+091901,ASCED6 - Economics,8.25,9/09/2022,8.95
+091903,ASCED6 - Econometrics,8.25,9/09/2022,8.95
+092101,ASCED6 - Sport And Recreation Activities,8.84,9/09/2022,9.59
+092103,"ASCED6 - Sports Coaching, Officiating And Instruction",8.84,9/09/2022,9.59
+092199,"ASCED6 - Sport And Recreation, N.e.c.",8.84,9/09/2022,9.59
+099901,ASCED6 - Family And Consumer Studies,7.07,9/09/2022,7.67
+099903,ASCED6 - Criminology,7.07,9/09/2022,7.67
+099905,ASCED6 - Security Services,7.96,9/09/2022,8.64
+099999,"ASCED6 - Society And Culture, N.e.c.",7.07,9/09/2022,7.67
+100101,ASCED6 - Music,9.14,9/09/2022,9.92
+100103,ASCED6 - Drama And Theatre Studies,9.14,9/09/2022,9.92
+100105,ASCED6 - Dance,9.14,9/09/2022,9.92
+100199,"ASCED6 - Performing Arts, N.e.c.",9.14,9/09/2022,9.92
+100301,ASCED6 - Fine Arts,9.14,9/09/2022,9.92
+100303,ASCED6 - Photography,9.14,9/09/2022,9.92
+100305,ASCED6 - Crafts,9.14,9/09/2022,9.92
+100307,ASCED6 - Jewellery Making,17.68,9/09/2022,19.18
+100309,ASCED6 - Floristry,9.14,9/09/2022,9.92
+100399,"ASCED6 - Visual Arts And Crafts, N.e.c.",9.14,9/09/2022,9.92
+100501,ASCED6 - Graphic Arts And Design Studies,10.61,9/09/2022,11.51
+100503,ASCED6 - Textile Design,9.14,9/09/2022,9.92
+100505,ASCED6 - Fashion Design,9.14,9/09/2022,9.92
+100599,"ASCED6 - Graphic And Design Studies, N.e.c.",9.14,9/09/2022,9.92
+100701,ASCED6 - Audio Visual Studies,9.14,9/09/2022,9.92
+100703,ASCED6 - Journalism,7.66,9/09/2022,8.31
+100705,ASCED6 - Written Communication,8.25,9/09/2022,8.95
+100707,ASCED6 - Verbal Communication,8.25,9/09/2022,8.95
+100799,"ASCED6 - Communication And Media Studies, N.e.c.",7.66,9/09/2022,8.31
+109999,"ASCED6 - Creative Arts, N.e.c.",7.66,9/09/2022,8.31
+110101,ASCED6 - Hospitality,8.25,9/09/2022,8.95
+110103,ASCED6 - Food And Beverage Service,8.25,9/09/2022,8.95
+110105,ASCED6 - Butchery,16.80,9/09/2022,18.23
+110107,ASCED6 - Baking And Pastrymaking,14.15,9/09/2022,15.35
+110109,ASCED6 - Cookery,15.62,9/09/2022,16.95
+110111,ASCED6 - Food Hygiene,8.84,9/09/2022,9.59
+110199,"ASCED6 - Food And Hospitality, N.e.c.",7.66,9/09/2022,8.31
+110301,ASCED6 - Beauty Therapy,12.27,9/09/2022,13.31
+110303,ASCED6 - Hairdressing,14.92,9/09/2022,16.19
+110399,"ASCED6 - Personal Services, N.e.c.",9.43,9/09/2022,10.23
+120101,ASCED6 - General Primary And Secondary Education Programmes,8.25,9/09/2022,8.95
+120103,ASCED6 - Literacy And Numeracy Programmes,9.43,9/09/2022,10.23
+120105,ASCED6 - Learning Skills Programmes,8.84,9/09/2022,9.59
+120199,"ASCED6 - General Education Programmes, N.e.c.",8.84,9/09/2022,9.59
+120301,ASCED6 - Social And Interpersonal Skills Programmes,8.25,9/09/2022,8.95
+120303,ASCED6 - Survival Skills Programmes,8.84,9/09/2022,9.59
+120305,ASCED6 - Parental Education Programmes,8.25,9/09/2022,8.95
+120399,"ASCED6 - Social Skills Programmes, N.e.c.",8.84,9/09/2022,9.59
+120501,ASCED6 - Career Development Programmes,8.25,9/09/2022,8.95
+120503,ASCED6 - Job Search Skills Programmes,8.84,9/09/2022,9.59
+120505,ASCED6 - Work Practices Programmes,7.66,9/09/2022,8.31
+120599,"ASCED6 - Employment Skills Programmes, N.e.c.",8.84,9/09/2022,9.59
+129999,"ASCED6 - Mixed Field Programmes, N.e.c.",8.84,9/09/2022,9.59

@@ -1,0 +1,12 @@
+# Government PDFs: fetch.py downloads the current versions on every run
+docs/
+# Exports and real (internal) unit / claims files never go in the repo
+*.xlsx
+*.xls
+uploads/
+__pycache__/
+.DS_Store
+# Global ignore excludes *.csv; re-include only public/derived/synthetic ones. Any other CSV stays out.
+!data/*.csv
+!samples/*.csv
+!templates/*.csv

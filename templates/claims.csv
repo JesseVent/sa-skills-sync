@@ -1,0 +1,3 @@
+student_id,course_code,unit_code,postcode,suburb,result_code,concession,fee_exempt,std_fee_per_hour,qualification_issued,volume
+S0001,CHC32015,CHCCOM005,5000,,20,Y,,2.50,,1
+S0001,CHC32015,BSBWHS211,5710,PORT AUGUSTA,51,Y,,2.50,Y,1

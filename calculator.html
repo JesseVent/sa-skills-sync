@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SA Subsidy Calculator</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --surface-2: #f1f0ec;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --line: #e1e0d9; --border: rgba(11,11,11,0.10);
+  --accent: #2a78d6; --accent-track: #d6e5f7; --accent-ink: #ffffff;
+  --warning: #fab219; --critical: #d03b3b; --good-ink: #006300;
+  --error-bg: #fbeaea; --error-ink: #9c2525;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --surface-2: #232321;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --line: #2c2c2a; --border: rgba(255,255,255,0.10);
+    --accent: #3987e5; --accent-track: #1f3350; --accent-ink: #ffffff;
+    --good-ink: #0ca30c; --error-bg: #3a1c1c; --error-ink: #ff9d9d;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --surface-2: #232321;
+  --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+  --line: #2c2c2a; --border: rgba(255,255,255,0.10);
+  --accent: #3987e5; --accent-track: #1f3350; --accent-ink: #ffffff;
+  --good-ink: #0ca30c; --error-bg: #3a1c1c; --error-ink: #ff9d9d;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+header { padding: 20px 24px 0; max-width: 1280px; margin: 0 auto; }
+h1 { font-size: 20px; margin: 0 0 2px; font-weight: 650; }
+.sub { color: var(--ink-2); font-size: 13px; }
+.privacy { color: var(--good-ink); font-size: 13px; margin-top: 4px; }
+nav { display: flex; gap: 4px; margin-top: 16px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+nav button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 10px 14px; font: inherit; color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+nav button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+main { max-width: 1280px; margin: 0 auto; padding: 20px 24px 60px; }
+section[hidden] { display: none; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.card h2 { font-size: 15px; margin: 0 0 12px; font-weight: 600; }
+.card h3 { font-size: 13px; margin: 14px 0 8px; font-weight: 600; color: var(--ink-2); }
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.cols { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+@media (max-width: 860px) { .cols { grid-template-columns: 1fr; } }
+label { display: block; font-size: 12px; color: var(--ink-2); margin-bottom: 4px; }
+input, select, textarea { width: 100%; font: inherit; color: var(--ink); background: var(--page); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; }
+textarea { min-height: 150px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+input[type="checkbox"] { width: auto; margin-right: 6px; }
+.check { display: flex; align-items: center; font-size: 13px; color: var(--ink); margin: 6px 0; }
+.hint { color: var(--muted); font-size: 12px; margin-top: 4px; }
+.btn { display: inline-block; background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 6px; padding: 8px 14px; font: inherit; font-weight: 600; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); font-weight: 500; }
+.btn:disabled { opacity: .45; cursor: default; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.drop { border: 1.5px dashed var(--line); border-radius: 10px; padding: 18px; text-align: center; color: var(--ink-2); cursor: pointer; background: var(--page); }
+.drop.over { border-color: var(--accent); background: var(--accent-track); }
+.drop strong { color: var(--ink); }
+.status { margin-top: 8px; font-size: 13px; }
+.status.ok { color: var(--good-ink); }
+.status.err { color: var(--error-ink); }
+.mapping { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin-top: 12px; }
+.mapping label b { color: var(--error-ink); }
+.tiles { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin-bottom: 16px; }
+.tile { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+.tile .l { color: var(--ink-2); font-size: 12px; }
+.tile .v { font-size: 22px; font-weight: 600; margin-top: 2px; }
+.tile .d { font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+.tile.hero .v { font-size: 30px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { padding: 6px 10px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+th { background: var(--surface-2); color: var(--ink-2); font-weight: 600; position: sticky; top: 0; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+tr.bad td { background: var(--error-bg); }
+tr:last-child td { border-bottom: 0; }
+.scroll { max-height: 460px; overflow: auto; }
+.err-text { color: var(--error-ink); }
+.meter { height: 12px; border-radius: 6px; background: var(--accent-track); overflow: hidden; margin: 8px 0 6px; }
+.meter > div { height: 100%; border-radius: 6px; background: var(--accent); transition: width .2s; }
+.meter.warn > div { background: var(--warning); }
+.meter.over > div { background: var(--critical); }
+.levers { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; font-size: 13px; }
+.kv dt { color: var(--ink-2); }
+.kv dd { margin: 0; }
+ul.plain { margin: 0; padding-left: 18px; }
+ul.plain li { margin: 3px 0; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; background: var(--surface-2); padding: 1px 4px; border-radius: 4px; }
+.fatal { background: var(--error-bg); color: var(--error-ink); padding: 14px; border-radius: 8px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>SA Subsidy Calculator</h1>
+  <div class="sub" id="ratesInfo">Loading rates…</div>
+  <div class="privacy">✓ Runs offline. Files you add are read in this tab only and never uploaded.</div>
+  <nav role="tablist">
+    <button role="tab" data-tab="estimate">Estimate</button>
+    <button role="tab" data-tab="bulk">Bulk claims</button>
+    <button role="tab" data-tab="budget">Budget &amp; scenarios</button>
+    <button role="tab" data-tab="data">Data &amp; rules</button>
+  </nav>
+</header>
+<main>
+
+<!-- ============ ESTIMATE ============ -->
+<section id="tab-estimate" role="tabpanel">
+  <div class="cols">
+    <div class="card">
+      <h2>Course and location</h2>
+      <label for="estCourse">Course code</label>
+      <input id="estCourse" list="courseList" placeholder="e.g. CHC32015" autocomplete="off">
+      <div class="hint" id="estCourseInfo">Type a code or name from Attachment 2.</div>
+      <div class="grid" style="margin-top:12px">
+        <div><label for="estAqf">AQF level</label><select id="estAqf"></select></div>
+        <div><label for="estPostcode">Delivery postcode</label><input id="estPostcode" inputmode="numeric" placeholder="e.g. 5000"></div>
+        <div><label for="estSuburb">Suburb</label><select id="estSuburb"><option value="">(any)</option></select></div>
+      </div>
+      <div class="hint" id="estLocInfo"></div>
+      <h3>Student</h3>
+      <div class="grid">
+        <div><label for="estFee">Standard fee per hour ($)</label><input id="estFee" type="number" step="0.01" min="0" placeholder="default = AQF reduction"></div>
+      </div>
+      <label class="check"><input type="checkbox" id="estConcession">Concession card holder / prisoner</label>
+      <label class="check"><input type="checkbox" id="estExempt">Fee exempt (guardianship)</label>
+      <label class="check"><input type="checkbox" id="estIssued" checked>Qualification issued (include completion payment)</label>
+    </div>
+    <div class="card">
+      <h2>Units</h2>
+      <label for="estUnits">One unit per line: <code>unit_code</code>, optionally followed by <code>hours</code>, a 6-digit <code>FOE code</code>, and/or <code>RPL</code></label>
+      <textarea id="estUnits" placeholder="CHCCOM005&#10;CHCDIV001, 40&#10;NEWUNIT01, 090501, 25&#10;BSBWHS211, RPL"></textarea>
+      <div class="hint" id="estUnitsHint">Units not in your uploaded unit data need an FOE code and hours on the line.</div>
+    </div>
+  </div>
+  <div id="estOut"></div>
+</section>
+
+<!-- ============ BULK ============ -->
+<section id="tab-bulk" role="tabpanel" hidden>
+  <div class="cols">
+    <div class="card">
+      <h2>1. Unit data <span class="sub">(unit → FOE code + payment hours)</span></h2>
+      <div class="drop" id="dropUnits" tabindex="0"><strong>Drop units file</strong> or click · CSV / XLSX</div>
+      <input type="file" id="fileUnits" accept=".csv,.xlsx,.xls,.txt" hidden>
+      <div class="status" id="unitsStatus">Required: <code>unit_code</code>, <code>foe_code</code>, <code>payment_hours</code></div>
+      <div class="mapping" id="unitsMap"></div>
+    </div>
+    <div class="card">
+      <h2>2. Claims / forecast rows <span class="sub">(one row per unit)</span></h2>
+      <div class="drop" id="dropClaims" tabindex="0"><strong>Drop claims file</strong> or click · CSV / XLSX</div>
+      <input type="file" id="fileClaims" accept=".csv,.xlsx,.xls,.txt" hidden>
+      <div class="status" id="claimsStatus">Required: <code>course_code</code>, <code>unit_code</code>, <code>postcode</code></div>
+      <div class="mapping" id="claimsMap"></div>
+    </div>
+  </div>
+  <div id="bulkOut"></div>
+</section>
+
+<!-- ============ BUDGET ============ -->
+<section id="tab-budget" role="tabpanel" hidden>
+  <div id="budgetEmpty" class="card">Load unit data and claims or forecast rows on the <b>Bulk claims</b> tab first. Budget and scenarios reprice those rows. For forecasts, use a <code>volume</code> column (e.g. expected enrolments per course/unit/postcode).</div>
+  <div id="budgetBody" hidden>
+    <div class="card">
+      <h2>Scenario levers <span class="sub">baseline = published Framework rates</span></h2>
+      <div class="levers">
+        <div><label for="sIndex">Extra indexation (%)</label><input id="sIndex" type="number" step="0.1" value="0"></div>
+        <div><label for="sVolume">Volume growth (%)</label><input id="sVolume" type="number" step="1" value="0"></div>
+        <div><label for="sAdj">Course adjustment multiplier (%)</label><input id="sAdj" type="number" step="1" value="100"></div>
+        <div><label for="sRpl">RPL payment, Cert III+ (%)</label><input id="sRpl" type="number" step="5" value="50"></div>
+        <div><label for="sMinFee">Minimum student fee ($/hr)</label><input id="sMinFee" type="number" step="0.05"></div>
+        <div><label for="sMaxReimb">Concession max reimb. ($/hr)</label><input id="sMaxReimb" type="number" step="0.05"></div>
+        <div><label for="sCap">Budget cap ($)</label><input id="sCap" type="number" step="1000" placeholder="optional"></div>
+      </div>
+      <h3>AQF reduction ($/hr) and completion payment ($)</h3>
+      <div class="levers" id="sAqf"></div>
+      <h3>Location loading (%)</h3>
+      <div class="levers" id="sLoad"></div>
+      <h3>Per-course overrides</h3>
+      <div class="row">
+        <button class="btn ghost" id="sAdjUpload">Upload course adjustments (course_code, adjustment_pct)</button>
+        <button class="btn ghost" id="sAqfUpload">Upload AQF levels (course_code, aqf_level)</button>
+        <input type="file" id="fileAdj" accept=".csv,.xlsx" hidden><input type="file" id="fileAqfOv" accept=".csv,.xlsx" hidden>
+      </div>
+      <div class="status" id="overrideStatus"></div>
+      <div class="row" style="margin-top:14px">
+        <button class="btn ghost" id="sSave">Save scenario (JSON)</button>
+        <button class="btn ghost" id="sLoadBtn">Load scenario</button>
+        <input type="file" id="fileScenario" accept=".json" hidden>
+        <button class="btn ghost" id="sReset">Reset to baseline</button>
+        <button class="btn" id="sExport">Export comparison (XLSX)</button>
+      </div>
+    </div>
+    <div id="budgetOut"></div>
+  </div>
+</section>
+
+<!-- ============ DATA ============ -->
+<section id="tab-data" role="tabpanel" hidden>
+  <div class="cols">
+    <div class="card"><h2>Loaded data</h2><dl class="kv" id="dataKv"></dl></div>
+    <div class="card">
+      <h2>Templates</h2>
+      <p class="sub">Blank upload files with two example rows. Headers are matched loosely (e.g. <code>Nominal Hours</code>, <code>USI</code>, <code>Outcome</code> are recognised), and anything unmatched can be mapped by hand after upload.</p>
+      <div class="row"><button class="btn ghost" data-template="units">units.csv</button><button class="btn ghost" data-template="claims">claims.csv</button></div>
+      <h3>Claims columns</h3>
+      <ul class="plain sub">
+        <li><code>course_code</code>, <code>unit_code</code>, <code>postcode</code>: required</li>
+        <li><code>suburb</code>: needed only where a postcode spans different loadings</li>
+        <li><code>student_id</code>: completion payment is paid once per student + course</li>
+        <li><code>result_code</code>: 51/52 = RPL; <code>hours</code> overrides the unit's payment hours</li>
+        <li><code>concession</code>, <code>fee_exempt</code>, <code>qualification_issued</code>: Y/N</li>
+        <li><code>std_fee_per_hour</code>: the RTO's fee; defaults to the AQF reduction</li>
+        <li><code>volume</code>: multiplier for forecasts (default 1); <code>aqf_level</code> overrides the derived level</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <h2>How the subsidy is calculated</h2>
+    <p><code>per hour = max(0, base rate[FOE] × indexation × (1 + location loading) − AQF reduction)</code><br>
+       <code>subsidy = per hour × course adjustment % × payment hours × RPL factor × volume</code><br>
+       plus the completion payment once per student and course when the qualification is issued, plus concession reimbursement <code>min(max(fee − min fee, 0), max reimb.) × hours</code>.</p>
+    <h3>Assumptions (flagged where the Framework is silent)</h3>
+    <ul class="plain sub">
+      <li>Indexation is applied as one compounded factor with no rounding between years.</li>
+      <li>Fee-exempt students: the AQF reduction (assumed student fee) is not deducted, so government pays it.</li>
+      <li>Money is rounded to the cent per row (each unit claim), so totals equal the sum of exported rows.</li>
+      <li>Negative per-hour results are clamped to $0 and flagged on the row.</li>
+      <li>AQF level is derived from the course name; unrecognised courses are flagged and need an <code>aqf_level</code>, never guessed.</li>
+      <li>Concession: the full reimbursement is passed on to the student (Framework §11), so the student pays the standard fee minus the reimbursement.</li>
+      <li>Rates are those at the time <code>fetch.py</code> last ran. Re-run it to pick up new Framework versions.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<datalist id="courseList"></datalist>
+<script src="vendor/xlsx.full.min.js"></script>
+<script src="data/rates.js"></script>
+<script src="calc.js"></script>
+<script>
+"use strict";
+const R = window.SA_RATES, C = window.SACalc;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const aud = new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const money = (v) => (Number.isFinite(v) ? aud.format(v) : "");
+const compact = (v) => {
+  const a = Math.abs(v), s = v < 0 ? "−" : "";
+  if (a >= 1e9) return s + "$" + (a / 1e9).toFixed(2) + "B";
+  if (a >= 1e6) return s + "$" + (a / 1e6).toFixed(2) + "M";
+  if (a >= 1e4) return s + "$" + (a / 1e3).toFixed(1) + "K";
+  return s + aud.format(a);
+};
+const numf = (v, d = 0) => (Number.isFinite(v) ? v.toLocaleString("en-AU", { maximumFractionDigits: d, minimumFractionDigits: d }) : "");
+const signed = (v) => (v > 0 ? "+" : v < 0 ? "−" : "±") + aud.format(Math.abs(v));
+const pctChange = (a, b) => (a ? ((b - a) / a) * 100 : 0);
+const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
+
+if (!R || !C || !window.XLSX) {
+  document.querySelector("main").innerHTML = '<div class="fatal">Missing ' + [!R && "data/rates.js (run <code>python3 fetch.py</code>)", !C && "calc.js", !window.XLSX && "vendor/xlsx.full.min.js"].filter(Boolean).join(", ") + ". Keep calculator.html in the sa-skills-sync folder.</div>";
+  throw new Error("missing dependencies");
+}
+
+const state = { units: {}, unitsName: "", unitsErrors: [], unitsTable: null, claimsTable: null, claimRows: null, bulk: null, scenario: {}, baseline: null, overrides: "" };
+
+// ---------- header + tabs ----------
+$("ratesInfo").textContent = `Training Fee Framework ${R.framework} · base rates indexed to ${R.indexYear} (×${R.indexFactor.toFixed(4)}) · ${Object.keys(R.courses).length.toLocaleString()} courses · ${Object.keys(R.postcodes).length} postcodes · rates fetched ${R.generated}`;
+function showTab(name) {
+  document.querySelectorAll("nav button").forEach((b) => b.setAttribute("aria-selected", b.dataset.tab === name));
+  document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== "tab-" + name));
+  store.set("sa-calc-tab", name);
+  if (name === "budget") renderBudget();
+  if (name === "data") renderData();
+}
+document.querySelectorAll("nav button").forEach((b) => b.addEventListener("click", () => showTab(b.dataset.tab)));
+
+// ---------- shared helpers ----------
+async function readTable(file) {
+  const wb = XLSX.read(await file.arrayBuffer(), { type: "array", raw: true }); // raw: keep CSV text as-is (leading zeros)
+  const ws = wb.Sheets[wb.SheetNames[0]];
+  const rows = XLSX.utils.sheet_to_json(ws, { defval: "", raw: false });
+  return { rows, headers: rows.length ? Object.keys(rows[0]) : [], name: file.name };
+}
+function wireDrop(zoneId, inputId, onFile) {
+  const zone = $(zoneId), input = $(inputId);
+  zone.addEventListener("click", () => input.click());
+  zone.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); input.click(); } });
+  zone.addEventListener("dragover", (e) => { e.preventDefault(); zone.classList.add("over"); });
+  zone.addEventListener("dragleave", () => zone.classList.remove("over"));
+  zone.addEventListener("drop", (e) => { e.preventDefault(); zone.classList.remove("over"); if (e.dataTransfer.files[0]) onFile(e.dataTransfer.files[0]); });
+  input.addEventListener("change", () => { if (input.files[0]) onFile(input.files[0]); input.value = ""; });
+}
+function mappingUI(el, kind, table, onChange) {
+  const { map } = C.mapHeaders(table.headers, kind);
+  const fields = Object.keys(C.SCHEMAS[kind]);
+  el.innerHTML = fields.map((f) => `<div><label>${esc(f)}${C.REQUIRED[kind].includes(f) ? " <b>*</b>" : ""}</label><select data-field="${f}"><option value="">(none)</option>${table.headers.map((h) => `<option${map[f] === h ? " selected" : ""}>${esc(h)}</option>`).join("")}</select></div>`).join("");
+  const read = () => { const m = {}; el.querySelectorAll("select").forEach((s) => { if (s.value) m[s.dataset.field] = s.value; }); return m; };
+  el.querySelectorAll("select").forEach((s) => s.addEventListener("change", () => onChange(read())));
+  onChange(read());
+}
+function table(cols, rows, opts = {}) {
+  // cols: [{key, label, n(numeric), fmt}]
+  const head = cols.map((c) => `<th class="${c.n ? "n" : ""}">${esc(c.label)}</th>`).join("");
+  const body = rows.map((r) => `<tr class="${opts.bad && opts.bad(r) ? "bad" : ""}">${cols.map((c) => { const v = c.fmt ? c.fmt(r[c.key], r) : r[c.key]; return `<td class="${c.n ? "n" : ""}">${c.html ? v : esc(v)}</td>`; }).join("")}</tr>`).join("");
+  return `<div class="table-wrap${opts.scroll ? " scroll" : ""}"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+}
+const tile = (label, value, detail = "", hero = false) => `<div class="tile${hero ? " hero" : ""}"><div class="l">${esc(label)}</div><div class="v">${esc(value)}</div>${detail ? `<div class="d">${esc(detail)}</div>` : ""}</div>`;
+function download(name, text, type = "text/csv") {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type }));
+  a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+const bucketRows = (obj) => Object.entries(obj).map(([k, t]) => ({ key: k, ...t }));
+const RESULT_COLS = [
+  { key: "student_id", label: "Student" }, { key: "course_code", label: "Course" }, { key: "aqf", label: "AQF" },
+  { key: "unit_code", label: "Unit" }, { key: "foe", label: "FOE" }, { key: "postcode", label: "Postcode" },
+  { key: "loading_pct", label: "Loading %", n: 1 }, { key: "hours", label: "Hours", n: 1, fmt: (v) => numf(v, 1) },
+  { key: "volume", label: "Vol", n: 1, fmt: (v) => numf(v, 2) }, { key: "result_code", label: "Result" },
+  { key: "per_hour", label: "$/hr", n: 1, fmt: money }, { key: "course_adj_pct", label: "Adj %", n: 1, fmt: (v) => numf(v, 1) },
+  { key: "subsidy", label: "Subsidy", n: 1, fmt: money }, { key: "concession_reimb", label: "Concession", n: 1, fmt: money },
+  { key: "student_fee", label: "Student pays", n: 1, fmt: money }, { key: "errors", label: "Issues", html: 1, fmt: (v) => `<span class="err-text">${esc(v.join("; "))}</span>` },
+];
+const SUM_COLS = (first) => [
+  { key: "key", label: first }, { key: "rows", label: "Rows", n: 1, fmt: (v) => numf(v) }, { key: "hours", label: "Hours", n: 1, fmt: (v) => numf(v) },
+  { key: "subsidy", label: "Subsidy", n: 1, fmt: money }, { key: "completion", label: "Completion", n: 1, fmt: money },
+  { key: "concession", label: "Concession", n: 1, fmt: money }, { key: "govt", label: "Govt total", n: 1, fmt: money },
+  { key: "student", label: "Student fees", n: 1, fmt: money },
+];
+const flatResult = (r) => ({ student_id: r.student_id, course_code: r.course_code, course_name: r.course_name, aqf_level: r.aqf, unit_code: r.unit_code, unit_name: r.unit_name, foe_code: r.foe, postcode: r.postcode, location: r.location, loading_pct: r.loading_pct, payment_hours: r.hours, volume: r.volume, result_code: r.result_code, rpl: r.rpl ? "Y" : "", concession: r.concession ? "Y" : "", fee_exempt: r.exempt ? "Y" : "", qualification_issued: r.qualification_issued ? "Y" : "", indexed_base_rate: Number.isFinite(r.rate) ? +r.rate.toFixed(4) : "", per_hour: Number.isFinite(r.per_hour) ? +r.per_hour.toFixed(4) : "", course_adj_pct: r.course_adj_pct, subsidy: +r.subsidy.toFixed(2), concession_reimb: +r.concession_reimb.toFixed(2), std_fee_per_hour: r.std_fee_per_hour ?? "", student_fee: +r.student_fee.toFixed(2), issues: r.errors.join("; ") });
+const flatBucket = (label) => (b) => ({ [label]: b.key, rows: b.rows, hours: +b.hours.toFixed(2), subsidy: +b.subsidy.toFixed(2), completion: +b.completion.toFixed(2), concession: +b.concession.toFixed(2), govt_total: +b.govt.toFixed(2), student_fees: +b.student.toFixed(2) });
+
+// ---------- ESTIMATE ----------
+$("courseList").innerHTML = Object.entries(R.courses).map(([c, v]) => `<option value="${esc(c)}">${esc(v[0])}</option>`).join("");
+$("estAqf").innerHTML = `<option value="">(from course name)</option>` + C.LEVELS.map((l) => `<option>${l}</option>`).join("");
+function estCourseCode() { return $("estCourse").value.trim().split(/\s|—/)[0].toUpperCase(); }
+function refreshSuburbs() {
+  const pc = $("estPostcode").value.trim().padStart(4, "0"), list = R.postcodes[pc] || [];
+  const keep = $("estSuburb").value;
+  $("estSuburb").innerHTML = `<option value="">(any)</option>` + list.map((r) => `<option value="${esc(r[0])}"${r[0] === keep ? " selected" : ""}>${esc(r[0])} (${r[3]}%)</option>`).join("");
+}
+function parseUnitLines() {
+  const units = Object.assign({}, state.units), rows = [];
+  $("estUnits").value.split(/\n/).map((l) => l.trim()).filter(Boolean).forEach((line) => {
+    const parts = line.split(/[,\t;]+/).map((p) => p.trim()).filter(Boolean);
+    const code = parts[0].toUpperCase();
+    let foe = null, hours = null, rpl = false;
+    parts.slice(1).forEach((p) => { if (/^rpl$/i.test(p)) rpl = true; else if (/^\d{5,6}$/.test(p)) foe = p.padStart(6, "0"); else if (/^\d+(\.\d+)?$/.test(p)) hours = parseFloat(p); });
+    if (foe && hours != null) units[code] = { foe, hours, name: (state.units[code] || {}).name || "" };
+    else if (foe && state.units[code]) units[code] = Object.assign({}, state.units[code], { foe });
+    rows.push({ student_id: "ESTIMATE", unit_code: code, hours: hours == null ? "" : hours, result_code: rpl ? "51" : "20" });
+  });
+  return { units, rows };
+}
+function renderEstimate() {
+  const code = estCourseCode(), info = C.courseInfo(C.makeContext(R), code, $("estAqf").value || null);
+  $("estCourseInfo").innerHTML = !code ? "Type a code or name from Attachment 2." : info.known
+    ? `${esc(info.name)} · course adjustment ${numf(info.adj, 1)}% · AQF ${esc(info.aqf || "unknown: choose a level")}`
+    : `<span class="err-text">${esc(code)} is not on Attachment 2${$("estAqf").value ? "" : ""}</span>`;
+  refreshSuburbs();
+  const pc = $("estPostcode").value.trim(), loc = pc ? C.loadingFor(C.makeContext(R), pc, $("estSuburb").value) : null;
+  $("estLocInfo").innerHTML = !loc ? "" : loc.error ? `<span class="err-text">${esc(loc.error)}</span>` : `${esc(loc.location)} · loading ${numf(loc.loading * 100)}%`;
+
+  const { units, rows } = parseUnitLines();
+  if (!code || !pc || !rows.length) { $("estOut").innerHTML = ""; return; }
+  const common = { course_code: code, postcode: pc, suburb: $("estSuburb").value, concession: $("estConcession").checked ? "Y" : "", fee_exempt: $("estExempt").checked ? "Y" : "", std_fee_per_hour: $("estFee").value, qualification_issued: $("estIssued").checked ? "Y" : "", aqf_level: $("estAqf").value };
+  const out = C.priceRows(C.makeContext(R), units, rows.map((r) => Object.assign({}, common, r)));
+  const t = out.totals, hours = out.results.reduce((s, r) => s + (r.ok ? r.hours : 0), 0);
+  $("estOut").innerHTML = `<div class="tiles">
+      ${tile("Total government cost", money(t.govt), "subsidy + completion + concession", true)}
+      ${tile("Unit subsidies", money(t.subsidy), `${numf(hours)} payment hours`)}
+      ${tile("Completion payment", money(t.completion), $("estIssued").checked ? (info.aqf || "") : "not included")}
+      ${tile("Concession reimbursement", money(t.concession), $("estConcession").checked ? "passed on to student" : "not a concession student")}
+      ${tile("Student pays", money(t.student), $("estExempt").checked ? "fee exempt" : "course fee")}
+      ${tile("Average subsidy per hour", hours ? money(t.subsidy / hours) : "–")}
+    </div>
+    <div class="card"><h2>Per unit</h2>${table(RESULT_COLS.filter((c) => !["student_id", "course_code", "aqf", "postcode", "volume"].includes(c.key)), out.results, { bad: (r) => !r.ok })}
+    ${out.errorCount ? `<p class="err-text">${out.errorCount} unit(s) could not be priced. Upload unit data on the Bulk tab, or add an FOE code and hours on the line.</p>` : ""}</div>`;
+}
+["estCourse", "estAqf", "estPostcode", "estSuburb", "estFee", "estConcession", "estExempt", "estIssued", "estUnits"].forEach((id) => ["input", "change"].forEach((ev) => $(id).addEventListener(ev, renderEstimate)));
+
+// ---------- BULK ----------
+wireDrop("dropUnits", "fileUnits", async (file) => {
+  $("unitsStatus").textContent = "Reading " + file.name + "…"; $("unitsStatus").className = "status";
+  try {
+    state.unitsTable = await readTable(file);
+    mappingUI($("unitsMap"), "units", state.unitsTable, (map) => {
+      const missing = C.REQUIRED.units.filter((f) => !map[f]);
+      if (missing.length) { $("unitsStatus").className = "status err"; $("unitsStatus").textContent = `${file.name}: map ${missing.join(", ")} below`; return; }
+      const built = C.buildUnits(state.unitsTable.rows, map);
+      state.units = built.units; state.unitsErrors = built.errors; state.unitsName = file.name;
+      const n = Object.keys(built.units).length, badFoe = Object.values(built.units).filter((u) => !R.base[u.foe]).length;
+      $("unitsStatus").className = "status ok";
+      $("unitsStatus").textContent = `✓ ${file.name}: ${n.toLocaleString()} units` + (built.errors.length ? ` · ${built.errors.length} rows skipped (bad FOE/hours)` : "") + (badFoe ? ` · ${badFoe} with an FOE not on Attachment 1` : "");
+      recomputeBulk(); renderEstimate();
+    });
+  } catch (e) { $("unitsStatus").className = "status err"; $("unitsStatus").textContent = "Could not read " + file.name + ": " + e.message; }
+});
+wireDrop("dropClaims", "fileClaims", async (file) => {
+  $("claimsStatus").textContent = "Reading " + file.name + "…"; $("claimsStatus").className = "status";
+  try {
+    state.claimsTable = await readTable(file);
+    mappingUI($("claimsMap"), "claims", state.claimsTable, (map) => {
+      const missing = C.REQUIRED.claims.filter((f) => !map[f]);
+      if (missing.length) { state.claimRows = null; $("claimsStatus").className = "status err"; $("claimsStatus").textContent = `${file.name}: map ${missing.join(", ")} below`; recomputeBulk(); return; }
+      state.claimRows = C.remap(state.claimsTable.rows, map); state.claimsName = file.name;
+      $("claimsStatus").className = "status ok"; $("claimsStatus").textContent = `✓ ${file.name}: ${state.claimRows.length.toLocaleString()} rows`;
+      recomputeBulk();
+    });
+  } catch (e) { $("claimsStatus").className = "status err"; $("claimsStatus").textContent = "Could not read " + file.name + ": " + e.message; }
+});
+function recomputeBulk() {
+  state.baseline = null;
+  if (!state.claimRows) { state.bulk = null; $("bulkOut").innerHTML = ""; return; }
+  const out = (state.bulk = C.priceRows(C.makeContext(R), state.units, state.claimRows)), t = out.totals;
+  const errs = out.results.filter((r) => !r.ok || r.errors.length);
+  const byErr = {}; errs.forEach((r) => r.errors.forEach((e) => { const k = e.replace(/postcode \d+/, "postcode …").replace(/FOE \d+/, "FOE …").replace(/suburb .* not in/, "suburb not in"); byErr[k] = (byErr[k] || 0) + 1; }));
+  if (out.completionsWithoutUnits) byErr["completion paid, but none of that student's units priced (review)"] = out.completionsWithoutUnits;
+  const LIMIT = 500;
+  $("bulkOut").innerHTML = `<div class="tiles">
+      ${tile("Total government cost", compact(t.govt), money(t.govt), true)}
+      ${tile("Unit subsidies", compact(t.subsidy), `${numf(t.hours)} payment hours`)}
+      ${tile("Completion payments", compact(t.completion), `${out.completions.toLocaleString()} completions`)}
+      ${tile("Concession reimbursement", compact(t.concession))}
+      ${tile("Student fees", compact(t.student))}
+      ${tile("Rows priced", `${(t.rows - out.errorCount).toLocaleString()} / ${t.rows.toLocaleString()}`, out.errorCount ? `${out.errorCount.toLocaleString()} rows with errors` : "no errors")}
+    </div>
+    <div class="row" style="margin-bottom:16px"><button class="btn" id="bulkExport">Export results (XLSX)</button>${!Object.keys(state.units).length ? '<span class="err-text">No unit data loaded yet: every row will show "unknown unit".</span>' : ""}</div>
+    ${Object.keys(byErr).length ? `<div class="card"><h2>Issues <span class="sub">${errs.length.toLocaleString()} rows</span></h2>${table([{ key: "k", label: "Issue" }, { key: "n", label: "Rows", n: 1, fmt: (v) => numf(v) }], Object.entries(byErr).sort((a, b) => b[1] - a[1]).map(([k, n]) => ({ k, n })))}</div>` : ""}
+    <div class="cols">
+      <div class="card"><h2>By AQF level</h2>${table(SUM_COLS("AQF level"), bucketRows(out.byAqf).sort((a, b) => b.govt - a.govt))}</div>
+      <div class="card"><h2>By location loading</h2>${table(SUM_COLS("Location"), bucketRows(out.byRegion).sort((a, b) => b.govt - a.govt))}</div>
+    </div>
+    <div class="card"><h2>By course <span class="sub">top 50 by government cost · all courses in the export</span></h2>${table(SUM_COLS("Course"), bucketRows(out.byCourse).sort((a, b) => b.govt - a.govt).slice(0, 50), { scroll: 1 })}</div>
+    <div class="card"><h2>Rows <span class="sub">${out.results.length > LIMIT ? `first ${LIMIT} of ${out.results.length.toLocaleString()} · all rows in the export` : out.results.length + " rows"}</span></h2>${table(RESULT_COLS, out.results.slice(0, LIMIT), { bad: (r) => !r.ok, scroll: 1 })}</div>`;
+  $("bulkExport").addEventListener("click", exportBulk);
+}
+function exportBulk() {
+  const out = state.bulk, wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(out.results.map(flatResult)), "Results");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet([flatBucket("aqf_level")({ key: "TOTAL", ...out.totals }), ...bucketRows(out.byAqf).map(flatBucket("aqf_level"))]), "By AQF");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(bucketRows(out.byRegion).map(flatBucket("location"))), "By location");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(bucketRows(out.byCourse).sort((a, b) => b.govt - a.govt).map(flatBucket("course_code"))), "By course");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(out.results.filter((r) => r.errors.length).map(flatResult)), "Issues");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet([{ framework: R.framework, index_year: R.indexYear, index_factor: R.indexFactor, rates_fetched: R.generated, units_file: state.unitsName, claims_file: state.claimsName, exported: new Date().toISOString() }]), "About");
+  XLSX.writeFile(wb, "subsidy-results.xlsx");
+}
+
+// ---------- BUDGET & SCENARIOS ----------
+const LOCS = [...new Set(Object.values(R.postcodes).flat().map((r) => r[2] + "|" + r[3]))].map((s) => s.split("|")).sort((a, b) => a[1] - b[1]);
+$("sAqf").innerHTML = C.LEVELS.map((l) => `<div><label>${l} <span style="color:var(--muted)">$/hr · completion $</span></label><div class="row" style="flex-wrap:nowrap"><input data-aqf="${l}" type="number" step="0.05" value="${R.aqfReduction[l]}" title="AQF reduction $/hr"><input data-comp="${l}" type="number" step="50" value="${R.completion[l]}" title="Completion payment $"></div></div>`).join("");
+$("sLoad").innerHTML = LOCS.map(([loc, pct]) => `<div><label>${loc}</label><input data-loc="${esc(loc)}" type="number" step="1" value="${pct}"></div>`).join("");
+$("sMinFee").placeholder = R.concession.minFee; $("sMaxReimb").placeholder = R.concession.maxReimb;
+
+function readScenario() {
+  const s = { indexExtraPct: $("sIndex").value, volumeGrowthPct: $("sVolume").value, adjMultiplier: ($("sAdj").value || 100) / 100, rplPct: $("sRpl").value, minFee: $("sMinFee").value, maxReimb: $("sMaxReimb").value, cap: $("sCap").value, aqfReduction: {}, completion: {}, locationLoading: {} };
+  document.querySelectorAll("[data-aqf]").forEach((i) => { if (+i.value !== R.aqfReduction[i.dataset.aqf]) s.aqfReduction[i.dataset.aqf] = +i.value; });
+  document.querySelectorAll("[data-comp]").forEach((i) => { if (+i.value !== R.completion[i.dataset.comp]) s.completion[i.dataset.comp] = +i.value; });
+  document.querySelectorAll("[data-loc]").forEach((i) => { const def = LOCS.find((l) => l[0] === i.dataset.loc)[1]; if (+i.value !== +def) s.locationLoading[i.dataset.loc] = +i.value; });
+  s.courseAdj = state.scenario.courseAdj || {}; s.aqfOverride = state.scenario.aqfOverride || {};
+  return (state.scenario = s);
+}
+function writeScenario(s) {
+  $("sIndex").value = s.indexExtraPct || 0; $("sVolume").value = s.volumeGrowthPct || 0; $("sAdj").value = Math.round((s.adjMultiplier ?? 1) * 1000) / 10;
+  $("sRpl").value = s.rplPct ?? 50; $("sMinFee").value = s.minFee ?? ""; $("sMaxReimb").value = s.maxReimb ?? ""; $("sCap").value = s.cap ?? "";
+  document.querySelectorAll("[data-aqf]").forEach((i) => (i.value = (s.aqfReduction || {})[i.dataset.aqf] ?? R.aqfReduction[i.dataset.aqf]));
+  document.querySelectorAll("[data-comp]").forEach((i) => (i.value = (s.completion || {})[i.dataset.comp] ?? R.completion[i.dataset.comp]));
+  document.querySelectorAll("[data-loc]").forEach((i) => (i.value = (s.locationLoading || {})[i.dataset.loc] ?? LOCS.find((l) => l[0] === i.dataset.loc)[1]));
+  state.scenario = { courseAdj: s.courseAdj || {}, aqfOverride: s.aqfOverride || {} };
+  $("overrideStatus").textContent = overrideSummary();
+}
+const overrideSummary = () => { const a = Object.keys(state.scenario.courseAdj || {}).length, q = Object.keys(state.scenario.aqfOverride || {}).length; return a || q ? `${a} course adjustment override(s), ${q} AQF override(s) active` : ""; };
+let budgetTimer;
+document.querySelector("#tab-budget").addEventListener("input", (e) => { if (e.target.matches("input:not([type=file])")) { clearTimeout(budgetTimer); budgetTimer = setTimeout(renderBudget, 150); } });
+
+function compareRows(base, scen, label, n) {
+  const keys = new Set([...Object.keys(base), ...Object.keys(scen)]);
+  const rows = [...keys].map((k) => { const b = base[k]?.govt || 0, s = scen[k]?.govt || 0; return { key: k, base: b, scen: s, delta: s - b, pct: pctChange(b, s) }; });
+  rows.sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta) || b.scen - a.scen);
+  return { rows: n ? rows.slice(0, n) : rows, cols: [{ key: "key", label }, { key: "base", label: "Baseline", n: 1, fmt: money }, { key: "scen", label: "Scenario", n: 1, fmt: money }, { key: "delta", label: "Change", n: 1, fmt: signed }, { key: "pct", label: "Change %", n: 1, fmt: (v) => (v > 0 ? "+" : "") + numf(v, 2) + "%" }] };
+}
+function renderBudget() {
+  const has = !!state.claimRows;
+  $("budgetEmpty").hidden = has; $("budgetBody").hidden = !has;
+  if (!has) return;
+  const s = readScenario();
+  if (!state.baseline) state.baseline = state.bulk || C.priceRows(C.makeContext(R), state.units, state.claimRows);
+  const base = state.baseline, scen = (state.scenarioOut = C.priceRows(C.makeContext(R, s), state.units, state.claimRows));
+  const b = base.totals.govt, v = scen.totals.govt, cap = parseFloat(s.cap);
+  let capHtml = "";
+  if (cap > 0) {
+    const used = (v / cap) * 100, cls = used > 100 ? "over" : used >= 90 ? "warn" : "";
+    const label = used > 100 ? `✕ Over cap by ${money(v - cap)}` : used >= 90 ? `⚠ Near cap: ${money(cap - v)} headroom` : `✓ ${money(cap - v)} headroom`;
+    capHtml = `<div class="card"><h2>Budget cap</h2><div class="row" style="justify-content:space-between"><span>${esc(label)}</span><span>${numf(used, 1)}% of ${money(cap)} (scenario)</span></div>
+      <div class="meter ${cls}" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.min(used, 100).toFixed(0)}" aria-label="Budget used"><div style="width:${Math.min(used, 100)}%"></div></div>
+      <div class="sub">Baseline uses ${numf((b / cap) * 100, 1)}% of the cap.</div></div>`;
+  }
+  const part = (k) => `${money(base.totals[k])} → ${money(scen.totals[k])}`;
+  const aqf = compareRows(base.byAqf, scen.byAqf, "AQF level"), loc = compareRows(base.byRegion, scen.byRegion, "Location"), crs = compareRows(base.byCourse, scen.byCourse, "Course", 20);
+  $("budgetOut").innerHTML = `<div class="tiles">
+      ${tile("Scenario government cost", compact(v), money(v), true)}
+      ${tile("Baseline government cost", compact(b), money(b))}
+      ${tile("Change", signed(v - b), `${(pctChange(b, v) > 0 ? "+" : "") + numf(pctChange(b, v), 2)}% vs baseline`)}
+      ${tile("Unit subsidies", compact(scen.totals.subsidy), part("subsidy"))}
+      ${tile("Completion payments", compact(scen.totals.completion), part("completion"))}
+      ${tile("Concession reimbursement", compact(scen.totals.concession), part("concession"))}
+    </div>${capHtml}
+    <div class="cols"><div class="card"><h2>By AQF level</h2>${table(aqf.cols, aqf.rows)}</div><div class="card"><h2>By location loading</h2>${table(loc.cols, loc.rows)}</div></div>
+    <div class="card"><h2>Courses most affected <span class="sub">top 20 by change · all courses in the export</span></h2>${table(crs.cols, crs.rows)}</div>`;
+}
+function overrideUpload(inputId, btnId, kind) {
+  $(btnId).addEventListener("click", () => $(inputId).click());
+  $(inputId).addEventListener("change", async () => {
+    const f = $(inputId).files[0]; $(inputId).value = ""; if (!f) return;
+    const t = await readTable(f), n = (h) => h.toLowerCase().replace(/[^a-z]/g, "");
+    const codeCol = t.headers.find((h) => ["coursecode", "course", "code"].includes(n(h)));
+    const valCol = t.headers.find((h) => (kind === "adj" ? ["adjustmentpct", "adjustment", "adj", "pct", "percentage", "percentageadj"] : ["aqflevel", "aqf", "level"]).includes(n(h)));
+    if (!codeCol || !valCol) { $("overrideStatus").innerHTML = `<span class="err-text">${esc(f.name)}: need columns course_code and ${kind === "adj" ? "adjustment_pct" : "aqf_level"}</span>`; return; }
+    const target = kind === "adj" ? (state.scenario.courseAdj = {}) : (state.scenario.aqfOverride = {});
+    let bad = 0;
+    t.rows.forEach((r) => { const c = String(r[codeCol]).trim().toUpperCase(), v = r[valCol]; if (!c) return;
+      if (kind === "adj") { const x = parseFloat(String(v).replace("%", "")); isNaN(x) ? bad++ : (target[c] = x); }
+      else { const lvl = C.LEVELS.find((l) => l.toLowerCase() === String(v).trim().toLowerCase()); lvl ? (target[c] = lvl) : bad++; } });
+    $("overrideStatus").textContent = overrideSummary() + (bad ? ` · ${bad} row(s) skipped` : "");
+    renderBudget();
+  });
+}
+overrideUpload("fileAdj", "sAdjUpload", "adj"); overrideUpload("fileAqfOv", "sAqfUpload", "aqf");
+$("sSave").addEventListener("click", () => download("scenario.json", JSON.stringify({ framework: R.framework, ...readScenario() }, null, 2), "application/json"));
+$("sLoadBtn").addEventListener("click", () => $("fileScenario").click());
+$("fileScenario").addEventListener("change", async () => { const f = $("fileScenario").files[0]; $("fileScenario").value = ""; if (!f) return; try { writeScenario(JSON.parse(await f.text())); renderBudget(); } catch (e) { $("overrideStatus").innerHTML = `<span class="err-text">Could not read scenario: ${esc(e.message)}</span>`; } });
+$("sReset").addEventListener("click", () => { writeScenario({}); renderBudget(); });
+$("sExport").addEventListener("click", () => {
+  if (!state.scenarioOut) return;
+  const base = state.baseline, scen = state.scenarioOut, wb = XLSX.utils.book_new();
+  const sheet = (b, s, label) => compareRows(b, s, label).rows.map((r) => ({ [label]: r.key, baseline: +r.base.toFixed(2), scenario: +r.scen.toFixed(2), change: +r.delta.toFixed(2), change_pct: +r.pct.toFixed(4) }));
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(sheet({ TOTAL: base.totals }, { TOTAL: scen.totals }, "total")), "Total");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(sheet(base.byAqf, scen.byAqf, "aqf_level")), "By AQF");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(sheet(base.byRegion, scen.byRegion, "location")), "By location");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(sheet(base.byCourse, scen.byCourse, "course_code")), "By course");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(Object.entries(readScenario()).filter(([k]) => !["courseAdj", "aqfOverride"].includes(k)).map(([k, v]) => ({ lever: k, value: typeof v === "object" ? JSON.stringify(v) : v }))), "Scenario");
+  XLSX.writeFile(wb, "scenario-comparison.xlsx");
+});
+
+// ---------- DATA ----------
+const TEMPLATES = {
+  units: "unit_code,foe_code,payment_hours,unit_name\nCHCCOM005,090501,35,Communicate and work in health or community services\nBSBWHS211,061301,20,Contribute to the health and safety of self and others\n",
+  claims: "student_id,course_code,unit_code,postcode,suburb,result_code,concession,fee_exempt,std_fee_per_hour,qualification_issued,volume\nS0001,CHC32015,CHCCOM005,5000,,20,Y,,2.50,,1\nS0001,CHC32015,BSBWHS211,5710,PORT AUGUSTA,51,Y,,2.50,Y,1\n",
+};
+document.querySelectorAll("[data-template]").forEach((b) => b.addEventListener("click", () => download(b.dataset.template + ".csv", TEMPLATES[b.dataset.template])));
+function renderData() {
+  const kv = [
+    ["Framework", `${R.framework} (rates fetched ${R.generated})`],
+    ["Indexation", `×${R.indexFactor.toFixed(6)} to ${R.indexYear}`],
+    ["Base rates", `${Object.keys(R.base).length} FOE codes`],
+    ["Courses", `${Object.keys(R.courses).length.toLocaleString()} (${Object.keys(R.courses).filter((k) => !C.classifyAqf(k, R.courses[k][0])).length} without a derivable AQF level)`],
+    ["Postcodes", `${Object.keys(R.postcodes).length} (${Object.values(R.postcodes).reduce((n, v) => n + v.length, 0).toLocaleString()} suburbs)`],
+    ["Unit data", state.unitsName ? `${Object.keys(state.units).length.toLocaleString()} units from ${state.unitsName}` : "none loaded"],
+    ["Claims", state.claimRows ? `${state.claimRows.length.toLocaleString()} rows from ${state.claimsName}` : "none loaded"],
+  ];
+  $("dataKv").innerHTML = kv.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
+}
+
+showTab(store.get("sa-calc-tab") || "estimate");
+renderEstimate();
+</script>
+</body>
+</html>

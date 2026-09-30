@@ -1,0 +1,2219 @@
+postcode,suburb,regional_metro,location,loading_pct
+0872,AMATA,Regional,Very Remote Regional,40
+0872,AYERS RANGE SOUTH,Regional,Very Remote Regional,40
+0872,DE ROSE HILL,Regional,Very Remote Regional,40
+0872,ERNABELLA (PUKATJA),Regional,Very Remote Regional,40
+0872,FREGON,Regional,Very Remote Regional,40
+0872,INDULKANA (IWANTJA),Regional,Very Remote Regional,40
+0872,KALTJITI,Regional,Very Remote Regional,40
+0872,LAMBINA,Regional,Very Remote Regional,40
+0872,MIMILI,Regional,Very Remote Regional,40
+0872,MURPUTJA HOMELANDS,Regional,Very Remote Regional,40
+0872,NYAPARI,Regional,Very Remote Regional,40
+0872,PITJANTJATJARA HOMELANDS,Regional,Very Remote Regional,40
+0872,TIEYON,Regional,Very Remote Regional,40
+0872,UMUWA,Regional,Very Remote Regional,40
+5000,ADELAIDE,Metro,Highly Accessible Metro,0
+5000,ADELAIDE BC,Metro,Highly Accessible Metro,0
+5000,CITY WEST CAMPUS,Metro,Highly Accessible Metro,0
+5000,HALIFAX STREET,Metro,Highly Accessible Metro,0
+5000,HALIFAX STREET PO,Metro,Highly Accessible Metro,0
+5000,HUTT STREET,Metro,Highly Accessible Metro,0
+5000,HUTT STREET PO,Metro,Highly Accessible Metro,0
+5000,PARLIAMENT HOUSE,Metro,Highly Accessible Metro,0
+5000,RUNDLE MALL,Metro,Highly Accessible Metro,0
+5000,RUNDLE MALL PO,Metro,Highly Accessible Metro,0
+5000,STATION ARCADE,Metro,Highly Accessible Metro,0
+5000,STURT STREET,Metro,Highly Accessible Metro,0
+5001,ADELAIDE,Metro,Highly Accessible Metro,0
+5005,ADELAIDE UNIVERSITY,Metro,Highly Accessible Metro,0
+5005,THE UNIVERSITY OF ADELAIDE,Metro,Highly Accessible Metro,0
+5005,UNIVERSITY OF ADELAIDE,Metro,Highly Accessible Metro,0
+5006,NORTH ADELAIDE,Metro,Highly Accessible Metro,0
+5006,ST,Metro,Highly Accessible Metro,0
+5007,BOWDEN,Metro,Highly Accessible Metro,0
+5007,BROMPTON,Metro,Highly Accessible Metro,0
+5007,HINDMARSH,Metro,Highly Accessible Metro,0
+5007,WELLAND,Metro,Highly Accessible Metro,0
+5007,WEST HINDMARSH,Metro,Highly Accessible Metro,0
+5008,CROYDON,Metro,Highly Accessible Metro,0
+5008,CROYDON PARK,Metro,Highly Accessible Metro,0
+5008,CROYDON PARK SOUTH,Metro,Highly Accessible Metro,0
+5008,DEVON PARK,Metro,Highly Accessible Metro,0
+5008,DUDLEY PARK,Metro,Highly Accessible Metro,0
+5008,RENOWN PARK,Metro,Highly Accessible Metro,0
+5008,RIDLEYTON,Metro,Highly Accessible Metro,0
+5008,WEST CROYDON,Metro,Highly Accessible Metro,0
+5009,ALLENBY GARDENS,Metro,Highly Accessible Metro,0
+5009,BEVERLEY,Metro,Highly Accessible Metro,0
+5009,KILKENNY,Metro,Highly Accessible Metro,0
+5010,ANGLE PARK,Metro,Highly Accessible Metro,0
+5010,FERRYDEN PARK,Metro,Highly Accessible Metro,0
+5010,REGENCY PARK,Metro,Highly Accessible Metro,0
+5010,REGENCY PARK BC,Metro,Highly Accessible Metro,0
+5011,ST CLAIR,Metro,Highly Accessible Metro,0
+5011,WOODVILLE,Metro,Highly Accessible Metro,0
+5011,WOODVILLE PARK,Metro,Highly Accessible Metro,0
+5011,WOODVILLE SOUTH,Metro,Highly Accessible Metro,0
+5011,WOODVILLE WEST,Metro,Highly Accessible Metro,0
+5012,ATHOL PARK,Metro,Highly Accessible Metro,0
+5012,MANSFIELD PARK,Metro,Highly Accessible Metro,0
+5012,WOODVILLE GARDENS,Metro,Highly Accessible Metro,0
+5012,WOODVILLE NORTH,Metro,Highly Accessible Metro,0
+5013,GILLMAN,Metro,Highly Accessible Metro,0
+5013,OTTOWAY,Metro,Highly Accessible Metro,0
+5013,PENNINGTON,Metro,Highly Accessible Metro,0
+5013,ROSEWATER,Metro,Highly Accessible Metro,0
+5013,ROSEWATER EAST,Metro,Highly Accessible Metro,0
+5013,WINGFIELD,Metro,Highly Accessible Metro,0
+5014,ALBERT PARK,Metro,Highly Accessible Metro,0
+5014,ALBERTON,Metro,Highly Accessible Metro,0
+5014,CHELTENHAM,Metro,Highly Accessible Metro,0
+5014,HENDON,Metro,Highly Accessible Metro,0
+5014,QUEENSTOWN,Metro,Highly Accessible Metro,0
+5014,ROYAL PARK,Metro,Highly Accessible Metro,0
+5015,BIRKENHEAD,Metro,Highly Accessible Metro,0
+5015,ETHELTON,Metro,Highly Accessible Metro,0
+5015,GLANVILLE,Metro,Highly Accessible Metro,0
+5015,NEW PORT,Metro,Highly Accessible Metro,0
+5015,PORT ADELAIDE,Metro,Highly Accessible Metro,0
+5015,PORT ADELAIDE BC,Metro,Highly Accessible Metro,0
+5015,PORT ADELAIDE DC,Metro,Highly Accessible Metro,0
+5015,TORRENS ISLAND,Metro,Highly Accessible Metro,0
+5016,LARGS BAY,Metro,Highly Accessible Metro,0
+5016,LARGS NORTH,Metro,Highly Accessible Metro,0
+5016,PETERHEAD,Metro,Highly Accessible Metro,0
+5017,OSBORNE,Metro,Highly Accessible Metro,0
+5017,TAPEROO,Metro,Highly Accessible Metro,0
+5018,NORTH HAVEN,Metro,Highly Accessible Metro,0
+5018,OUTER HARBOR,Metro,Highly Accessible Metro,0
+5019,EXETER,Metro,Highly Accessible Metro,0
+5019,SEMAPHORE,Metro,Highly Accessible Metro,0
+5019,SEMAPHORE PARK,Metro,Highly Accessible Metro,0
+5019,SEMAPHORE SOUTH,Metro,Highly Accessible Metro,0
+5020,WEST LAKES SHORE,Metro,Highly Accessible Metro,0
+5021,WEST LAKES,Metro,Highly Accessible Metro,0
+5022,GRANGE,Metro,Highly Accessible Metro,0
+5022,HENLEY BEACH,Metro,Highly Accessible Metro,0
+5022,HENLEY BEACH SOUTH,Metro,Highly Accessible Metro,0
+5022,KIRKCALDY,Metro,Highly Accessible Metro,0
+5022,TENNYSON,Metro,Highly Accessible Metro,0
+5023,FINDON,Metro,Highly Accessible Metro,0
+5023,SEATON,Metro,Highly Accessible Metro,0
+5023,SEATON NORTH,Metro,Highly Accessible Metro,0
+5024,FULHAM,Metro,Highly Accessible Metro,0
+5024,FULHAM GARDENS,Metro,Highly Accessible Metro,0
+5024,WEST BEACH,Metro,Highly Accessible Metro,0
+5025,FLINDERS PARK,Metro,Highly Accessible Metro,0
+5025,KIDMAN PARK,Metro,Highly Accessible Metro,0
+5031,MILE END,Metro,Highly Accessible Metro,0
+5031,MILE END SOUTH,Metro,Highly Accessible Metro,0
+5031,THEBARTON,Metro,Highly Accessible Metro,0
+5031,TORRENSVILLE,Metro,Highly Accessible Metro,0
+5031,TORRENSVILLE PLAZA,Metro,Highly Accessible Metro,0
+5032,BROOKLYN PARK,Metro,Highly Accessible Metro,0
+5032,LOCKLEYS,Metro,Highly Accessible Metro,0
+5032,UNDERDALE,Metro,Highly Accessible Metro,0
+5033,COWANDILLA,Metro,Highly Accessible Metro,0
+5033,HILTON,Metro,Highly Accessible Metro,0
+5033,HILTON PLAZA,Metro,Highly Accessible Metro,0
+5033,MARLESTON,Metro,Highly Accessible Metro,0
+5033,MARLESTON DC,Metro,Highly Accessible Metro,0
+5033,RICHMOND,Metro,Highly Accessible Metro,0
+5033,WEST RICHMOND,Metro,Highly Accessible Metro,0
+5034,CLARENCE PARK,Metro,Highly Accessible Metro,0
+5034,GOODWOOD,Metro,Highly Accessible Metro,0
+5034,KINGS PARK,Metro,Highly Accessible Metro,0
+5034,MILLSWOOD,Metro,Highly Accessible Metro,0
+5034,WAYVILLE,Metro,Highly Accessible Metro,0
+5035,ASHFORD,Metro,Highly Accessible Metro,0
+5035,BLACK FOREST,Metro,Highly Accessible Metro,0
+5035,EVERARD PARK,Metro,Highly Accessible Metro,0
+5035,FORESTVILLE,Metro,Highly Accessible Metro,0
+5035,KESWICK,Metro,Highly Accessible Metro,0
+5035,KESWICK TERMINAL,Metro,Highly Accessible Metro,0
+5037,GLANDORE,Metro,Highly Accessible Metro,0
+5037,KURRALTA PARK,Metro,Highly Accessible Metro,0
+5037,NETLEY,Metro,Highly Accessible Metro,0
+5037,NORTH PLYMPTON,Metro,Highly Accessible Metro,0
+5038,CAMDEN PARK,Metro,Highly Accessible Metro,0
+5038,PLYMPTON,Metro,Highly Accessible Metro,0
+5038,PLYMPTON PARK,Metro,Highly Accessible Metro,0
+5038,SOUTH PLYMPTON,Metro,Highly Accessible Metro,0
+5039,CLARENCE GARDENS,Metro,Highly Accessible Metro,0
+5039,EDWARDSTOWN,Metro,Highly Accessible Metro,0
+5039,MELROSE PARK,Metro,Highly Accessible Metro,0
+5039,MELROSE PARK DC,Metro,Highly Accessible Metro,0
+5040,NOVAR GARDENS,Metro,Highly Accessible Metro,0
+5041,COLONEL LIGHT GARDENS,Metro,Highly Accessible Metro,0
+5041,CUMBERLAND PARK,Metro,Highly Accessible Metro,0
+5041,DAW PARK,Metro,Highly Accessible Metro,0
+5041,PANORAMA,Metro,Highly Accessible Metro,0
+5041,WESTBOURNE PARK,Metro,Highly Accessible Metro,0
+5042,BEDFORD PARK,Metro,Highly Accessible Metro,0
+5042,CLOVELLY PARK,Metro,Highly Accessible Metro,0
+5042,FLINDERS UNIVERSITY,Metro,Highly Accessible Metro,0
+5042,PASADENA,Metro,Highly Accessible Metro,0
+5042,ST MARYS,Metro,Highly Accessible Metro,0
+5042,TONSLEY,Metro,Highly Accessible Metro,0
+5043,ASCOT PARK,Metro,Highly Accessible Metro,0
+5043,MARION,Metro,Highly Accessible Metro,0
+5043,MITCHELL PARK,Metro,Highly Accessible Metro,0
+5043,MORPHETTVILLE,Metro,Highly Accessible Metro,0
+5043,PARK HOLME,Metro,Highly Accessible Metro,0
+5044,GLENGOWRIE,Metro,Highly Accessible Metro,0
+5044,SOMERTON PARK,Metro,Highly Accessible Metro,0
+5045,GLENELG,Metro,Highly Accessible Metro,0
+5045,GLENELG EAST,Metro,Highly Accessible Metro,0
+5045,GLENELG JETTY ROAD,Metro,Highly Accessible Metro,0
+5045,GLENELG NORTH,Metro,Highly Accessible Metro,0
+5045,PLACE,Metro,Highly Accessible Metro,0
+5045,GLENELG SOUTH,Metro,Highly Accessible Metro,0
+5046,OAKLANDS PARK,Metro,Highly Accessible Metro,0
+5046,WARRADALE,Metro,Highly Accessible Metro,0
+5046,WARRADALE NORTH,Metro,Highly Accessible Metro,0
+5047,DARLINGTON,Metro,Highly Accessible Metro,0
+5047,SEACOMBE GARDENS,Metro,Highly Accessible Metro,0
+5047,SEACOMBE HEIGHTS,Metro,Highly Accessible Metro,0
+5047,STURT,Metro,Highly Accessible Metro,0
+5048,BRIGHTON,Metro,Highly Accessible Metro,0
+5048,DOVER GARDENS,Metro,Highly Accessible Metro,0
+5048,HOVE,Metro,Highly Accessible Metro,0
+5048,NORTH BRIGHTON,Metro,Highly Accessible Metro,0
+5048,SOUTH BRIGHTON,Metro,Highly Accessible Metro,0
+5049,KINGSTON PARK,Metro,Highly Accessible Metro,0
+5049,MARINO,Metro,Highly Accessible Metro,0
+5049,SEACLIFF,Metro,Highly Accessible Metro,0
+5049,SEACLIFF PARK,Metro,Highly Accessible Metro,0
+5049,SEAVIEW DOWNS,Metro,Highly Accessible Metro,0
+5050,BELLEVUE HEIGHTS,Metro,Highly Accessible Metro,0
+5050,EDEN HILLS,Metro,Highly Accessible Metro,0
+5051,BLACKWOOD,Metro,Highly Accessible Metro,0
+5051,COROMANDEL VALLEY,Metro,Highly Accessible Metro,0
+5051,CRAIGBURN FARM,Metro,Highly Accessible Metro,0
+5051,HAWTHORNDENE,Metro,Highly Accessible Metro,0
+5052,BELAIR,Metro,Highly Accessible Metro,0
+5052,GLENALTA,Metro,Highly Accessible Metro,0
+5061,HYDE PARK,Metro,Highly Accessible Metro,0
+5061,MALVERN,Metro,Highly Accessible Metro,0
+5061,UNLEY,Metro,Highly Accessible Metro,0
+5061,UNLEY BC,Metro,Highly Accessible Metro,0
+5061,UNLEY DC,Metro,Highly Accessible Metro,0
+5061,UNLEY PARK,Metro,Highly Accessible Metro,0
+5062,BROWN HILL CREEK,Metro,Highly Accessible Metro,0
+5062,CLAPHAM,Metro,Highly Accessible Metro,0
+5062,HAWTHORN,Metro,Highly Accessible Metro,0
+5062,KINGSWOOD,Metro,Highly Accessible Metro,0
+5062,LOWER MITCHAM,Metro,Highly Accessible Metro,0
+5062,LYNTON,Metro,Highly Accessible Metro,0
+5062,MITCHAM,Metro,Highly Accessible Metro,0
+5062,MITCHAM SHOPPING CENTRE,Metro,Highly Accessible Metro,0
+5062,NETHERBY,Metro,Highly Accessible Metro,0
+5062,SPRINGFIELD,Metro,Highly Accessible Metro,0
+5062,TORRENS PARK,Metro,Highly Accessible Metro,0
+5063,EASTWOOD,Metro,Highly Accessible Metro,0
+5063,FREWVILLE,Metro,Highly Accessible Metro,0
+5063,FULLARTON,Metro,Highly Accessible Metro,0
+5063,HIGHGATE,Metro,Highly Accessible Metro,0
+5063,PARKSIDE,Metro,Highly Accessible Metro,0
+5064,GLEN OSMOND,Metro,Highly Accessible Metro,0
+5064,GLENUNGA,Metro,Highly Accessible Metro,0
+5064,MOUNT OSMOND,Metro,Highly Accessible Metro,0
+5064,MYRTLE BANK,Metro,Highly Accessible Metro,0
+5064,ST GEORGES,Metro,Highly Accessible Metro,0
+5064,URRBRAE,Metro,Highly Accessible Metro,0
+5065,DULWICH,Metro,Highly Accessible Metro,0
+5065,GLENSIDE,Metro,Highly Accessible Metro,0
+5065,LINDEN PARK,Metro,Highly Accessible Metro,0
+5065,TOORAK GARDENS,Metro,Highly Accessible Metro,0
+5065,TUSMORE,Metro,Highly Accessible Metro,0
+5066,BEAUMONT,Metro,Highly Accessible Metro,0
+5066,BURNSIDE,Metro,Highly Accessible Metro,0
+5066,ERINDALE,Metro,Highly Accessible Metro,0
+5066,HAZELWOOD PARK,Metro,Highly Accessible Metro,0
+5066,STONYFELL,Metro,Highly Accessible Metro,0
+5066,WATERFALL GULLY,Metro,Highly Accessible Metro,0
+5066,WATTLE PARK,Metro,Highly Accessible Metro,0
+5067,BEULAH PARK,Metro,Highly Accessible Metro,0
+5067,KENT TOWN,Metro,Highly Accessible Metro,0
+5067,NORWOOD,Metro,Highly Accessible Metro,0
+5067,NORWOOD SOUTH,Metro,Highly Accessible Metro,0
+5067,ROSE PARK,Metro,Highly Accessible Metro,0
+5068,HEATHPOOL,Metro,Highly Accessible Metro,0
+5068,KENSINGTON,Metro,Highly Accessible Metro,0
+5068,KENSINGTON GARDENS,Metro,Highly Accessible Metro,0
+5068,KENSINGTON PARK,Metro,Highly Accessible Metro,0
+5068,LEABROOK,Metro,Highly Accessible Metro,0
+5068,MARRYATVILLE,Metro,Highly Accessible Metro,0
+5068,ST MORRIS,Metro,Highly Accessible Metro,0
+5068,TRINITY GARDENS,Metro,Highly Accessible Metro,0
+5069,COLLEGE PARK,Metro,Highly Accessible Metro,0
+5069,EVANDALE,Metro,Highly Accessible Metro,0
+5069,HACKNEY,Metro,Highly Accessible Metro,0
+5069,MAYLANDS,Metro,Highly Accessible Metro,0
+5069,ST PETERS,Metro,Highly Accessible Metro,0
+5069,STEPNEY,Metro,Highly Accessible Metro,0
+5070,FELIXSTOW,Metro,Highly Accessible Metro,0
+5070,FIRLE,Metro,Highly Accessible Metro,0
+5070,GLYNDE,Metro,Highly Accessible Metro,0
+5070,GLYNDE DC,Metro,Highly Accessible Metro,0
+5070,GLYNDE PLAZA,Metro,Highly Accessible Metro,0
+5070,JOSLIN,Metro,Highly Accessible Metro,0
+5070,MARDAN,Metro,Highly Accessible Metro,0
+5070,MARDEN,Metro,Highly Accessible Metro,0
+5070,PAYNEHAM,Metro,Highly Accessible Metro,0
+5070,PAYNEHAM SOUTH,Metro,Highly Accessible Metro,0
+5070,ROYSTON PARK,Metro,Highly Accessible Metro,0
+5071,KENT TOWN,Metro,Highly Accessible Metro,0
+5071,KENT TOWN DC,Metro,Highly Accessible Metro,0
+5072,AULDANA,Metro,Highly Accessible Metro,0
+5072,MAGILL,Metro,Highly Accessible Metro,0
+5072,MAGILL NORTH,Metro,Highly Accessible Metro,0
+5072,MAGILL SOUTH,Metro,Highly Accessible Metro,0
+5072,ROSSLYN PARK,Metro,Highly Accessible Metro,0
+5072,SKYE,Metro,Highly Accessible Metro,0
+5072,TERINGIE,Metro,Highly Accessible Metro,0
+5072,WOODFORDE,Metro,Highly Accessible Metro,0
+5073,HECTORVILLE,Metro,Highly Accessible Metro,0
+5073,ROSTREVOR,Metro,Highly Accessible Metro,0
+5073,TRANMERE,Metro,Highly Accessible Metro,0
+5073,TRANMERE NORTH,Metro,Highly Accessible Metro,0
+5074,CAMPBELLTOWN,Metro,Highly Accessible Metro,0
+5074,NEWTON,Metro,Highly Accessible Metro,0
+5075,DERNANCOURT,Metro,Highly Accessible Metro,0
+5075,PARADISE,Metro,Highly Accessible Metro,0
+5076,ATHELSTONE,Metro,Highly Accessible Metro,0
+5076,CASTAMBUL,Metro,Highly Accessible Metro,0
+5081,COLLINSWOOD,Metro,Highly Accessible Metro,0
+5081,GILBERTON,Metro,Highly Accessible Metro,0
+5081,MEDINDIE,Metro,Highly Accessible Metro,0
+5081,MEDINDIE GARDENS,Metro,Highly Accessible Metro,0
+5081,VALE PARK,Metro,Highly Accessible Metro,0
+5081,WALKERVILLE,Metro,Highly Accessible Metro,0
+5082,FITZROY,Metro,Highly Accessible Metro,0
+5082,OVINGHAM,Metro,Highly Accessible Metro,0
+5082,PROSPECT,Metro,Highly Accessible Metro,0
+5082,PROSPECT EAST,Metro,Highly Accessible Metro,0
+5082,PROSPECT WEST,Metro,Highly Accessible Metro,0
+5082,THORNGATE,Metro,Highly Accessible Metro,0
+5083,BROADVIEW,Metro,Highly Accessible Metro,0
+5083,NAILSWORTH,Metro,Highly Accessible Metro,0
+5083,SEFTON PARK,Metro,Highly Accessible Metro,0
+5084,BLAIR ATHOL,Metro,Highly Accessible Metro,0
+5084,BLAIR ATHOL WEST,Metro,Highly Accessible Metro,0
+5084,KILBURN,Metro,Highly Accessible Metro,0
+5084,KILBURN NORTH,Metro,Highly Accessible Metro,0
+5085,CLEARVIEW,Metro,Highly Accessible Metro,0
+5085,ENFIELD,Metro,Highly Accessible Metro,0
+5085,ENFIELD PLAZA,Metro,Highly Accessible Metro,0
+5085,LIGHTSVIEW,Metro,Highly Accessible Metro,0
+5085,NORTHFIELD,Metro,Highly Accessible Metro,0
+5085,NORTHGATE,Metro,Highly Accessible Metro,0
+5086,GILLES PLAINS,Metro,Highly Accessible Metro,0
+5086,GREENACRES,Metro,Highly Accessible Metro,0
+5086,HAMPSTEAD GARDENS,Metro,Highly Accessible Metro,0
+5086,HILLCREST,Metro,Highly Accessible Metro,0
+5086,MANNINGHAM,Metro,Highly Accessible Metro,0
+5086,OAKDEN,Metro,Highly Accessible Metro,0
+5087,KLEMZIG,Metro,Highly Accessible Metro,0
+5087,WINDSOR GARDENS,Metro,Highly Accessible Metro,0
+5088,HOLDEN HILL,Metro,Highly Accessible Metro,0
+5089,HIGHBURY,Metro,Highly Accessible Metro,0
+5090,HOPE VALLEY,Metro,Highly Accessible Metro,0
+5091,BANKSIA PARK,Metro,Highly Accessible Metro,0
+5091,TEA TREE GULLY,Metro,Highly Accessible Metro,0
+5091,VISTA,Metro,Highly Accessible Metro,0
+5092,MODBURY,Metro,Highly Accessible Metro,0
+5092,MODBURY HEIGHTS,Metro,Highly Accessible Metro,0
+5092,MODBURY NORTH,Metro,Highly Accessible Metro,0
+5092,MODBURY NORTH DC,Metro,Highly Accessible Metro,0
+5093,PARA VISTA,Metro,Highly Accessible Metro,0
+5093,VALLEY VIEW,Metro,Highly Accessible Metro,0
+5094,CAVAN,Metro,Highly Accessible Metro,0
+5094,DRY CREEK,Metro,Highly Accessible Metro,0
+5094,GEPPS CROSS,Metro,Highly Accessible Metro,0
+5095,MAWSON LAKES,Metro,Highly Accessible Metro,0
+5095,POORAKA,Metro,Highly Accessible Metro,0
+5095,THE LEVELS,Metro,Highly Accessible Metro,0
+5096,GULFVIEW HEIGHTS,Metro,Highly Accessible Metro,0
+5096,PARA HILLS,Metro,Highly Accessible Metro,0
+5096,PARA HILLS WEST,Metro,Highly Accessible Metro,0
+5097,REDWOOD PARK,Metro,Highly Accessible Metro,0
+5097,RIDGEHAVEN,Metro,Highly Accessible Metro,0
+5097,ST AGNES,Metro,Highly Accessible Metro,0
+5098,INGLE FARM,Metro,Highly Accessible Metro,0
+5098,WALKLEY HEIGHTS,Metro,Highly Accessible Metro,0
+5106,PARAFIELD,Metro,Highly Accessible Metro,0
+5106,SALISBURY SOUTH,Metro,Highly Accessible Metro,0
+5106,SALISBURY SOUTH BC,Metro,Highly Accessible Metro,0
+5106,SALISBURY SOUTH DC,Metro,Highly Accessible Metro,0
+5107,GREEN FIELDS,Metro,Highly Accessible Metro,0
+5107,PARAFIELD GARDENS,Metro,Highly Accessible Metro,0
+5108,PARALOWIE,Metro,Highly Accessible Metro,0
+5108,SALISBURY,Metro,Highly Accessible Metro,0
+5108,SALISBURY DOWNS,Metro,Highly Accessible Metro,0
+5108,SALISBURY NORTH,Metro,Highly Accessible Metro,0
+5108,ROAD,Metro,Highly Accessible Metro,0
+5109,BRAHMA LODGE,Metro,Highly Accessible Metro,0
+5109,SALISBURY EAST,Metro,Highly Accessible Metro,0
+5109,SALISBURY EAST NORTHBRI AV,Metro,Highly Accessible Metro,0
+5109,AVE,Metro,Highly Accessible Metro,0
+5109,SALISBURY HEIGHTS,Metro,Highly Accessible Metro,0
+5109,SALISBURY PARK,Metro,Highly Accessible Metro,0
+5109,SALISBURY PLAIN,Metro,Highly Accessible Metro,0
+5110,BOLIVAR,Metro,Highly Accessible Metro,0
+5110,BURTON,Metro,Highly Accessible Metro,0
+5110,DIREK,Metro,Highly Accessible Metro,0
+5110,GLOBE DERBY PARK,Metro,Highly Accessible Metro,0
+5110,ST KILDA,Metro,Highly Accessible Metro,0
+5110,WATERLOO CORNER,Metro,Highly Accessible Metro,0
+5111,EDINBURGH,Metro,Highly Accessible Metro,0
+5111,EDINBURGH RAAF,Metro,Highly Accessible Metro,0
+5112,ELIZABETH,Metro,Highly Accessible Metro,0
+5112,ELIZABETH EAST,Metro,Highly Accessible Metro,0
+5112,ELIZABETH GROVE,Metro,Highly Accessible Metro,0
+5112,ELIZABETH SOUTH,Metro,Highly Accessible Metro,0
+5112,ELIZABETH VALE,Metro,Highly Accessible Metro,0
+5112,HILLBANK,Metro,Highly Accessible Metro,0
+5113,DAVOREN PARK,Metro,Highly Accessible Metro,0
+5113,DAVOREN PARK NORTH,Metro,Highly Accessible Metro,0
+5113,DAVOREN PARK SOUTH,Metro,Highly Accessible Metro,0
+5113,EDINBURGH NORTH,Metro,Highly Accessible Metro,0
+5113,ELIZABETH DOWNS,Metro,Highly Accessible Metro,0
+5113,ELIZABETH NORTH,Metro,Highly Accessible Metro,0
+5113,ELIZABETH PARK,Metro,Highly Accessible Metro,0
+5113,ELIZABETH WEST,Metro,Highly Accessible Metro,0
+5113,ELIZABETH WEST DC,Metro,Highly Accessible Metro,0
+5114,ANDREWS FARM,Metro,Highly Accessible Metro,0
+5114,BLAKEVIEW,Metro,Highly Accessible Metro,0
+5114,CRAIGMORE,Metro,Highly Accessible Metro,0
+5114,GOULD CREEK,Metro,Highly Accessible Metro,0
+5114,HUMBUG SCRUB,Metro,Highly Accessible Metro,0
+5114,ONE TREE HILL,Metro,Highly Accessible Metro,0
+5114,SAMPSON FLAT,Metro,Highly Accessible Metro,0
+5114,SMITHFIELD,Metro,Highly Accessible Metro,0
+5114,SMITHFIELD PLAINS,Metro,Highly Accessible Metro,0
+5114,SMITHFIELD WEST,Metro,Highly Accessible Metro,0
+5114,ULEYBURY,Metro,Highly Accessible Metro,0
+5114,YATTALUNGA,Metro,Highly Accessible Metro,0
+5115,KUDLA,Metro,Highly Accessible Metro,0
+5115,MUNNO PARA,Metro,Highly Accessible Metro,0
+5115,MUNNO PARA DOWNS,Metro,Highly Accessible Metro,0
+5115,MUNNO PARA WEST,Metro,Highly Accessible Metro,0
+5116,EVANSTON,Metro,Highly Accessible Metro,0
+5116,EVANSTON GARDENS,Metro,Highly Accessible Metro,0
+5116,EVANSTON PARK,Metro,Highly Accessible Metro,0
+5116,EVANSTON SOUTH,Metro,Highly Accessible Metro,0
+5116,HILLIER,Metro,Highly Accessible Metro,0
+5117,ANGLE VALE,Metro,Highly Accessible Metro,0
+5118,BIBARINGA,Metro,Highly Accessible Metro,0
+5118,BUCHFELDE,Metro,Highly Accessible Metro,0
+5118,CONCORDIA,Metro,Highly Accessible Metro,0
+5118,GAWLER,Metro,Highly Accessible Metro,0
+5118,GAWLER BELT,Metro,Highly Accessible Metro,0
+5118,GAWLER EAST,Metro,Highly Accessible Metro,0
+5118,GAWLER RIVER,Metro,Highly Accessible Metro,0
+5118,GAWLER SOUTH,Metro,Highly Accessible Metro,0
+5118,GAWLER WEST,Metro,Highly Accessible Metro,0
+5118,HEWETT,Metro,Highly Accessible Metro,0
+5118,KALBEEBA,Metro,Highly Accessible Metro,0
+5118,KANGAROO FLAT,Metro,Highly Accessible Metro,0
+5118,KINGSFORD,Metro,Highly Accessible Metro,0
+5118,REID,Metro,Highly Accessible Metro,0
+5118,WARD BELT,Metro,Highly Accessible Metro,0
+5118,WILLASTON,Metro,Highly Accessible Metro,0
+5120,BUCKLAND PARK,Metro,Highly Accessible Metro,0
+5120,RIVERLEA PARK,Metro,Highly Accessible Metro,0
+5120,VIRGINIA,Metro,Highly Accessible Metro,0
+5121,EYRE,Metro,Highly Accessible Metro,0
+5121,MACDONALD PARK,Metro,Highly Accessible Metro,0
+5121,PENFIELD,Metro,Highly Accessible Metro,0
+5121,PENFIELD GARDENS,Metro,Highly Accessible Metro,0
+5125,GOLDEN GROVE,Metro,Highly Accessible Metro,0
+5125,GOLDEN GROVE VILLAGE,Metro,Highly Accessible Metro,0
+5125,GREENWITH,Metro,Highly Accessible Metro,0
+5126,FAIRVIEW PARK,Metro,Highly Accessible Metro,0
+5126,SURREY DOWNS,Metro,Highly Accessible Metro,0
+5126,YATALA VALE,Metro,Highly Accessible Metro,0
+5127,WYNN VALE,Metro,Highly Accessible Metro,0
+5131,HOUGHTON,Metro,Highly Accessible Metro,0
+5131,LOWER HERMITAGE,Metro,Highly Accessible Metro,0
+5131,UPPER HERMITAGE,Metro,Highly Accessible Metro,0
+5132,PARACOMBE,Metro,Highly Accessible Metro,0
+5133,INGLEWOOD,Metro,Highly Accessible Metro,0
+5134,CHERRYVILLE,Metro,Highly Accessible Metro,0
+5134,MONTACUTE,Metro,Highly Accessible Metro,0
+5136,NORTON SUMMIT,Metro,Highly Accessible Metro,0
+5137,ASHTON,Metro,Highly Accessible Metro,0
+5137,MARBLE HILL,Metro,Highly Accessible Metro,0
+5138,BASKET RANGE,Metro,Highly Accessible Metro,0
+5139,FOREST RANGE,Metro,Highly Accessible Metro,0
+5140,GREENHILL,Metro,Highly Accessible Metro,0
+5141,HORSNELL GULLY,Metro,Highly Accessible Metro,0
+5141,SUMMERTOWN,Metro,Highly Accessible Metro,0
+5142,URAIDLA,Metro,Highly Accessible Metro,0
+5144,CAREY GULLY,Metro,Highly Accessible Metro,0
+5144,MOUNT GEORGE,Metro,Highly Accessible Metro,0
+5150,EAGLE ON THE HILL,Metro,Highly Accessible Metro,0
+5150,LEAWOOD GARDENS,Metro,Highly Accessible Metro,0
+5151,PICCADILLY,Metro,Highly Accessible Metro,0
+5152,CLELAND,Metro,Highly Accessible Metro,0
+5152,CRAFERS,Metro,Highly Accessible Metro,0
+5152,CRAFERS WEST,Metro,Highly Accessible Metro,0
+5152,MOUNT LOFTY,Metro,Highly Accessible Metro,0
+5152,STIRLING,Metro,Highly Accessible Metro,0
+5153,BIGGS FLAT,Metro,Highly Accessible Metro,0
+5153,BRADBURY,Metro,Highly Accessible Metro,0
+5153,CHAPEL HILL,Metro,Highly Accessible Metro,0
+5153,ECHUNGA,Metro,Highly Accessible Metro,0
+5153,FLAXLEY,Metro,Highly Accessible Metro,0
+5153,GREEN HILLS RANGE,Metro,Highly Accessible Metro,0
+5153,HEATHFIELD,Metro,Highly Accessible Metro,0
+5153,IRONBANK,Metro,Highly Accessible Metro,0
+5153,JUPITER CREEK,Metro,Highly Accessible Metro,0
+5153,LONGWOOD,Metro,Highly Accessible Metro,0
+5153,MACCLESFIELD,Metro,Highly Accessible Metro,0
+5153,MYLOR,Metro,Highly Accessible Metro,0
+5153,SCOTT CREEK,Metro,Highly Accessible Metro,0
+5154,ALDGATE,Metro,Highly Accessible Metro,0
+5155,BRIDGEWATER,Metro,Highly Accessible Metro,0
+5155,MOUNT GEORGE,Metro,Highly Accessible Metro,0
+5156,UPPER STURT,Metro,Highly Accessible Metro,0
+5157,ASHBOURNE,Metro,Highly Accessible Metro,0
+5157,BULL CREEK,Metro,Highly Accessible Metro,0
+5157,CHERRY GARDENS,Metro,Highly Accessible Metro,0
+5157,CLARENDON,Metro,Highly Accessible Metro,0
+5157,COROMANDEL EAST,Metro,Highly Accessible Metro,0
+5157,DORSET VALE,Metro,Highly Accessible Metro,0
+5157,KANGARILLA,Metro,Highly Accessible Metro,0
+5157,MCHARG CREEK,Metro,Highly Accessible Metro,0
+5158,HALLETT COVE,Metro,Highly Accessible Metro,0
+5158,KARRARA,Metro,Highly Accessible Metro,0
+5158,O'HALLORAN HILL,Metro,Highly Accessible Metro,0
+5158,O'HALLORAN HILL DC,Metro,Highly Accessible Metro,0
+5158,SHEIDOW PARK,Metro,Highly Accessible Metro,0
+5158,TROTT PARK,Metro,Highly Accessible Metro,0
+5158,WOODEND,Metro,Highly Accessible Metro,0
+5159,ABERFOYLE PARK,Metro,Highly Accessible Metro,0
+5159,CHANDLERS HILL,Metro,Highly Accessible Metro,0
+5159,FLAGSTAFF HILL,Metro,Highly Accessible Metro,0
+5159,FOUNTAIN VALLEY,Metro,Highly Accessible Metro,0
+5159,HAPPY VALLEY,Metro,Highly Accessible Metro,0
+5159,WOODLEA,Metro,Highly Accessible Metro,0
+5160,LONSDALE,Metro,Highly Accessible Metro,0
+5160,LONSDALE DC,Metro,Highly Accessible Metro,0
+5160,PORT STANVAC,Metro,Highly Accessible Metro,0
+5161,OLD REYNELLA,Metro,Highly Accessible Metro,0
+5161,REYNELLA,Metro,Highly Accessible Metro,0
+5161,REYNELLA EAST,Metro,Highly Accessible Metro,0
+5162,MORPHETT VALE,Metro,Highly Accessible Metro,0
+5162,MOUNT HURTLE,Metro,Highly Accessible Metro,0
+5162,WOODCROFT,Metro,Highly Accessible Metro,0
+5163,HACKHAM,Metro,Highly Accessible Metro,0
+5163,HACKHAM WEST,Metro,Highly Accessible Metro,0
+5163,HUNTFIELD HEIGHTS,Metro,Highly Accessible Metro,0
+5163,ONKAPARINGA HILLS,Metro,Highly Accessible Metro,0
+5164,CHRISTIE DOWNS,Metro,Highly Accessible Metro,0
+5165,CHRISTIES BEACH,Metro,Highly Accessible Metro,0
+5165,CHRISTIES BEACH NORTH,Metro,Highly Accessible Metro,0
+5166,O'SULLIVAN BEACH,Metro,Highly Accessible Metro,0
+5167,PORT NOARLUNGA,Metro,Highly Accessible Metro,0
+5167,PORT NOARLUNGA SOUTH,Metro,Highly Accessible Metro,0
+5168,NOARLUNGA CENTRE,Metro,Highly Accessible Metro,0
+5168,NOARLUNGA DOWNS,Metro,Highly Accessible Metro,0
+5168,OLD NOARLUNGA,Metro,Highly Accessible Metro,0
+5169,MOANA,Metro,Highly Accessible Metro,0
+5169,SEAFORD,Metro,Highly Accessible Metro,0
+5169,SEAFORD HEIGHTS,Metro,Highly Accessible Metro,0
+5169,SEAFORD MEADOWS,Metro,Highly Accessible Metro,0
+5169,SEAFORD RISE,Metro,Highly Accessible Metro,0
+5170,LANDCROSS FARM,Metro,Highly Accessible Metro,0
+5170,MASLIN BEACH,Metro,Highly Accessible Metro,0
+5171,BLEWITT SPRINGS,Metro,Highly Accessible Metro,0
+5171,MCLAREN FLAT,Metro,Highly Accessible Metro,0
+5171,MCLAREN VALE,Metro,Highly Accessible Metro,0
+5171,PEDLER CREEK,Metro,Highly Accessible Metro,0
+5171,TATACHILLA,Metro,Highly Accessible Metro,0
+5172,DINGABLEDINGA,Metro,Highly Accessible Metro,0
+5172,HOPE FOREST,Metro,Highly Accessible Metro,0
+5172,KUITPO,Metro,Highly Accessible Metro,0
+5172,KUITPO COLONY,Metro,Highly Accessible Metro,0
+5172,KYEEMA,Metro,Highly Accessible Metro,0
+5172,MONTARRA,Metro,Highly Accessible Metro,0
+5172,PAGES FLAT,Metro,Highly Accessible Metro,0
+5172,THE RANGE,Metro,Highly Accessible Metro,0
+5172,WHITES VALLEY,Metro,Highly Accessible Metro,0
+5172,WILLUNGA,Metro,Highly Accessible Metro,0
+5172,WILLUNGA HILL,Metro,Highly Accessible Metro,0
+5172,WILLUNGA SOUTH,Metro,Highly Accessible Metro,0
+5172,YUNDI,Metro,Highly Accessible Metro,0
+5173,ALDINGA,Metro,Highly Accessible Metro,0
+5173,ALDINGA BEACH,Metro,Highly Accessible Metro,0
+5173,PORT WILLUNGA,Metro,Highly Accessible Metro,0
+5173,SILVER SANDS,Metro,Highly Accessible Metro,0
+5174,SELLICKS BEACH,Metro,Highly Accessible Metro,0
+5174,SELLICKS HILL,Metro,Highly Accessible Metro,0
+5201,BLACKFELLOWS CREEK,Metro,Highly Accessible Metro,0
+5201,KUITPO,Metro,Highly Accessible Metro,0
+5201,MEADOWS,Metro,Highly Accessible Metro,0
+5201,PARIS CREEK,Metro,Highly Accessible Metro,0
+5201,PROSPECT HILL,Metro,Highly Accessible Metro,0
+5202,HINDMARSH TIERS,Regional,Highly Accessible Regional,0
+5202,MYPONGA,Regional,Highly Accessible Regional,0
+5202,MYPONGA BEACH,Regional,Highly Accessible Regional,0
+5203,BALD HILLS,Regional,Highly Accessible Regional,0
+5203,PARAWA,Regional,Highly Accessible Regional,0
+5203,TORRENS VALE,Regional,Highly Accessible Regional,0
+5203,TUNKALILLA,Regional,Highly Accessible Regional,0
+5203,WATTLE FLAT,Regional,Highly Accessible Regional,0
+5203,YANKALILLA,Regional,Highly Accessible Regional,0
+5204,CAPE JERVIS,Regional,Highly Accessible Regional,0
+5204,CARRICKALINGA,Regional,Highly Accessible Regional,0
+5204,DEEP CREEK,Regional,Highly Accessible Regional,0
+5204,DELAMERE,Regional,Highly Accessible Regional,0
+5204,HAY FLAT,Regional,Highly Accessible Regional,0
+5204,NORMANVILLE,Regional,Highly Accessible Regional,0
+5204,RAPID BAY,Regional,Highly Accessible Regional,0
+5204,SECOND VALLEY,Regional,Highly Accessible Regional,0
+5204,SILVERTON,Regional,Highly Accessible Regional,0
+5204,WIRRINA COVE,Regional,Highly Accessible Regional,0
+5210,MOUNT COMPASS,Regional,Highly Accessible Regional,0
+5210,MOUNT MAGNIFICENT,Regional,Highly Accessible Regional,0
+5210,NANGKITA,Regional,Highly Accessible Regional,0
+5211,BACK VALLEY,Regional,Highly Accessible Regional,0
+5211,CHITON,Regional,Highly Accessible Regional,0
+5211,ENCOUNTER BAY,Regional,Highly Accessible Regional,0
+5211,HAYBOROUGH,Regional,Highly Accessible Regional,0
+5211,HINDMARSH VALLEY,Regional,Highly Accessible Regional,0
+5211,INMAN VALLEY,Regional,Highly Accessible Regional,0
+5211,LOWER INMAN VALLEY,Regional,Highly Accessible Regional,0
+5211,MCCRACKEN,Regional,Highly Accessible Regional,0
+5211,MOUNT JAGGED,Regional,Highly Accessible Regional,0
+5211,VICTOR HARBOR,Regional,Highly Accessible Regional,0
+5211,VICTOR HARBOR CENTRAL,Metro,Highly Accessible Metro,0
+5211,WAITPINGA,Regional,Highly Accessible Regional,0
+5211,WILLOW CREEK,Regional,Highly Accessible Regional,0
+5211,YILKI,Regional,Highly Accessible Regional,0
+5212,PORT ELLIOT,Regional,Highly Accessible Regional,0
+5213,MIDDLETON,Regional,Highly Accessible Regional,0
+5214,CURRENCY CREEK,Regional,Highly Accessible Regional,0
+5214,GOOLWA,Regional,Highly Accessible Regional,0
+5214,GOOLWA BEACH,Regional,Highly Accessible Regional,0
+5214,GOOLWA NORTH,Regional,Highly Accessible Regional,0
+5214,GOOLWA SOUTH,Regional,Highly Accessible Regional,0
+5214,HINDMARSH ISLAND,Regional,Highly Accessible Regional,0
+5214,MOSQUITO HILL,Regional,Highly Accessible Regional,0
+5214,MUNDOO ISLAND,Regional,Highly Accessible Regional,0
+5220,PARNDANA,Regional,Remote Regional,30
+5221,AMERICAN RIVER,Regional,Remote Regional,30
+5221,BALLAST HEAD,Regional,Remote Regional,30
+5221,MUSTON,Regional,Remote Regional,30
+5222,AMERICAN BEACH,Regional,Remote Regional,30
+5222,ANTECHAMBER BAY,Regional,Remote Regional,30
+5222,BAUDIN BEACH,Regional,Remote Regional,30
+5222,BROWN BEACH,Regional,Remote Regional,30
+5222,BROWNS BEACH,Regional,Remote Regional,30
+5222,CUTTLEFISH BAY,Regional,Remote Regional,30
+5222,DUDLEY,Regional,Remote Regional,30
+5222,DUDLEY EAST,Regional,Remote Regional,30
+5222,DUDLEY WEST,Regional,Remote Regional,30
+5222,HUNGERFORD,Regional,Remote Regional,30
+5222,IRONSTONE,Regional,Remote Regional,30
+5222,ISLAND BEACH,Regional,Remote Regional,30
+5222,KANGAROO HEAD,Regional,Remote Regional,30
+5222,PELICAN LAGOON,Regional,Remote Regional,30
+5222,PENNESHAW,Regional,Remote Regional,30
+5222,PORKY FLAT,Regional,Remote Regional,30
+5222,SAPPHIRETOWN,Regional,Remote Regional,30
+5222,WILLOUGHBY,Regional,Remote Regional,30
+5222,WILLSON RIVER,Regional,Remote Regional,30
+5223,BAY OF SHOALS,Regional,Remote Regional,30
+5223,BIRCHMORE,Regional,Remote Regional,30
+5223,BROWNLOW,Regional,Remote Regional,30
+5223,BROWNLOW K.I.,Regional,Remote Regional,30
+5223,BROWNLOW KI,Regional,Remote Regional,30
+5223,CAPE BORDA,Regional,Remote Regional,30
+5223,CASSINI,Regional,Remote Regional,30
+5223,CYGNET RIVER,Regional,Remote Regional,30
+5223,DE MOLE RIVER,Regional,Remote Regional,30
+5223,D'ESTREES BAY,Regional,Remote Regional,30
+5223,DUNCAN,Regional,Remote Regional,30
+5223,EMU BAY,Regional,Remote Regional,30
+5223,FLINDERS CHASE,Regional,Remote Regional,30
+5223,GOSSE,Regional,Remote Regional,30
+5223,HAINES,Regional,Remote Regional,30
+5223,HARRIET RIVER,Regional,Remote Regional,30
+5223,KARATTA,Regional,Remote Regional,30
+5223,KINGSCOTE,Regional,Remote Regional,30
+5223,KOHINOOR,Regional,Remote Regional,30
+5223,MACGILLIVRAY,Regional,Remote Regional,30
+5223,MENZIES,Regional,Remote Regional,30
+5223,MIDDLE RIVER,Regional,Remote Regional,30
+5223,NEPEAN BAY,Regional,Remote Regional,30
+5223,NEWLAND,Regional,Remote Regional,30
+5223,NORTH CAPE,Regional,Remote Regional,30
+5223,SEAL BAY,Regional,Remote Regional,30
+5223,SEDDON,Regional,Remote Regional,30
+5223,STOKES BAY,Regional,Remote Regional,30
+5223,STUNSAIL BOOM,Regional,Remote Regional,30
+5223,STUN'SAIL BOOM,Regional,Remote Regional,30
+5223,VIVONNE BAY,Regional,Remote Regional,30
+5223,WESTERN RIVER,Regional,Remote Regional,30
+5223,WISANGER,Regional,Remote Regional,30
+5231,CHAIN OF PONDS,Metro,Highly Accessible Metro,0
+5231,KERSBROOK,Metro,Highly Accessible Metro,0
+5231,MILLBROOK,Metro,Highly Accessible Metro,0
+5232,CUDLEE CREEK,Metro,Highly Accessible Metro,0
+5233,FORRESTON,Metro,Highly Accessible Metro,0
+5233,GUMERACHA,Metro,Highly Accessible Metro,0
+5233,KENTON VALLEY,Metro,Highly Accessible Metro,0
+5233,WARREN,Metro,Highly Accessible Metro,0
+5234,BIRDWOOD,Metro,Highly Accessible Metro,0
+5235,CROMER,Regional,Highly Accessible Regional,0
+5235,EDEN VALLEY,Regional,Highly Accessible Regional,0
+5235,FLAXMAN VALLEY,Regional,Highly Accessible Regional,0
+5235,MOUNT PLEASANT,Regional,Highly Accessible Regional,0
+5235,SPRINGTON,Regional,Highly Accessible Regional,0
+5235,TAUNTON,Regional,Highly Accessible Regional,0
+5236,TUNGKILLO,Regional,Highly Accessible Regional,0
+5237,APAMURRA,Regional,Highly Accessible Regional,0
+5237,MILENDELLA,Regional,Highly Accessible Regional,0
+5237,PALMER,Regional,Highly Accessible Regional,0
+5237,SANDERSTON,Regional,Highly Accessible Regional,0
+5238,ANGAS VALLEY,Regional,Highly Accessible Regional,0
+5238,BIG BEND,Regional,Accessible Regional,10
+5238,BOLTO,Regional,Highly Accessible Regional,0
+5238,BONYTHON,Regional,Accessible Regional,10
+5238,BOWHILL,Regional,Accessible Regional,10
+5238,CAURNAMONT,Regional,Accessible Regional,10
+5238,CLAYPANS,Regional,Accessible Regional,10
+5238,COOLCHA,Regional,Accessible Regional,10
+5238,COWIRRA,Regional,Highly Accessible Regional,0
+5238,FIVE MILES,Regional,Highly Accessible Regional,0
+5238,FORSTER,Regional,Accessible Regional,10
+5238,FRAHNS,Regional,Highly Accessible Regional,0
+5238,FRAYVILLE,Regional,Highly Accessible Regional,0
+5238,JULANKA HOLDINGS,Regional,Accessible Regional,10
+5238,LAKE CARLET,Regional,Accessible Regional,10
+5238,MANNUM,Regional,Highly Accessible Regional,0
+5238,NILDOTTIE,Regional,Accessible Regional,10
+5238,OLD TEAL FLAT,Regional,Accessible Regional,10
+5238,PELLARING FLAT,Regional,Highly Accessible Regional,0
+5238,POMPOOTA,Regional,Highly Accessible Regional,0
+5238,PONDE,Regional,Highly Accessible Regional,0
+5238,PORT MANNUM,Regional,Highly Accessible Regional,0
+5238,PUNTHARI,Regional,Highly Accessible Regional,0
+5238,PURNONG,Regional,Accessible Regional,10
+5238,PURNONG LANDING,Regional,Accessible Regional,10
+5238,ROCKY POINT,Regional,Highly Accessible Regional,0
+5238,TEAL FLAT,Regional,Accessible Regional,10
+5238,WALKER FLAT,Regional,Accessible Regional,10
+5238,WALL,Regional,Highly Accessible Regional,0
+5238,WALL FLAT,Regional,Highly Accessible Regional,0
+5238,WONGULLA,Regional,Accessible Regional,10
+5238,WOODLANE,Regional,Highly Accessible Regional,0
+5238,YOUNGHUSBAND,Regional,Accessible Regional,10
+5238,YOUNGHUSBAND HOLDINGS,Regional,Accessible Regional,10
+5240,LENSWOOD,Metro,Highly Accessible Metro,0
+5241,LOBETHAL,Metro,Highly Accessible Metro,0
+5242,BALHANNAH,Metro,Highly Accessible Metro,0
+5243,OAKBANK,Metro,Highly Accessible Metro,0
+5244,CHARLESTON,Metro,Highly Accessible Metro,0
+5244,HARROGATE,Metro,Highly Accessible Metro,0
+5244,INVERBRACKIE,Metro,Highly Accessible Metro,0
+5244,MOUNT TORRENS,Metro,Highly Accessible Metro,0
+5244,WOODSIDE,Metro,Highly Accessible Metro,0
+5245,HAHNDORF,Metro,Highly Accessible Metro,0
+5245,PAECHTOWN,Metro,Highly Accessible Metro,0
+5245,VERDUN,Metro,Highly Accessible Metro,0
+5246,WOODHOUSE,Metro,Highly Accessible Metro,0
+5250,BLAKISTON,Metro,Highly Accessible Metro,0
+5250,LITTLEHAMPTON,Metro,Highly Accessible Metro,0
+5250,TOTNESS,Metro,Highly Accessible Metro,0
+5251,BUGLE RANGES,Metro,Highly Accessible Metro,0
+5251,MOUNT BARKER,Metro,Highly Accessible Metro,0
+5251,MOUNT BARKER JUNCTION,Metro,Highly Accessible Metro,0
+5251,MOUNT BARKER SPRINGS,Metro,Highly Accessible Metro,0
+5251,MOUNT BARKER SUMMIT,Metro,Highly Accessible Metro,0
+5251,WISTOW,Metro,Highly Accessible Metro,0
+5252,BRUKUNGA,Metro,Highly Accessible Metro,0
+5252,DAWESLEY,Metro,Highly Accessible Metro,0
+5252,HAY VALLEY,Metro,Highly Accessible Metro,0
+5252,KANMANTOO,Metro,Highly Accessible Metro,0
+5252,NAIRNE,Metro,Highly Accessible Metro,0
+5252,ST IVES,Metro,Highly Accessible Metro,0
+5253,AVOCA DELL,Regional,Highly Accessible Regional,0
+5253,BRINKLEY,Regional,Highly Accessible Regional,0
+5253,BURDETT,Regional,Highly Accessible Regional,0
+5253,CHAPMAN BORE,Regional,Highly Accessible Regional,0
+5253,ETTRICK,Regional,Highly Accessible Regional,0
+5253,GIFFORD HILL,Regional,Highly Accessible Regional,0
+5253,GREENBANKS,Regional,Highly Accessible Regional,0
+5253,LONG FLAT,Regional,Highly Accessible Regional,0
+5253,MOBILONG,Regional,Highly Accessible Regional,0
+5253,MONTEITH,Regional,Highly Accessible Regional,0
+5253,MURRAWONG,Regional,Highly Accessible Regional,0
+5253,MURRAY BRIDGE,Regional,Highly Accessible Regional,0
+5253,MURRAY BRIDGE EAST,Regional,Highly Accessible Regional,0
+5253,MURRAY BRIDGE NORTH,Regional,Highly Accessible Regional,0
+5253,MURRAY BRIDGE SOUTH,Regional,Highly Accessible Regional,0
+5253,NORTHERN HEIGHTS,Regional,Highly Accessible Regional,0
+5253,RIVERGLADES,Regional,Highly Accessible Regional,0
+5253,RIVERGLEN,Regional,Highly Accessible Regional,0
+5253,ROCKY GULLY,Regional,Highly Accessible Regional,0
+5253,SUNNYSIDE,Regional,Highly Accessible Regional,0
+5253,SWANPORT,Regional,Highly Accessible Regional,0
+5253,TOORA,Regional,Highly Accessible Regional,0
+5253,WHITE HILL,Regional,Highly Accessible Regional,0
+5253,WHITE SANDS,Regional,Highly Accessible Regional,0
+5253,WILLOW BANKS,Regional,Highly Accessible Regional,0
+5253,WOODS POINT,Regional,Highly Accessible Regional,0
+5254,BUCCLEUCH,Regional,Highly Accessible Regional,0
+5254,CALLINGTON,Regional,Highly Accessible Regional,0
+5254,CALOOTE,Regional,Highly Accessible Regional,0
+5254,MONARTO,Regional,Highly Accessible Regional,0
+5254,MONARTO SOUTH,Regional,Highly Accessible Regional,0
+5254,MONTEITH,Regional,Highly Accessible Regional,0
+5254,MURRAY BRIDGE,Regional,Highly Accessible Regional,0
+5254,MYPOLONGA,Regional,Highly Accessible Regional,0
+5254,PALLAMANA,Regional,Highly Accessible Regional,0
+5254,PETWOOD,Regional,Highly Accessible Regional,0
+5254,ROCKLEIGH,Regional,Highly Accessible Regional,0
+5254,ROCKY GULLY,Regional,Highly Accessible Regional,0
+5254,TEPKO,Regional,Highly Accessible Regional,0
+5254,THE POINT,Regional,Highly Accessible Regional,0
+5254,WALL FLAT,Regional,Highly Accessible Regional,0
+5254,WHITE HILL,Regional,Highly Accessible Regional,0
+5254,WOODLANE,Regional,Highly Accessible Regional,0
+5254,ZADOWS LANDING,Regional,Highly Accessible Regional,0
+5255,ANGAS PLAINS,Regional,Highly Accessible Regional,0
+5255,BELVIDERE,Regional,Highly Accessible Regional,0
+5255,BLETCHLEY,Regional,Highly Accessible Regional,0
+5255,FINNISS,Regional,Highly Accessible Regional,0
+5255,GEMMELLS,Regional,Highly Accessible Regional,0
+5255,HARTLEY,Regional,Highly Accessible Regional,0
+5255,HIGHLAND VALLEY,Regional,Highly Accessible Regional,0
+5255,LAKE PLAINS,Regional,Highly Accessible Regional,0
+5255,LANGHORNE CREEK,Regional,Highly Accessible Regional,0
+5255,MOUNT OBSERVATION,Regional,Highly Accessible Regional,0
+5255,MULGUNDAWA,Regional,Highly Accessible Regional,0
+5255,NALPA,Regional,Highly Accessible Regional,0
+5255,RED CREEK,Regional,Highly Accessible Regional,0
+5255,SALEM,Regional,Highly Accessible Regional,0
+5255,SANDERGROVE,Regional,Highly Accessible Regional,0
+5255,STRATHALBYN,Regional,Highly Accessible Regional,0
+5255,TOOPERANG,Regional,Highly Accessible Regional,0
+5255,WILLYAROO,Regional,Highly Accessible Regional,0
+5255,WOODCHESTER,Regional,Highly Accessible Regional,0
+5256,CLAYTON,Regional,Highly Accessible Regional,0
+5256,CLAYTON BAY,Regional,Highly Accessible Regional,0
+5256,MILANG,Regional,Highly Accessible Regional,0
+5256,NURRAGI,Regional,Highly Accessible Regional,0
+5256,POINT STURT,Regional,Highly Accessible Regional,0
+5256,TOLDEROL,Regional,Highly Accessible Regional,0
+5259,ASHVILLE,Regional,Highly Accessible Regional,0
+5259,EAST WELLINGTON,Regional,Highly Accessible Regional,0
+5259,JERVOIS,Regional,Highly Accessible Regional,0
+5259,KEPA,Regional,Highly Accessible Regional,0
+5259,MALINONG,Regional,Highly Accessible Regional,0
+5259,NARRUNG,Regional,Highly Accessible Regional,0
+5259,NATURI,Regional,Highly Accessible Regional,0
+5259,NUTRI,Regional,Highly Accessible Regional,0
+5259,POINT MCLEAY,Regional,Highly Accessible Regional,0
+5259,POLTALLOCH,Regional,Highly Accessible Regional,0
+5259,RAUKKAN,Regional,Highly Accessible Regional,0
+5259,TAILEM BEND,Regional,Highly Accessible Regional,0
+5259,WELLINGTON,Regional,Highly Accessible Regional,0
+5259,WELLINGTON EAST,Regional,Highly Accessible Regional,0
+5260,BAYAH,Regional,Accessible Regional,10
+5260,ELWOMPLE,Regional,Accessible Regional,10
+5260,TAILEM BEND,Regional,Accessible Regional,10
+5261,COOKE PLAINS,Regional,Accessible Regional,10
+5261,COOMANDOOK,Regional,Accessible Regional,10
+5261,CULBURRA,Regional,Accessible Regional,10
+5261,KI KI,Regional,Accessible Regional,10
+5261,YUMALI,Regional,Accessible Regional,10
+5262,BINNUM,Regional,Moderately Accessible Regional,20
+5262,FRANCES,Regional,Moderately Accessible Regional,20
+5262,HYNAM,Regional,Moderately Accessible Regional,20
+5262,KYBYBOLITE,Regional,Moderately Accessible Regional,20
+5263,COONAWARRA,Regional,Accessible Regional,10
+5264,COORONG,Regional,Accessible Regional,10
+5264,MENINGIE,Regional,Accessible Regional,10
+5264,MENINGIE EAST,Regional,Accessible Regional,10
+5264,MENINGIE WEST,Regional,Accessible Regional,10
+5264,POLICEMAN POINT,Regional,Accessible Regional,10
+5264,POLICEMAN'S POINT,Regional,Accessible Regional,10
+5264,SALT CREEK,Regional,Accessible Regional,10
+5264,WALTOWA,Regional,Accessible Regional,10
+5265,COONALPYN,Regional,Accessible Regional,10
+5265,FIELD,Regional,Accessible Regional,10
+5266,BUNBURY,Regional,Moderately Accessible Regional,20
+5266,COLEBATCH,Regional,Moderately Accessible Regional,20
+5266,DEEPWATER,Regional,Moderately Accessible Regional,20
+5266,TINTINARA,Regional,Moderately Accessible Regional,20
+5267,BRIMBAGO,Regional,Moderately Accessible Regional,20
+5267,COOMBE,Regional,Moderately Accessible Regional,20
+5267,KEITH,Regional,Moderately Accessible Regional,20
+5267,LAFFER,Regional,Moderately Accessible Regional,20
+5267,MAKIN,Regional,Moderately Accessible Regional,20
+5267,MCCALLUM,Regional,Moderately Accessible Regional,20
+5267,MOUNT CHARLES,Regional,Moderately Accessible Regional,20
+5267,PETHERICK,Regional,Moderately Accessible Regional,20
+5267,SHAUGH,Regional,Moderately Accessible Regional,20
+5267,SHERWOOD,Regional,Moderately Accessible Regional,20
+5267,WILLALOOKA,Regional,Moderately Accessible Regional,20
+5267,WIRREGA,Regional,Moderately Accessible Regional,20
+5268,BANGHAM,Regional,Moderately Accessible Regional,20
+5268,BORDERTOWN,Regional,Moderately Accessible Regional,20
+5268,BORDERTOWN SOUTH,Regional,Moderately Accessible Regional,20
+5268,CANGARA,Regional,Moderately Accessible Regional,20
+5268,CANNAWIGARA,Regional,Moderately Accessible Regional,20
+5268,LOWAN VALE,Regional,Moderately Accessible Regional,20
+5268,POOGINAGORIC,Regional,Moderately Accessible Regional,20
+5268,SENIOR,Regional,Moderately Accessible Regional,20
+5268,WESTERN FLAT,Regional,Moderately Accessible Regional,20
+5268,WIRREGA,Regional,Moderately Accessible Regional,20
+5269,CUSTON,Regional,Moderately Accessible Regional,20
+5269,PINE HILL,Regional,Moderately Accessible Regional,20
+5269,WOLSELEY,Regional,Moderately Accessible Regional,20
+5270,BUCKINGHAM,Regional,Moderately Accessible Regional,20
+5270,CAREW,Regional,Moderately Accessible Regional,20
+5270,CUSTON,Regional,Moderately Accessible Regional,20
+5270,KONGAL,Regional,Moderately Accessible Regional,20
+5270,MUNDULLA,Regional,Moderately Accessible Regional,20
+5270,MUNDULLA WEST,Regional,Moderately Accessible Regional,20
+5270,SWEDE FLAT,Regional,Moderately Accessible Regional,20
+5271,BOOL LAGOON,Regional,Moderately Accessible Regional,20
+5271,CADGEE,Regional,Moderately Accessible Regional,20
+5271,JOANNA,Regional,Moderately Accessible Regional,20
+5271,KEPPOCH,Regional,Moderately Accessible Regional,20
+5271,KOPPAMURRA,Regional,Moderately Accessible Regional,20
+5271,LAURIE PARK,Regional,Moderately Accessible Regional,20
+5271,LOCHABER,Regional,Moderately Accessible Regional,20
+5271,MARCOLLAT,Regional,Moderately Accessible Regional,20
+5271,MOUNT LIGHT,Regional,Moderately Accessible Regional,20
+5271,MOYHALL,Regional,Moderately Accessible Regional,20
+5271,NARACOORTE,Regional,Moderately Accessible Regional,20
+5271,PADTHAWAY,Regional,Moderately Accessible Regional,20
+5271,SPENCE,Regional,Moderately Accessible Regional,20
+5271,STEWART RANGE,Regional,Moderately Accessible Regional,20
+5271,STRUAN,Regional,Moderately Accessible Regional,20
+5271,THE GAP,Regional,Moderately Accessible Regional,20
+5271,WILD DOG VALLEY,Regional,Moderately Accessible Regional,20
+5271,WRATTONBULLY,Regional,Moderately Accessible Regional,20
+5272,COLES,Regional,Moderately Accessible Regional,20
+5272,CONMURRA,Regional,Moderately Accessible Regional,20
+5272,FOX,Regional,Moderately Accessible Regional,20
+5272,GREENWAYS,Regional,Moderately Accessible Regional,20
+5272,LUCINDALE,Regional,Moderately Accessible Regional,20
+5272,WOOLUMBOOL,Regional,Moderately Accessible Regional,20
+5273,AVENUE RANGE,Regional,Moderately Accessible Regional,20
+5273,EVELYN DOWNS,Regional,Moderately Accessible Regional,20
+5273,MABEL CREEK,Regional,Moderately Accessible Regional,20
+5273,MOUNT BARRY,Regional,Moderately Accessible Regional,20
+5273,MOUNT CLARENCE STATION,Regional,Moderately Accessible Regional,20
+5273,MOUNT WILLOUGHBY,Regional,Moderately Accessible Regional,20
+5275,BLACKFORD,Regional,Moderately Accessible Regional,20
+5275,BOATSWAIN POINT,Regional,Moderately Accessible Regional,20
+5275,CAPE JAFFA,Regional,Moderately Accessible Regional,20
+5275,KEILIRA,Regional,Moderately Accessible Regional,20
+5275,KINGSTON S.E.,Regional,Moderately Accessible Regional,20
+5275,KINGSTON SE,Regional,Moderately Accessible Regional,20
+5275,MOUNT BENSON,Regional,Moderately Accessible Regional,20
+5275,PINKS BEACH,Regional,Moderately Accessible Regional,20
+5275,REEDY CREEK,Regional,Moderately Accessible Regional,20
+5275,ROSETOWN,Regional,Moderately Accessible Regional,20
+5275,SANDY GROVE,Regional,Moderately Accessible Regional,20
+5275,TARATAP,Regional,Moderately Accessible Regional,20
+5275,TILLEY SWAMP,Regional,Moderately Accessible Regional,20
+5275,WANGOLINA,Regional,Moderately Accessible Regional,20
+5275,WEST RANGE,Regional,Moderately Accessible Regional,20
+5275,WYOMI,Regional,Moderately Accessible Regional,20
+5276,BRAY,Regional,Moderately Accessible Regional,20
+5276,NORA CREINA,Regional,Moderately Accessible Regional,20
+5276,ROBE,Regional,Moderately Accessible Regional,20
+5277,COMAUM,Regional,Accessible Regional,10
+5277,GLENROY,Regional,Accessible Regional,10
+5277,MAAOUPE,Regional,Accessible Regional,10
+5277,MONBULLA,Regional,Accessible Regional,10
+5277,NANGWARRY,Regional,Accessible Regional,10
+5277,PENOLA,Regional,Accessible Regional,10
+5277,PLEASANT PARK,Regional,Accessible Regional,10
+5277,TARPEENA,Regional,Accessible Regional,10
+5278,KALANGADOO,Regional,Accessible Regional,10
+5278,KRONGART,Regional,Accessible Regional,10
+5278,MOERLONG,Regional,Accessible Regional,10
+5278,WEPAR,Regional,Accessible Regional,10
+5279,KOORINE,Regional,Accessible Regional,10
+5279,MOUNT BURR,Regional,Accessible Regional,10
+5279,MOUNT MCINTYRE,Regional,Accessible Regional,10
+5279,SHORT,Regional,Accessible Regional,10
+5279,TRIHI,Regional,Accessible Regional,10
+5279,WATTLE RANGE,Regional,Accessible Regional,10
+5279,WATTLE RANGE EAST,Regional,Accessible Regional,10
+5280,BEACHPORT,Regional,Accessible Regional,10
+5280,CANUNDA,Regional,Accessible Regional,10
+5280,CLAY WELLS,Regional,Accessible Regional,10
+5280,FURNER,Regional,Accessible Regional,10
+5280,GERMAN CREEK,Regional,Accessible Regional,10
+5280,GERMAN FLAT,Regional,Accessible Regional,10
+5280,HATHERLEIGH,Regional,Accessible Regional,10
+5280,KANGAROO INN,Regional,Accessible Regional,10
+5280,MAGAREY,Regional,Accessible Regional,10
+5280,MILLICENT,Regional,Accessible Regional,10
+5280,RENDELSHAM,Regional,Accessible Regional,10
+5280,ROCKY CAMP,Regional,Accessible Regional,10
+5280,SEBASTOPOL,Regional,Accessible Regional,10
+5280,SOUTHEND,Regional,Accessible Regional,10
+5280,TANTANOOLA,Regional,Accessible Regional,10
+5280,THORNLEA,Regional,Accessible Regional,10
+5280,WATTLE RANGE,Regional,Accessible Regional,10
+5290,MOUNT GAMBIER,Regional,Accessible Regional,10
+5290,MOUNT GAMBIER DC,Regional,Accessible Regional,10
+5291,ALLENDALE EAST,Regional,Accessible Regional,10
+5291,BLACKFELLOWS CAVES,Regional,Accessible Regional,10
+5291,BURRUNGULE,Regional,Accessible Regional,10
+5291,CANUNDA,Regional,Accessible Regional,10
+5291,CAPE DOUGLAS,Regional,Accessible Regional,10
+5291,CAROLINE,Regional,Accessible Regional,10
+5291,CARPENTER ROCKS,Regional,Accessible Regional,10
+5291,CAVETON,Regional,Accessible Regional,10
+5291,COMPTON,Regional,Accessible Regional,10
+5291,DISMAL SWAMP,Regional,Accessible Regional,10
+5291,DONOVANS,Regional,Accessible Regional,10
+5291,EIGHT MILE CREEK,Regional,Accessible Regional,10
+5291,GERMAN CREEK,Regional,Accessible Regional,10
+5291,GLENBURNIE,Regional,Accessible Regional,10
+5291,GLENCOE,Regional,Accessible Regional,10
+5291,GLENCOE WEST,Regional,Accessible Regional,10
+5291,KONGORONG,Regional,Accessible Regional,10
+5291,MIL LEL,Regional,Accessible Regional,10
+5291,MIL-LEL,Regional,Accessible Regional,10
+5291,MINGBOOL,Regional,Accessible Regional,10
+5291,MOORAK,Regional,Accessible Regional,10
+5291,MOUNT GAMBIER,Regional,Accessible Regional,10
+5291,MOUNT GAMBIER EAST,Regional,Accessible Regional,10
+5291,MOUNT GAMBIER WEST,Regional,Accessible Regional,10
+5291,MOUNT SCHANK,Regional,Accessible Regional,10
+5291,NENE,Regional,Accessible Regional,10
+5291,NENE VALLEY,Regional,Accessible Regional,10
+5291,O B FLAT,Regional,Accessible Regional,10
+5291,O.B. FLAT,Regional,Accessible Regional,10
+5291,OB FLAT,Regional,Accessible Regional,10
+5291,PELICAN POINT,Regional,Accessible Regional,10
+5291,PORT MACDONNELL,Regional,Accessible Regional,10
+5291,RACECOURSE BAY,Regional,Accessible Regional,10
+5291,SQUARE MILE,Regional,Accessible Regional,10
+5291,SUTTONTOWN,Regional,Accessible Regional,10
+5291,WANDILO,Regional,Accessible Regional,10
+5291,WORROLONG,Regional,Accessible Regional,10
+5291,WYE,Regional,Accessible Regional,10
+5291,YAHL,Regional,Accessible Regional,10
+5301,CARCUMA,Regional,Accessible Regional,10
+5301,GERANIUM,Regional,Accessible Regional,10
+5301,JABUK,Regional,Accessible Regional,10
+5301,MOORLANDS,Regional,Accessible Regional,10
+5301,NETHERTON,Regional,Accessible Regional,10
+5301,PARRAKIE,Regional,Accessible Regional,10
+5301,PEAKE,Regional,Accessible Regional,10
+5301,SHERLOCK,Regional,Accessible Regional,10
+5301,WILKAWATT,Regional,Accessible Regional,10
+5302,LAMEROO,Regional,Moderately Accessible Regional,20
+5302,NGARKAT,Regional,Moderately Accessible Regional,20
+5302,SMITHVILLE,Regional,Moderately Accessible Regional,20
+5303,PARILLA,Regional,Moderately Accessible Regional,20
+5304,KARTE,Regional,Moderately Accessible Regional,20
+5304,KRINGIN,Regional,Moderately Accessible Regional,20
+5304,PEEBINGA,Regional,Moderately Accessible Regional,20
+5304,PINNAROO,Regional,Moderately Accessible Regional,20
+5306,WYNARKA,Regional,Accessible Regional,10
+5307,KAROONDA,Regional,Accessible Regional,10
+5307,KARTE,Regional,Accessible Regional,10
+5307,KULKAMI,Regional,Accessible Regional,10
+5307,LOWALDIE,Regional,Accessible Regional,10
+5307,MARAMA,Regional,Accessible Regional,10
+5307,MOOTATUNGA,Regional,Accessible Regional,10
+5307,PEEBINGA,Regional,Accessible Regional,10
+5308,COPEVILLE,Regional,Accessible Regional,10
+5308,GALGA,Regional,Accessible Regional,10
+5308,KALYAN,Regional,Accessible Regional,10
+5308,MAGGEA,Regional,Accessible Regional,10
+5308,MANTUNG,Regional,Accessible Regional,10
+5308,MERCUNDA,Regional,Accessible Regional,10
+5308,PERPONDA,Regional,Accessible Regional,10
+5309,BORRIKA,Regional,Accessible Regional,10
+5309,HALIDON,Regional,Accessible Regional,10
+5309,MINDARIE,Regional,Accessible Regional,10
+5309,SANDALWOOD,Regional,Accessible Regional,10
+5310,CALIPH,Regional,Moderately Accessible Regional,20
+5310,WANBI,Regional,Moderately Accessible Regional,20
+5311,ALAWOONA,Regional,Moderately Accessible Regional,20
+5311,BILLIATT,Regional,Moderately Accessible Regional,20
+5311,BUGLE HUT,Regional,Moderately Accessible Regional,20
+5311,MAGGEA,Regional,Moderately Accessible Regional,20
+5311,MALPAS,Regional,Moderately Accessible Regional,20
+5311,MERIBAH,Regional,Moderately Accessible Regional,20
+5311,PARUNA,Regional,Moderately Accessible Regional,20
+5311,SCHELL WELL,Regional,Moderately Accessible Regional,20
+5311,TALDRA,Regional,Moderately Accessible Regional,20
+5311,TAPLAN,Regional,Moderately Accessible Regional,20
+5311,VEITCH,Regional,Moderately Accessible Regional,20
+5311,WOODLEIGH,Regional,Moderately Accessible Regional,20
+5311,WUNKAR,Regional,Moderately Accessible Regional,20
+5312,VEITCH,Regional,Moderately Accessible Regional,20
+5320,BEATTY,Regional,Moderately Accessible Regional,20
+5320,BEAUMONTS,Regional,Moderately Accessible Regional,20
+5320,BRENDA PARK,Regional,Moderately Accessible Regional,20
+5320,BUNDEY,Regional,Moderately Accessible Regional,20
+5320,EBA,Regional,Moderately Accessible Regional,20
+5320,LINDLEY,Regional,Moderately Accessible Regional,20
+5320,MAUDE,Regional,Moderately Accessible Regional,20
+5320,MORGAN,Regional,Moderately Accessible Regional,20
+5320,MORPHETTS FLAT,Regional,Moderately Accessible Regional,20
+5320,MURBKO,Regional,Moderately Accessible Regional,20
+5320,NORTH WEST BEND,Regional,Moderately Accessible Regional,20
+5320,QUALCO,Regional,Moderately Accessible Regional,20
+5320,STUART,Regional,Moderately Accessible Regional,20
+5320,WESTONS FLAT,Regional,Moderately Accessible Regional,20
+5320,WOMBATS REST,Regional,Moderately Accessible Regional,20
+5321,CADELL,Regional,Moderately Accessible Regional,20
+5321,CADELL LAGOON,Regional,Moderately Accessible Regional,20
+5322,GOLDEN HEIGHTS,Regional,Moderately Accessible Regional,20
+5322,QUALCO,Regional,Moderately Accessible Regional,20
+5322,RAMCO,Regional,Moderately Accessible Regional,20
+5322,RAMCO HEIGHTS,Regional,Moderately Accessible Regional,20
+5322,SUNLANDS,Regional,Moderately Accessible Regional,20
+5330,BOOLGUN,Regional,Moderately Accessible Regional,20
+5330,DEVLINS POUND,Regional,Moderately Accessible Regional,20
+5330,GOOD HOPE LANDING,Regional,Moderately Accessible Regional,20
+5330,HAWKS NEST STATION,Regional,Moderately Accessible Regional,20
+5330,HOLDER,Regional,Moderately Accessible Regional,20
+5330,HOLDER SIDING,Regional,Moderately Accessible Regional,20
+5330,KANNI,Regional,Moderately Accessible Regional,20
+5330,LOWBANK,Regional,Moderately Accessible Regional,20
+5330,MARKARANKA,Regional,Moderately Accessible Regional,20
+5330,OVERLAND CORNER,Regional,Moderately Accessible Regional,20
+5330,POOGINOOK,Regional,Moderately Accessible Regional,20
+5330,STOCKYARD PLAIN,Regional,Moderately Accessible Regional,20
+5330,TAYLORVILLE,Regional,Moderately Accessible Regional,20
+5330,TAYLORVILLE STATION,Regional,Moderately Accessible Regional,20
+5330,WAIKERIE,Regional,Moderately Accessible Regional,20
+5330,WIGLEY FLAT,Regional,Moderately Accessible Regional,20
+5330,WOOLPUNDA,Regional,Moderately Accessible Regional,20
+5331,KINGSTON ON MURRAY,Regional,Moderately Accessible Regional,20
+5331,KINGSTON-ON-MURRAY,Regional,Moderately Accessible Regional,20
+5332,MOOROOK,Regional,Moderately Accessible Regional,20
+5332,MOOROOK SOUTH,Regional,Moderately Accessible Regional,20
+5332,WAPPILKA,Regional,Moderately Accessible Regional,20
+5332,YINKANIE,Regional,Moderately Accessible Regional,20
+5333,BOOKPURNONG,Regional,Moderately Accessible Regional,20
+5333,LOXTON,Regional,Moderately Accessible Regional,20
+5333,LOXTON NORTH,Regional,Moderately Accessible Regional,20
+5333,MALPAS,Regional,Moderately Accessible Regional,20
+5333,MERIBAH,Regional,Moderately Accessible Regional,20
+5333,NANGARI,Regional,Moderately Accessible Regional,20
+5333,NEW RESIDENCE,Regional,Moderately Accessible Regional,20
+5333,NOORA,Regional,Moderately Accessible Regional,20
+5333,PATA,Regional,Moderately Accessible Regional,20
+5333,PYAP,Regional,Moderately Accessible Regional,20
+5333,PYAP WEST,Regional,Moderately Accessible Regional,20
+5333,TAPLAN,Regional,Moderately Accessible Regional,20
+5333,WUNKAR,Regional,Moderately Accessible Regional,20
+5340,MUNDIC CREEK,Regional,Moderately Accessible Regional,20
+5340,MURTHO,Regional,Moderately Accessible Regional,20
+5340,PARINGA,Regional,Moderately Accessible Regional,20
+5340,PIKE RIVER,Regional,Moderately Accessible Regional,20
+5340,WONUARRA,Regional,Moderately Accessible Regional,20
+5340,YAMBA,Regional,Moderately Accessible Regional,20
+5341,CALPERUM,Regional,Moderately Accessible Regional,20
+5341,CALPERUM STATION,Regional,Moderately Accessible Regional,20
+5341,CHAFFEY,Regional,Moderately Accessible Regional,20
+5341,CHOWILLA,Regional,Moderately Accessible Regional,20
+5341,COOLTONG,Regional,Moderately Accessible Regional,20
+5341,CRESCENT,Regional,Moderately Accessible Regional,20
+5341,OLD CALPERUM,Regional,Moderately Accessible Regional,20
+5341,RENMARK,Regional,Moderately Accessible Regional,20
+5341,RENMARK NORTH,Regional,Moderately Accessible Regional,20
+5341,RENMARK SOUTH,Regional,Moderately Accessible Regional,20
+5341,RENMARK WEST,Regional,Moderately Accessible Regional,20
+5341,YAMBA,Regional,Moderately Accessible Regional,20
+5342,MONASH,Regional,Moderately Accessible Regional,20
+5343,BERRI,Regional,Moderately Accessible Regional,20
+5343,BUGLE HUT,Regional,Moderately Accessible Regional,20
+5343,GERARD,Regional,Moderately Accessible Regional,20
+5343,GURRA GURRA,Regional,Moderately Accessible Regional,20
+5343,KATARAPKO,Regional,Moderately Accessible Regional,20
+5343,LYRUP,Regional,Moderately Accessible Regional,20
+5343,WINKIE,Regional,Moderately Accessible Regional,20
+5344,GLOSSOP,Regional,Moderately Accessible Regional,20
+5345,BARMERA,Regional,Moderately Accessible Regional,20
+5345,LOVEDAY,Regional,Moderately Accessible Regional,20
+5345,SPECTACLE LAKE,Regional,Moderately Accessible Regional,20
+5346,COBDOGLA,Regional,Moderately Accessible Regional,20
+5350,ROSEDALE,Metro,Highly Accessible Metro,0
+5350,SANDY CREEK,Metro,Highly Accessible Metro,0
+5351,ALTONA,Regional,Highly Accessible Regional,0
+5351,BAROSSA GOLDFIELDS,Regional,Highly Accessible Regional,0
+5351,COCKATOO VALLEY,Regional,Highly Accessible Regional,0
+5351,LYNDOCH,Regional,Highly Accessible Regional,0
+5351,MOUNT CRAWFORD,Regional,Highly Accessible Regional,0
+5351,PEWSEY VALE,Regional,Highly Accessible Regional,0
+5351,WILLIAMSTOWN,Regional,Highly Accessible Regional,0
+5352,BETHANY,Regional,Highly Accessible Regional,0
+5352,GOMERSAL,Regional,Highly Accessible Regional,0
+5352,KRONDORF,Regional,Highly Accessible Regional,0
+5352,ROWLAND FLAT,Regional,Highly Accessible Regional,0
+5352,STONE WELL,Regional,Highly Accessible Regional,0
+5352,TANUNDA,Regional,Highly Accessible Regional,0
+5352,VINE VALE,Regional,Highly Accessible Regional,0
+5353,ANGASTON,Regional,Highly Accessible Regional,0
+5353,BLACK HILL,Regional,Highly Accessible Regional,0
+5353,CAMBRAI,Regional,Highly Accessible Regional,0
+5353,FLAXMAN VALLEY,Regional,Highly Accessible Regional,0
+5353,KEYNETON,Regional,Highly Accessible Regional,0
+5353,KONGOLIA,Regional,Highly Accessible Regional,0
+5353,LANGS LANDING,Regional,Highly Accessible Regional,0
+5353,MARKS LANDING,Regional,Highly Accessible Regional,0
+5353,MOCULTA,Regional,Highly Accessible Regional,0
+5353,MOUNT MCKENZIE,Regional,Highly Accessible Regional,0
+5353,PENRICE,Regional,Highly Accessible Regional,0
+5353,PUNYELROO,Regional,Highly Accessible Regional,0
+5353,SEDAN,Regional,Highly Accessible Regional,0
+5353,SUNNYDALE,Regional,Highly Accessible Regional,0
+5353,TOWITTA,Regional,Highly Accessible Regional,0
+5354,BAKARA,Regional,Accessible Regional,10
+5354,BAKARA WELL,Regional,Accessible Regional,10
+5354,FISHER,Regional,Accessible Regional,10
+5354,GREENWAYS LANDING,Regional,Accessible Regional,10
+5354,LANGS LANDING,Regional,Accessible Regional,10
+5354,MARKS LANDING,Regional,Accessible Regional,10
+5354,NAIDIA,Regional,Accessible Regional,10
+5354,PUNYELROO,Regional,Accessible Regional,10
+5354,SUNNYDALE,Regional,Accessible Regional,10
+5354,SWAN REACH,Regional,Accessible Regional,10
+5355,DAVEYSTON,Regional,Highly Accessible Regional,0
+5355,EBENEZER,Regional,Highly Accessible Regional,0
+5355,LIGHT PASS,Regional,Highly Accessible Regional,0
+5355,MARANANGA,Regional,Highly Accessible Regional,0
+5355,MOPPA,Regional,Highly Accessible Regional,0
+5355,NURIOOTPA,Regional,Highly Accessible Regional,0
+5355,SEPPELTSFIELD,Regional,Highly Accessible Regional,0
+5355,STOCKWELL,Regional,Highly Accessible Regional,0
+5356,ANNADALE,Regional,Accessible Regional,10
+5356,DUTTON,Regional,Accessible Regional,10
+5356,DUTTON EAST,Regional,Accessible Regional,10
+5356,FRANKTON,Regional,Accessible Regional,10
+5356,SANDLETON,Regional,Accessible Regional,10
+5356,ST KITTS,Regional,Accessible Regional,10
+5356,STEINFELD,Regional,Accessible Regional,10
+5356,STONEFIELD,Regional,Accessible Regional,10
+5356,TRURO,Regional,Accessible Regional,10
+5357,BLANCHETOWN,Regional,Accessible Regional,10
+5357,MCBEAN POUND,Regional,Accessible Regional,10
+5357,MOORUNDIE,Regional,Accessible Regional,10
+5357,NEW WELL,Regional,Accessible Regional,10
+5357,NOTTS WELL,Regional,Accessible Regional,10
+5357,PAISLEY,Regional,Accessible Regional,10
+5357,WIGLEY FLAT,Regional,Accessible Regional,10
+5360,GREENOCK,Regional,Highly Accessible Regional,0
+5360,NAIN,Regional,Highly Accessible Regional,0
+5371,MORN HILL,Regional,Highly Accessible Regional,0
+5371,ROSEWORTHY,Regional,Highly Accessible Regional,0
+5371,SHEAOAK LOG,Regional,Highly Accessible Regional,0
+5371,SHEA-OAK LOG,Regional,Highly Accessible Regional,0
+5371,TEMPLERS,Regional,Highly Accessible Regional,0
+5372,FREELING,Regional,Highly Accessible Regional,0
+5373,ALLENDALE NORTH,Regional,Highly Accessible Regional,0
+5373,BAGOT WELL,Regional,Highly Accessible Regional,0
+5373,BETHEL,Regional,Highly Accessible Regional,0
+5373,FORDS,Regional,Highly Accessible Regional,0
+5373,HAMILTON,Regional,Highly Accessible Regional,0
+5373,KAPUNDA,Regional,Highly Accessible Regional,0
+5373,KOONUNGA,Regional,Highly Accessible Regional,0
+5373,ST JOHNS,Regional,Highly Accessible Regional,0
+5374,AUSTRALIA PLAINS,Regional,Accessible Regional,10
+5374,BOWER,Regional,Accessible Regional,10
+5374,BROWNLOW,Regional,Accessible Regional,10
+5374,BUCHANAN,Regional,Accessible Regional,10
+5374,EUDUNDA,Regional,Accessible Regional,10
+5374,FRANKTON,Regional,Accessible Regional,10
+5374,HAMPDEN,Regional,Accessible Regional,10
+5374,HANSBOROUGH,Regional,Accessible Regional,10
+5374,JULIA,Regional,Accessible Regional,10
+5374,MOUNT MARY,Regional,Accessible Regional,10
+5374,NEALES FLAT,Regional,Accessible Regional,10
+5374,NGAPALA,Regional,Accessible Regional,10
+5374,PEEP HILL,Regional,Accessible Regional,10
+5374,POINT PASS,Regional,Accessible Regional,10
+5374,SUTHERLANDS,Regional,Accessible Regional,10
+5381,BRADY CREEK,Regional,Accessible Regional,10
+5381,BRIGHT,Regional,Accessible Regional,10
+5381,EMU DOWNS,Regional,Accessible Regional,10
+5381,GERANIUM PLAINS,Regional,Accessible Regional,10
+5381,HALLELUJA HILLS,Regional,Accessible Regional,10
+5381,HALLELUJAH HILLS,Regional,Accessible Regional,10
+5381,ROBERTSTOWN,Regional,Accessible Regional,10
+5381,ROCKY PLAIN,Regional,Accessible Regional,10
+5381,WORLDS END,Regional,Accessible Regional,10
+5381,WORLDS END CREEK,Regional,Accessible Regional,10
+5400,MAGDALA,Regional,Highly Accessible Regional,0
+5400,MAGDALLA,Regional,Highly Accessible Regional,0
+5400,PINKERTON PLAINS,Regional,Highly Accessible Regional,0
+5400,WASLEYS,Regional,Highly Accessible Regional,0
+5400,WOOLSHEDS,Regional,Highly Accessible Regional,0
+5401,ALMA,Regional,Highly Accessible Regional,0
+5401,HAMLEY BRIDGE,Regional,Highly Accessible Regional,0
+5401,SALTER SPRINGS,Regional,Highly Accessible Regional,0
+5410,LINWOOD,Regional,Highly Accessible Regional,0
+5410,STOCKPORT,Regional,Highly Accessible Regional,0
+5411,GILES CORNER,Regional,Highly Accessible Regional,0
+5411,TARLEE,Regional,Highly Accessible Regional,0
+5412,NAVAN,Regional,Accessible Regional,10
+5412,RHYNIE,Regional,Accessible Regional,10
+5412,RIVERTON,Regional,Accessible Regional,10
+5412,WOOLSHED FLAT,Regional,Accessible Regional,10
+5413,APOINGA,Regional,Accessible Regional,10
+5413,BLACK SPRINGS,Regional,Accessible Regional,10
+5413,MARRABEL,Regional,Accessible Regional,10
+5413,SADDLEWORTH,Regional,Accessible Regional,10
+5413,STEELTON,Regional,Accessible Regional,10
+5413,TARNMA,Regional,Accessible Regional,10
+5413,TOTHILL BELT,Regional,Accessible Regional,10
+5413,TOTHILL CREEK,Regional,Accessible Regional,10
+5413,WATERLOO,Regional,Accessible Regional,10
+5414,MANOORA,Regional,Accessible Regional,10
+5415,MINTARO,Regional,Accessible Regional,10
+5415,STANLEY,Regional,Accessible Regional,10
+5416,FARRELL FLAT,Regional,Accessible Regional,10
+5416,PORTER LAGOON,Regional,Accessible Regional,10
+5417,BALAH,Regional,Accessible Regional,10
+5417,BALDINA,Regional,Accessible Regional,10
+5417,BOOBOROWIE,Regional,Accessible Regional,10
+5417,BUNYUNG,Regional,Accessible Regional,10
+5417,BURRA,Regional,Accessible Regional,10
+5417,BURRA EASTERN DISTRICTS,Regional,Accessible Regional,10
+5417,CANEGRASS,Regional,Accessible Regional,10
+5417,DANGGALI,Regional,Accessible Regional,10
+5417,FARAWAY HILL,Regional,Accessible Regional,10
+5417,GLUEPOT,Regional,Accessible Regional,10
+5417,GUM CREEK,Regional,Accessible Regional,10
+5417,HANSON,Regional,Accessible Regional,10
+5417,KOONOONA,Regional,Accessible Regional,10
+5417,LEIGHTON,Regional,Accessible Regional,10
+5417,MONGOLATA,Regional,Accessible Regional,10
+5417,NORTH BOOBOROWIE,Regional,Accessible Regional,10
+5417,OAKVALE STATION,Regional,Accessible Regional,10
+5417,OLD KOOMOOLOO,Regional,Accessible Regional,10
+5417,PARCOOLA,Regional,Accessible Regional,10
+5417,PINE VALLEY STATION,Regional,Accessible Regional,10
+5417,QUONDONG,Regional,Accessible Regional,10
+5417,STURT VALE,Regional,Accessible Regional,10
+5417,WARNES,Regional,Accessible Regional,10
+5418,COLLINSVILLE,Regional,Accessible Regional,10
+5418,MOUNT BRYAN,Regional,Accessible Regional,10
+5419,CANOWIE,Regional,Moderately Accessible Regional,20
+5419,HALLETT,Regional,Moderately Accessible Regional,20
+5419,MOUNT BRYAN EAST,Regional,Moderately Accessible Regional,20
+5419,PINE CREEK,Regional,Moderately Accessible Regional,20
+5419,ULOOLOO,Regional,Moderately Accessible Regional,20
+5419,WILLALO,Regional,Moderately Accessible Regional,20
+5419,WONNA,Regional,Moderately Accessible Regional,20
+5420,CANOWIE BELT,Regional,Moderately Accessible Regional,20
+5420,WHYTE YARCOWIE,Regional,Moderately Accessible Regional,20
+5421,FRANKLYN,Regional,Moderately Accessible Regional,20
+5421,TEROWIE,Regional,Moderately Accessible Regional,20
+5422,CAVENAGH,Regional,Moderately Accessible Regional,20
+5422,DAWSON,Regional,Moderately Accessible Regional,20
+5422,ERSKINE,Regional,Moderately Accessible Regional,20
+5422,HARDY,Regional,Moderately Accessible Regional,20
+5422,MANNANARIE,Regional,Moderately Accessible Regional,20
+5422,MINVALARA,Regional,Moderately Accessible Regional,20
+5422,OODLA WIRRA,Regional,Moderately Accessible Regional,20
+5422,PARATOO,Regional,Moderately Accessible Regional,20
+5422,PARNAROO,Regional,Moderately Accessible Regional,20
+5422,PETERBOROUGH,Regional,Moderately Accessible Regional,20
+5422,SUNNYBRAE,Regional,Moderately Accessible Regional,20
+5422,UCOLTA,Regional,Moderately Accessible Regional,20
+5422,WAROONEE,Regional,Moderately Accessible Regional,20
+5422,YATINA,Regional,Moderately Accessible Regional,20
+5430,BLACK ROCK,Regional,Moderately Accessible Regional,20
+5430,HAMMOND,Regional,Moderately Accessible Regional,20
+5431,AMYTON,Regional,Moderately Accessible Regional,20
+5431,BLACK ROCK,Regional,Moderately Accessible Regional,20
+5431,COOMOOROO,Regional,Moderately Accessible Regional,20
+5431,EURELIA,Regional,Moderately Accessible Regional,20
+5431,HAMMOND,Regional,Moderately Accessible Regional,20
+5431,JOHNBURG,Regional,Moderately Accessible Regional,20
+5431,JOHNBURGH,Regional,Moderately Accessible Regional,20
+5431,MINBURRA,Regional,Moderately Accessible Regional,20
+5431,MINBURRA PLAIN,Regional,Moderately Accessible Regional,20
+5431,MINBURRA STATION,Regional,Moderately Accessible Regional,20
+5431,MORCHARD,Regional,Moderately Accessible Regional,20
+5431,NORTH HILLS,Regional,Moderately Accessible Regional,20
+5431,ORROROO,Regional,Moderately Accessible Regional,20
+5431,PEKINA,Regional,Moderately Accessible Regional,20
+5431,TARCOWIE,Regional,Moderately Accessible Regional,20
+5431,WALLOWAY,Regional,Moderately Accessible Regional,20
+5431,WILLOWIE,Regional,Moderately Accessible Regional,20
+5431,YALPARA,Regional,Moderately Accessible Regional,20
+5432,BARATTA,Regional,Moderately Accessible Regional,20
+5432,BELTON,Regional,Moderately Accessible Regional,20
+5432,BIBLIANDO,Regional,Moderately Accessible Regional,20
+5432,CARRIETON,Regional,Moderately Accessible Regional,20
+5432,CRADOCK,Regional,Moderately Accessible Regional,20
+5432,HOLOWILIENA,Regional,Moderately Accessible Regional,20
+5432,HOLOWILIENA SOUTH,Regional,Moderately Accessible Regional,20
+5432,MOOCKRA,Regional,Moderately Accessible Regional,20
+5432,THREE CREEKS,Regional,Moderately Accessible Regional,20
+5432,WILCOWIE,Regional,Moderately Accessible Regional,20
+5432,WILLIPPA,Regional,Moderately Accessible Regional,20
+5432,WITCHITIE,Regional,Moderately Accessible Regional,20
+5432,YANYARRIE,Regional,Moderately Accessible Regional,20
+5433,BRUCE,Regional,Moderately Accessible Regional,20
+5433,QUORN,Regional,Moderately Accessible Regional,20
+5433,SALTIA,Regional,Moderately Accessible Regional,20
+5433,STEPHENSON,Regional,Moderately Accessible Regional,20
+5433,STEPHENSTON,Regional,Moderately Accessible Regional,20
+5433,WILLOCHRA,Regional,Moderately Accessible Regional,20
+5433,YARRAH,Regional,Moderately Accessible Regional,20
+5434,BARNDIOOTA,Regional,Moderately Accessible Regional,20
+5434,BARNIDOOTA,Regional,Moderately Accessible Regional,20
+5434,BLACK HILL STATION,Regional,Moderately Accessible Regional,20
+5434,FLINDERS RANGES,Regional,Moderately Accessible Regional,20
+5434,HAWKER,Regional,Moderately Accessible Regional,20
+5434,KANYAKA,Regional,Moderately Accessible Regional,20
+5434,MANNAWARRA,Regional,Moderately Accessible Regional,20
+5434,MOUNT HAVELOCK,Regional,Moderately Accessible Regional,20
+5434,PRELINNA,Regional,Moderately Accessible Regional,20
+5434,SHAGGY RIDGE,Regional,Moderately Accessible Regional,20
+5434,UPALINNA,Regional,Moderately Accessible Regional,20
+5434,WILLOW SPRINGS,Regional,Moderately Accessible Regional,20
+5434,WORUMBA,Regional,Moderately Accessible Regional,20
+5440,ABMINGA STATION,Regional,Moderately Accessible Regional,20
+5440,BENDA,Regional,Moderately Accessible Regional,20
+5440,BIMBOWRIE,Regional,Moderately Accessible Regional,20
+5440,BINDARRAH,Regional,Moderately Accessible Regional,20
+5440,BOOLCOOMATTA,Regional,Moderately Accessible Regional,20
+5440,BULLOO CREEK,Regional,Moderately Accessible Regional,20
+5440,COCKBURN,Regional,Moderately Accessible Regional,20
+5440,CURNAMONA,Regional,Moderately Accessible Regional,20
+5440,DEVONBOROUGH DOWNS,Regional,Moderately Accessible Regional,20
+5440,ERUDINA,Regional,Moderately Accessible Regional,20
+5440,FLORINA STATION,Regional,Moderately Accessible Regional,20
+5440,FROME DOWNS,Regional,Moderately Accessible Regional,20
+5440,GRAMPUS,Regional,Moderately Accessible Regional,20
+5440,KALABITY,Regional,Moderately Accessible Regional,20
+5440,KALKAROO,Regional,Moderately Accessible Regional,20
+5440,KOONAMORE,Regional,Moderately Accessible Regional,20
+5440,LAKE FROME,Regional,Moderately Accessible Regional,20
+5440,MANNA HILL,Regional,Moderately Accessible Regional,20
+5440,MANUNDA STATION,Regional,Moderately Accessible Regional,20
+5440,MARTINS WELL,Regional,Moderately Accessible Regional,20
+5440,MELTON STATION,Regional,Moderately Accessible Regional,20
+5440,MINGARY,Regional,Moderately Accessible Regional,20
+5440,MOOLEULOOLOO,Regional,Moderately Accessible Regional,20
+5440,MOUNT VICTOR STATION,Regional,Moderately Accessible Regional,20
+5440,MULYUNGARIE,Regional,Moderately Accessible Regional,20
+5440,MUNDI MUNDI,Regional,Moderately Accessible Regional,20
+5440,MUTOOROO,Regional,Moderately Accessible Regional,20
+5440,NACKARA,Regional,Moderately Accessible Regional,20
+5440,NETLEY GAP,Regional,Moderately Accessible Regional,20
+5440,OLARY,Regional,Moderately Accessible Regional,20
+5440,OULNINA,Regional,Moderately Accessible Regional,20
+5440,OULNINA PARK,Regional,Moderately Accessible Regional,20
+5440,OUTALPA,Regional,Moderately Accessible Regional,20
+5440,PAULCO RANGE,Regional,Moderately Accessible Regional,20
+5440,PINE CREEK STATION,Regional,Moderately Accessible Regional,20
+5440,PLUMBAGO,Regional,Moderately Accessible Regional,20
+5440,QUINYAMBIE,Regional,Moderately Accessible Regional,20
+5440,TEPCO STATION,Regional,Moderately Accessible Regional,20
+5440,TI TREE WELL,Regional,Moderately Accessible Regional,20
+5440,TIKALINA,Regional,Moderately Accessible Regional,20
+5440,TIVERTON,Regional,Moderately Accessible Regional,20
+5440,WADNAMINGA,Regional,Moderately Accessible Regional,20
+5440,WAUKARINGA,Regional,Moderately Accessible Regional,20
+5440,WEEKEROO,Regional,Moderately Accessible Regional,20
+5440,WIAWERA,Regional,Moderately Accessible Regional,20
+5440,WINNININNIE,Regional,Moderately Accessible Regional,20
+5440,WOMPINIE,Regional,Moderately Accessible Regional,20
+5440,YARRAMBA,Regional,Moderately Accessible Regional,20
+5440,YUNTA,Regional,Moderately Accessible Regional,20
+5451,AUBURN,Regional,Accessible Regional,10
+5451,UNDALYA,Regional,Accessible Regional,10
+5452,LEASINGHAM,Regional,Accessible Regional,10
+5452,WATERVALE,Regional,Accessible Regional,10
+5453,ARMAGH,Regional,Accessible Regional,10
+5453,BARINIA,Regional,Accessible Regional,10
+5453,BENBOURNIE,Regional,Accessible Regional,10
+5453,BOCONNOC PARK,Regional,Accessible Regional,10
+5453,CLARE,Regional,Accessible Regional,10
+5453,EMU FLAT,Regional,Accessible Regional,10
+5453,GILLENTOWN,Regional,Accessible Regional,10
+5453,HILL RIVER,Regional,Accessible Regional,10
+5453,HOYLETON,Regional,Accessible Regional,10
+5453,KYBUNGA,Regional,Accessible Regional,10
+5453,PENWORTHAM,Regional,Accessible Regional,10
+5453,POLISH HILL RIVER,Regional,Accessible Regional,10
+5453,SEVENHILL,Regional,Accessible Regional,10
+5453,SPRING FARM,Regional,Accessible Regional,10
+5453,SPRING GULLY,Regional,Accessible Regional,10
+5453,STANLEY FLAT,Regional,Accessible Regional,10
+5454,ANDREWS,Regional,Accessible Regional,10
+5454,BROUGHTON RIVER VALLEY,Regional,Accessible Regional,10
+5454,EUROMINA,Regional,Accessible Regional,10
+5454,HACKLINS CORNER,Regional,Accessible Regional,10
+5454,MAYFIELD,Regional,Accessible Regional,10
+5454,SPALDING,Regional,Accessible Regional,10
+5454,WASHPOOL,Regional,Accessible Regional,10
+5455,HILLTOWN,Regional,Accessible Regional,10
+5460,BARABBA,Regional,Highly Accessible Regional,0
+5460,OWEN,Regional,Highly Accessible Regional,0
+5460,PINERY,Regional,Highly Accessible Regional,0
+5460,STOCKYARD CREEK,Regional,Highly Accessible Regional,0
+5461,BALAKLAVA,Regional,Accessible Regional,10
+5461,BOWILLIA,Regional,Accessible Regional,10
+5461,DALKEY,Regional,Accessible Regional,10
+5461,ERITH,Regional,Accessible Regional,10
+5461,EVERARD CENTRAL,Regional,Accessible Regional,10
+5461,GOYDER,Regional,Accessible Regional,10
+5461,HALBURY,Regional,Accessible Regional,10
+5461,HOSKIN CORNER,Regional,Accessible Regional,10
+5461,MOUNT TEMPLETON,Regional,Accessible Regional,10
+5461,SAINTS,Regional,Accessible Regional,10
+5461,STOW,Regional,Accessible Regional,10
+5461,WATCHMAN,Regional,Accessible Regional,10
+5461,WHITWARTA,Regional,Accessible Regional,10
+5462,BENBOURNIE,Regional,Accessible Regional,10
+5462,BLYTH,Regional,Accessible Regional,10
+5464,ANAMA,Regional,Accessible Regional,10
+5464,BRINKWORTH,Regional,Accessible Regional,10
+5464,BUNGAREE,Regional,Accessible Regional,10
+5464,CONDOWIE,Regional,Accessible Regional,10
+5464,HART,Regional,Accessible Regional,10
+5464,KOOLUNGA,Regional,Accessible Regional,10
+5464,MAROLA,Regional,Accessible Regional,10
+5464,ROCHESTER,Regional,Accessible Regional,10
+5470,YACKA,Regional,Accessible Regional,10
+5471,GULNARE,Regional,Accessible Regional,10
+5472,GEORGETOWN,Regional,Accessible Regional,10
+5473,GLADSTONE,Regional,Accessible Regional,10
+5480,APPILA,Regional,Accessible Regional,10
+5480,LAURA,Regional,Accessible Regional,10
+5480,STONE HUT,Regional,Accessible Regional,10
+5481,BANGOR,Regional,Accessible Regional,10
+5481,MURRAY TOWN,Regional,Accessible Regional,10
+5481,WIRRABARA,Regional,Accessible Regional,10
+5481,WONGYARRA,Regional,Accessible Regional,10
+5482,BOOLEROO CENTRE,Regional,Accessible Regional,10
+5482,WEPOWIE,Regional,Accessible Regional,10
+5483,MELROSE,Regional,Accessible Regional,10
+5485,WILMINGTON,Regional,Accessible Regional,10
+5490,CALTOWIE,Regional,Accessible Regional,10
+5490,CALTOWIE NORTH,Regional,Accessible Regional,10
+5490,CALTOWIE WEST,Regional,Accessible Regional,10
+5491,BELALIE,Regional,Accessible Regional,10
+5491,BELALIE EAST,Regional,Accessible Regional,10
+5491,BELALIE NORTH,Regional,Accessible Regional,10
+5491,BUNDALEER GARDENS,Regional,Accessible Regional,10
+5491,BUNDALEER NORTH,Regional,Accessible Regional,10
+5491,HORNSDALE,Regional,Accessible Regional,10
+5491,JAMESTOWN,Regional,Accessible Regional,10
+5491,WEST BUNDALEER,Regional,Accessible Regional,10
+5493,YATINA,Regional,Moderately Accessible Regional,20
+5493,YONGALA,Regional,Moderately Accessible Regional,20
+5495,BAROOTA,Regional,Accessible Regional,10
+5495,GERMEIN BAY,Regional,Accessible Regional,10
+5495,MAMBRAY CREEK,Regional,Accessible Regional,10
+5495,NECTAR BROOK,Regional,Accessible Regional,10
+5495,PORT FLINDERS,Regional,Accessible Regional,10
+5495,PORT GERMEIN,Regional,Accessible Regional,10
+5495,WEEROONA ISLAND,Regional,Accessible Regional,10
+5501,AVON,Regional,Highly Accessible Regional,0
+5501,CALOMBA,Regional,Highly Accessible Regional,0
+5501,DUBLIN,Regional,Highly Accessible Regional,0
+5501,LEWISTON,Regional,Highly Accessible Regional,0
+5501,LONG PLAINS,Regional,Highly Accessible Regional,0
+5501,LOWER LIGHT,Regional,Highly Accessible Regional,0
+5501,MIDDLE BEACH,Regional,Highly Accessible Regional,0
+5501,PARHAM,Regional,Highly Accessible Regional,0
+5501,PORT GAWLER,Regional,Highly Accessible Regional,0
+5501,THOMPSON BEACH,Regional,Highly Accessible Regional,0
+5501,TWO WELLS,Regional,Highly Accessible Regional,0
+5501,WEBB BEACH,Regional,Highly Accessible Regional,0
+5501,WILD HORSE PLAINS,Regional,Highly Accessible Regional,0
+5501,WINDSOR,Regional,Highly Accessible Regional,0
+5502,FISCHER,Regional,Highly Accessible Regional,0
+5502,GRACE PLAINS,Regional,Highly Accessible Regional,0
+5502,KORUNYE,Regional,Highly Accessible Regional,0
+5502,MALLALA,Regional,Highly Accessible Regional,0
+5502,RED BANKS,Regional,Highly Accessible Regional,0
+5502,REDBANKS,Regional,Highly Accessible Regional,0
+5502,REEVES PLAINS,Regional,Highly Accessible Regional,0
+5510,LOCHIEL,Regional,Accessible Regional,10
+5520,BARUNGA GAP,Regional,Accessible Regional,10
+5520,BUMBUNGA,Regional,Accessible Regional,10
+5520,BURNSFIELD,Regional,Accessible Regional,10
+5520,GLEESON HILL,Regional,Accessible Regional,10
+5520,SNOWTOWN,Regional,Accessible Regional,10
+5520,WOKURNA,Regional,Accessible Regional,10
+5521,REDHILL,Regional,Accessible Regional,10
+5522,COLLINSFIELD,Regional,Accessible Regional,10
+5522,FISHERMAN BAY,Regional,Accessible Regional,10
+5522,HOPE GAP,Regional,Accessible Regional,10
+5522,LAKE VIEW,Regional,Accessible Regional,10
+5522,LOWER BROUGHTON,Regional,Accessible Regional,10
+5522,MUNDOORA,Regional,Accessible Regional,10
+5522,PORT BROUGHTON,Regional,Accessible Regional,10
+5522,WARD HILL,Regional,Accessible Regional,10
+5523,BEETALOO,Regional,Accessible Regional,10
+5523,BEETALOO VALLEY,Regional,Accessible Regional,10
+5523,CLEMENTS GAP,Regional,Accessible Regional,10
+5523,CRYSTAL BROOK,Regional,Accessible Regional,10
+5523,HUDDLESTON,Regional,Accessible Regional,10
+5523,HUDDLESTONE,Regional,Accessible Regional,10
+5523,MERRITON,Regional,Accessible Regional,10
+5523,NARRIDY,Regional,Accessible Regional,10
+5523,NUROM,Regional,Accessible Regional,10
+5523,WANDEARAH,Regional,Accessible Regional,10
+5523,WANDEARAH EAST,Regional,Accessible Regional,10
+5523,WANDEARAH WEST,Regional,Accessible Regional,10
+5540,BUNGAMA,Regional,Accessible Regional,10
+5540,COONAMIA,Regional,Accessible Regional,10
+5540,LOWER BROUGHTON,Regional,Accessible Regional,10
+5540,NAPPERBY,Regional,Accessible Regional,10
+5540,NELSHABY,Regional,Accessible Regional,10
+5540,PIRIE EAST,Regional,Accessible Regional,10
+5540,PORT DAVIS,Regional,Accessible Regional,10
+5540,PORT PIRIE,Regional,Accessible Regional,10
+5540,PORT PIRIE SOUTH,Regional,Accessible Regional,10
+5540,PORT PIRIE WEST,Regional,Accessible Regional,10
+5540,RISDON PARK,Regional,Accessible Regional,10
+5540,RISDON PARK SOUTH,Regional,Accessible Regional,10
+5540,SOLOMONTOWN,Regional,Accessible Regional,10
+5540,TELOWIE,Regional,Accessible Regional,10
+5540,WARNERTOWN,Regional,Accessible Regional,10
+5550,BEAUFORT,Regional,Accessible Regional,10
+5550,BOWMANS,Regional,Accessible Regional,10
+5550,INKERMAN,Regional,Accessible Regional,10
+5550,KALLORA,Regional,Accessible Regional,10
+5550,NANTAWARRA,Regional,Accessible Regional,10
+5550,PORT WAKEFIELD,Regional,Accessible Regional,10
+5550,PROOF RANGE,Regional,Accessible Regional,10
+5550,SOUTH HUMMOCKS,Regional,Accessible Regional,10
+5552,KAINTON,Regional,Accessible Regional,10
+5552,KULPARA,Regional,Accessible Regional,10
+5552,MELTON,Regional,Accessible Regional,10
+5552,PASKEVILLE,Regional,Accessible Regional,10
+5552,PORT ARTHUR,Regional,Accessible Regional,10
+5552,SUNNYVALE,Regional,Accessible Regional,10
+5552,THRINGTON,Regional,Accessible Regional,10
+5554,BOORS PLAIN,Regional,Accessible Regional,10
+5554,CUNLIFFE,Regional,Accessible Regional,10
+5554,JERICHO,Regional,Accessible Regional,10
+5554,JERUSALEM,Regional,Accessible Regional,10
+5554,KADINA,Regional,Accessible Regional,10
+5554,MATTA FLAT,Regional,Accessible Regional,10
+5554,NEW TOWN,Regional,Accessible Regional,10
+5554,THOMAS PLAIN,Regional,Accessible Regional,10
+5554,WALLAROO MINES,Regional,Accessible Regional,10
+5554,WILLAMULKA,Regional,Accessible Regional,10
+5555,ALFORD,Regional,Accessible Regional,10
+5555,CLINTON,Regional,Accessible Regional,10
+5555,CLINTON CENTRE,Regional,Accessible Regional,10
+5555,COLLINSFIELD,Regional,Accessible Regional,10
+5555,DOWLING,Regional,Accessible Regional,10
+5555,DOWLINGVILLE,Regional,Accessible Regional,10
+5555,HOPE GAP,Regional,Accessible Regional,10
+5555,KULPARA,Regional,Accessible Regional,10
+5555,LAKE VIEW,Regional,Accessible Regional,10
+5555,MELTON,Regional,Accessible Regional,10
+5555,MUNDOORA,Regional,Accessible Regional,10
+5555,PORT ARTHUR,Regional,Accessible Regional,10
+5555,PORT CLINTON,Regional,Accessible Regional,10
+5555,TICKERA,Regional,Accessible Regional,10
+5555,WINULTA,Regional,Accessible Regional,10
+5556,NORTH BEACH,Regional,Accessible Regional,10
+5556,WALLAROO,Regional,Accessible Regional,10
+5556,WALLAROO PLAIN,Regional,Accessible Regional,10
+5556,WARBURTO,Regional,Accessible Regional,10
+5558,AGERY,Regional,Accessible Regional,10
+5558,CROSS ROADS,Regional,Accessible Regional,10
+5558,EAST MOONTA,Regional,Accessible Regional,10
+5558,HAMLEY,Regional,Accessible Regional,10
+5558,KOOROONA,Regional,Accessible Regional,10
+5558,MOONTA,Regional,Accessible Regional,10
+5558,MOONTA BAY,Regional,Accessible Regional,10
+5558,MOONTA MINES,Regional,Accessible Regional,10
+5558,NALYAPPA,Regional,Accessible Regional,10
+5558,NORTH MOONTA,Regional,Accessible Regional,10
+5558,NORTH YELTA,Regional,Accessible Regional,10
+5558,PARAMATTA,Regional,Accessible Regional,10
+5558,PORT HUGHES,Regional,Accessible Regional,10
+5558,YELTA,Regional,Accessible Regional,10
+5560,BUTE,Regional,Accessible Regional,10
+5560,NINNES,Regional,Accessible Regional,10
+5570,CLINTON,Regional,Accessible Regional,10
+5570,CLINTON CENTRE,Regional,Accessible Regional,10
+5570,PORT CLINTON,Regional,Accessible Regional,10
+5570,PRICE,Regional,Accessible Regional,10
+5570,WINULTA,Regional,Accessible Regional,10
+5571,ARDROSSAN,Regional,Moderately Accessible Regional,20
+5571,BLACK POINT,Regional,Moderately Accessible Regional,20
+5571,CUNNINGHAM,Regional,Moderately Accessible Regional,20
+5571,DOWLINGVILLE,Regional,Moderately Accessible Regional,20
+5571,JAMES WELL,Regional,Moderately Accessible Regional,20
+5571,PETERSVILLE,Regional,Moderately Accessible Regional,20
+5571,PINE POINT,Regional,Moderately Accessible Regional,20
+5571,ROGUES POINT,Regional,Moderately Accessible Regional,20
+5571,SANDILANDS,Regional,Moderately Accessible Regional,20
+5571,TIDDY WIDDY BEACH,Regional,Moderately Accessible Regional,20
+5572,ARTHURTON,Regional,Accessible Regional,10
+5572,PORT ARTHUR,Regional,Accessible Regional,10
+5573,BALGOWAN,Regional,Moderately Accessible Regional,20
+5573,CHINAMAN WELLS,Regional,Moderately Accessible Regional,20
+5573,CHINAMEN WELLS,Regional,Moderately Accessible Regional,20
+5573,MAITLAND,Regional,Moderately Accessible Regional,20
+5573,POINT PEARCE,Regional,Moderately Accessible Regional,20
+5573,PORT VICTORIA,Regional,Moderately Accessible Regional,20
+5573,SOUTH KILKERRAN,Regional,Moderately Accessible Regional,20
+5573,URANIA,Regional,Moderately Accessible Regional,20
+5573,WAURALTEE,Regional,Moderately Accessible Regional,20
+5573,WEETULTA,Regional,Moderately Accessible Regional,20
+5573,YORKE VALLEY,Regional,Moderately Accessible Regional,20
+5575,BLUFF BEACH,Regional,Moderately Accessible Regional,20
+5575,BRENTWOOD,Regional,Moderately Accessible Regional,20
+5575,CORNY POINT,Regional,Moderately Accessible Regional,20
+5575,COUCH BEACH,Regional,Moderately Accessible Regional,20
+5575,HARDWICKE BAY,Regional,Moderately Accessible Regional,20
+5575,KOOLYWURTIE,Regional,Moderately Accessible Regional,20
+5575,MARION BAY,Regional,Moderately Accessible Regional,20
+5575,MINLATON,Regional,Moderately Accessible Regional,20
+5575,POINT SOUTTAR,Regional,Moderately Accessible Regional,20
+5575,POINT TURTON,Regional,Moderately Accessible Regional,20
+5575,PORT JULIA,Regional,Moderately Accessible Regional,20
+5575,PORT RICKABY,Regional,Moderately Accessible Regional,20
+5575,RAMSAY,Regional,Moderately Accessible Regional,20
+5575,STENHOUSE BAY,Regional,Moderately Accessible Regional,20
+5575,THE PINES,Regional,Moderately Accessible Regional,20
+5575,WHITE HUT,Regional,Moderately Accessible Regional,20
+5575,WOOL BAY,Regional,Moderately Accessible Regional,20
+5576,HONITON,Regional,Moderately Accessible Regional,20
+5576,PORT MOOROWIE,Regional,Moderately Accessible Regional,20
+5576,YORKETOWN,Regional,Moderately Accessible Regional,20
+5577,COUCH BEACH,Regional,Moderately Accessible Regional,20
+5577,FOUL BAY,Regional,Moderately Accessible Regional,20
+5577,INNESTON,Regional,Moderately Accessible Regional,20
+5577,POINT SOUTTAR,Regional,Moderately Accessible Regional,20
+5577,THE PINES,Regional,Moderately Accessible Regional,20
+5577,WAROOKA,Regional,Moderately Accessible Regional,20
+5580,CURRAMULKA,Regional,Moderately Accessible Regional,20
+5580,PORT JULIA,Regional,Moderately Accessible Regional,20
+5581,PORT VINCENT,Regional,Moderately Accessible Regional,20
+5581,SHEAOAK FLAT,Regional,Moderately Accessible Regional,20
+5582,PORT GILES,Regional,Moderately Accessible Regional,20
+5582,STANSBURY,Regional,Moderately Accessible Regional,20
+5583,COOBOWIE,Regional,Moderately Accessible Regional,20
+5583,EDITHBURGH,Regional,Moderately Accessible Regional,20
+5583,SULTANA POINT,Regional,Moderately Accessible Regional,20
+5600,BACKY POINT,Regional,Accessible Regional,10
+5600,BLACKY POINT,Regional,Accessible Regional,10
+5600,COORABIE,Regional,Accessible Regional,10
+5600,CORUNNA STATION,Regional,Accessible Regional,10
+5600,CULTANA,Regional,Accessible Regional,10
+5600,DOUGLAS POINT,Regional,Accessible Regional,10
+5600,DOUGLAS POINT SOUTH,Regional,Accessible Regional,10
+5600,FALSE BAY,Regional,Accessible Regional,10
+5600,FITZGERALD BAY,Regional,Accessible Regional,10
+5600,GILLES DOWNS,Regional,Accessible Regional,10
+5600,IRON BARON,Regional,Accessible Regional,10
+5600,KATUNGA STATION,Regional,Accessible Regional,10
+5600,LAKE GILES,Regional,Accessible Regional,10
+5600,LAKE HARRIS,Regional,Accessible Regional,10
+5600,MIDDLEBACK RANGE,Regional,Accessible Regional,10
+5600,MULLAQUANA,Regional,Accessible Regional,10
+5600,MYOLA STATION,Regional,Accessible Regional,10
+5600,POINT LOWLY,Regional,Accessible Regional,10
+5600,POINT LOWLY NORTH,Regional,Accessible Regional,10
+5600,PORT BONYTHON,Regional,Accessible Regional,10
+5600,SECRET ROCKS,Regional,Accessible Regional,10
+5600,WHYALLA,Regional,Accessible Regional,10
+5600,WHYALLA DC,Regional,Accessible Regional,10
+5600,WHYALLA PLAYFORD,Regional,Accessible Regional,10
+5601,BACKY POINT,Regional,Accessible Regional,10
+5601,BARSON,Regional,Accessible Regional,10
+5601,COWLEDS LANDING,Regional,Accessible Regional,10
+5601,CULTANA,Regional,Accessible Regional,10
+5601,DOUGLAS POINT,Regional,Accessible Regional,10
+5601,DOUGLAS POINT SOUTH,Regional,Accessible Regional,10
+5601,FALSE BAY,Regional,Accessible Regional,10
+5601,FITZGERALD BAY,Regional,Accessible Regional,10
+5601,IRON BARON,Regional,Accessible Regional,10
+5601,MULLAQUANA,Regional,Accessible Regional,10
+5601,MURNINNIE BEACH,Regional,Accessible Regional,10
+5601,POINT LOWLY,Regional,Accessible Regional,10
+5601,POINT LOWLY NORTH,Regional,Accessible Regional,10
+5601,PORT BONYTHON,Regional,Accessible Regional,10
+5601,WHYALLA BARSON,Regional,Accessible Regional,10
+5602,COWELL,Regional,Moderately Accessible Regional,20
+5602,ELBOW HILL,Regional,Moderately Accessible Regional,20
+5602,LUCKY BAY,Regional,Moderately Accessible Regional,20
+5602,MANGALO,Regional,Moderately Accessible Regional,20
+5602,MIDGEE,Regional,Moderately Accessible Regional,20
+5602,MILTALIE,Regional,Moderately Accessible Regional,20
+5602,MINBRIE,Regional,Moderately Accessible Regional,20
+5602,MITALIE,Regional,Moderately Accessible Regional,20
+5602,MITCHELLVILLE,Regional,Moderately Accessible Regional,20
+5602,MURNINNIE,Regional,Moderately Accessible Regional,20
+5602,PORT GIBBON,Regional,Moderately Accessible Regional,20
+5602,YABMANA,Regional,Moderately Accessible Regional,20
+5603,ARNO BAY,Regional,Moderately Accessible Regional,20
+5603,HINCKS,Regional,Moderately Accessible Regional,20
+5603,VERRAN,Regional,Moderately Accessible Regional,20
+5603,WHARMINDA,Regional,Moderately Accessible Regional,20
+5604,PORT NEILL,Regional,Moderately Accessible Regional,20
+5605,BUTLER,Regional,Moderately Accessible Regional,20
+5605,BUTLER TANKS,Regional,Moderately Accessible Regional,20
+5605,TUMBY BAY,Regional,Moderately Accessible Regional,20
+5606,KIRTON POINT,Regional,Moderately Accessible Regional,20
+5606,PORT LINCOLN,Regional,Moderately Accessible Regional,20
+5607,BOSTON,Regional,Remote Regional,30
+5607,BROOKER,Regional,Remote Regional,30
+5607,CHARLTON GULLY,Regional,Remote Regional,30
+5607,COFFIN BAY,Regional,Remote Regional,30
+5607,COOMUNGA,Regional,Remote Regional,30
+5607,COULTA,Regional,Remote Regional,30
+5607,DUCK PONDS,Regional,Remote Regional,30
+5607,FARM BEACH,Regional,Remote Regional,30
+5607,FOUNTAIN,Regional,Remote Regional,30
+5607,GREEN PATCH,Regional,Remote Regional,30
+5607,HAWSON,Regional,Remote Regional,30
+5607,HORSE PENINSULA,Regional,Remote Regional,30
+5607,KARKOO,Regional,Remote Regional,30
+5607,KELLIDIE BAY,Regional,Remote Regional,30
+5607,KIANA,Regional,Remote Regional,30
+5607,KOPPIO,Regional,Remote Regional,30
+5607,LINCOLN NATIONAL PARK,Regional,Remote Regional,30
+5607,LIPSON,Regional,Remote Regional,30
+5607,LITTLE DOUGLAS,Regional,Remote Regional,30
+5607,LOUTH BAY,Regional,Remote Regional,30
+5607,MITCHELL,Regional,Remote Regional,30
+5607,MOODY,Regional,Remote Regional,30
+5607,MOUNT DRUMMOND,Regional,Remote Regional,30
+5607,MOUNT DUTTON BAY,Regional,Remote Regional,30
+5607,MOUNT HOPE,Regional,Remote Regional,30
+5607,MURDINGA,Regional,Remote Regional,30
+5607,NORTH SHIELDS,Regional,Remote Regional,30
+5607,PEACHNA,Regional,Remote Regional,30
+5607,PEARLAH,Regional,Remote Regional,30
+5607,POINT BOSTON,Regional,Remote Regional,30
+5607,POONINDIE,Regional,Remote Regional,30
+5607,PORT LINCOLN,Regional,Remote Regional,30
+5607,SHERINGA,Regional,Remote Regional,30
+5607,SLEAFORD,Regional,Remote Regional,30
+5607,SULLIVAN,Regional,Remote Regional,30
+5607,TIATUKIA,Regional,Remote Regional,30
+5607,TOOLIGIE,Regional,Remote Regional,30
+5607,TOOTENILLA,Regional,Remote Regional,30
+5607,TULKA,Regional,Remote Regional,30
+5607,TULKA NORTH,Regional,Remote Regional,30
+5607,ULEY,Regional,Remote Regional,30
+5607,UNGARRA,Regional,Remote Regional,30
+5607,VENUS BAY,Regional,Remote Regional,30
+5607,WANGARY,Regional,Remote Regional,30
+5607,WANILLA,Regional,Remote Regional,30
+5607,WARRACHIE,Regional,Remote Regional,30
+5607,WARROW,Regional,Remote Regional,30
+5607,WARUNDA,Regional,Remote Regional,30
+5607,WHITES FLAT,Regional,Remote Regional,30
+5607,WHITES RIVER,Regional,Remote Regional,30
+5607,YALLUNDA FLAT,Regional,Remote Regional,30
+5608,MULLAQUANA,Regional,Accessible Regional,10
+5608,WHYALLA NORRIE,Regional,Accessible Regional,10
+5608,WHYALLA NORRIE EAST,Regional,Accessible Regional,10
+5608,WHYALLA NORRIE NORTH,Regional,Accessible Regional,10
+5608,WHYALLA STUART,Regional,Accessible Regional,10
+5609,WHYALLA JENKINS,Regional,Accessible Regional,10
+5611,IRON KNOB,Regional,Accessible Regional,10
+5630,EDILILLIE,Regional,Remote Regional,30
+5630,EDILLILIE,Regional,Remote Regional,30
+5631,COCKALEECHIE,Regional,Remote Regional,30
+5631,CUMMINS,Regional,Remote Regional,30
+5632,KAPINNIE,Regional,Remote Regional,30
+5632,KAPPINIE,Regional,Remote Regional,30
+5632,KARKOO,Regional,Remote Regional,30
+5632,MITCHELL,Regional,Remote Regional,30
+5632,YEELANNA,Regional,Remote Regional,30
+5633,BOONERDO,Regional,Remote Regional,30
+5633,HAMBIDGE,Regional,Remote Regional,30
+5633,LOCK,Regional,Remote Regional,30
+5640,CAMPOONA,Regional,Remote Regional,30
+5640,CLEVE,Regional,Remote Regional,30
+5640,JAMIESON,Regional,Remote Regional,30
+5640,WADDIKEE,Regional,Remote Regional,30
+5641,BARNA,Regional,Moderately Accessible Regional,20
+5641,BUCKLEBOO,Regional,Moderately Accessible Regional,20
+5641,BUNGEROO,Regional,Moderately Accessible Regional,20
+5641,CARALUE,Regional,Moderately Accessible Regional,20
+5641,CORTLINYE,Regional,Moderately Accessible Regional,20
+5641,CUNYARIE,Regional,Moderately Accessible Regional,20
+5641,KELLY,Regional,Moderately Accessible Regional,20
+5641,KIMBA,Regional,Moderately Accessible Regional,20
+5641,MOSELEY,Regional,Moderately Accessible Regional,20
+5641,PANITYA,Regional,Moderately Accessible Regional,20
+5641,PINKAWILLINIE,Regional,Moderately Accessible Regional,20
+5641,SOLOMON,Regional,Moderately Accessible Regional,20
+5641,WILCHERRY,Regional,Moderately Accessible Regional,20
+5641,YALANDA,Regional,Moderately Accessible Regional,20
+5641,YELTANA,Regional,Moderately Accessible Regional,20
+5642,DARKE PEAK,Regional,Remote Regional,30
+5642,HAMBIDGE,Regional,Remote Regional,30
+5642,KIELPA,Regional,Remote Regional,30
+5642,MURLONG,Regional,Remote Regional,30
+5642,RUDALL,Regional,Remote Regional,30
+5650,COOTRA,Regional,Remote Regional,30
+5650,KOONGAWA,Regional,Remote Regional,30
+5650,WARRAMBOO,Regional,Remote Regional,30
+5651,KYANCUTTA,Regional,Remote Regional,30
+5652,PANEY,Regional,Remote Regional,30
+5652,PYGERY,Regional,Remote Regional,30
+5652,WUDINNA,Regional,Remote Regional,30
+5653,YANINEE,Regional,Remote Regional,30
+5654,COCATA,Regional,Remote Regional,30
+5654,KARCULTABY,Regional,Remote Regional,30
+5654,MINNIPA,Regional,Remote Regional,30
+5654,MOUNT DAMPER,Regional,Remote Regional,30
+5655,BOCKELBERG,Regional,Very Remote Regional,40
+5655,GAWLER RANGES,Regional,Very Remote Regional,40
+5655,KALDOONERA,Regional,Very Remote Regional,40
+5655,LOCKES CLAYPAN,Regional,Very Remote Regional,40
+5655,NARLABY,Regional,Very Remote Regional,40
+5655,POOCHERA,Regional,Very Remote Regional,40
+5655,PYGERY,Regional,Very Remote Regional,40
+5660,CHILPENUNDA,Regional,Very Remote Regional,40
+5660,CUNGENA,Regional,Very Remote Regional,40
+5661,KOOLGERA,Regional,Very Remote Regional,40
+5661,PIMBAACLA,Regional,Very Remote Regional,40
+5661,WALLALA,Regional,Very Remote Regional,40
+5661,WIRRULLA,Regional,Very Remote Regional,40
+5661,YANTANABIE,Regional,Very Remote Regional,40
+5670,BRAMFIELD,Regional,Remote Regional,30
+5670,COLTON,Regional,Remote Regional,30
+5670,COOLILLIE,Regional,Remote Regional,30
+5670,ELLISTON,Regional,Remote Regional,30
+5670,KAPPAWANTA,Regional,Remote Regional,30
+5670,MOUNT JOY,Regional,Remote Regional,30
+5670,MOUNT WEDGE,Regional,Remote Regional,30
+5670,PALKAGEE,Regional,Remote Regional,30
+5670,POLDA,Regional,Remote Regional,30
+5670,TALIA,Regional,Remote Regional,30
+5670,ULYERRA,Regional,Remote Regional,30
+5671,BAIRD BAY,Regional,Very Remote Regional,40
+5671,CALCA,Regional,Very Remote Regional,40
+5671,COLLEY,Regional,Very Remote Regional,40
+5671,MORTANA,Regional,Very Remote Regional,40
+5671,MOUNT COOPER,Regional,Very Remote Regional,40
+5671,PORT KENNY,Regional,Very Remote Regional,40
+5671,TYRINGA,Regional,Very Remote Regional,40
+5671,WITERA,Regional,Very Remote Regional,40
+5680,CARAWA,Regional,Very Remote Regional,40
+5680,CHANDADA,Regional,Very Remote Regional,40
+5680,CHINBINGINA,Regional,Very Remote Regional,40
+5680,EBA ANCHORAGE,Regional,Very Remote Regional,40
+5680,HASLAM,Regional,Very Remote Regional,40
+5680,INKSTER,Regional,Very Remote Regional,40
+5680,LAURA BAY,Regional,Very Remote Regional,40
+5680,MARYVALE,Regional,Very Remote Regional,40
+5680,MUDAMUCKLA,Regional,Very Remote Regional,40
+5680,NUNJIKOMPITA,Regional,Very Remote Regional,40
+5680,PERLUBIE,Regional,Very Remote Regional,40
+5680,PETINA,Regional,Very Remote Regional,40
+5680,PIEDNIPPIE,Regional,Very Remote Regional,40
+5680,PINJARRA STATION,Regional,Very Remote Regional,40
+5680,PUNTABIE,Regional,Very Remote Regional,40
+5680,PUREBA,Regional,Very Remote Regional,40
+5680,SCEALE BAY,Regional,Very Remote Regional,40
+5680,SMOKY BAY,Regional,Very Remote Regional,40
+5680,STREAKY BAY,Regional,Very Remote Regional,40
+5680,WESTALL,Regional,Very Remote Regional,40
+5680,YANERBIE,Regional,Very Remote Regional,40
+5690,BOOKABIE,Regional,Very Remote Regional,40
+5690,CEDUNA,Regional,Very Remote Regional,40
+5690,CEDUNA WATERS,Regional,Very Remote Regional,40
+5690,CHARRA,Regional,Very Remote Regional,40
+5690,CHUNDARIA,Regional,Very Remote Regional,40
+5690,COORABIE,Regional,Very Remote Regional,40
+5690,DENIAL BAY,Regional,Very Remote Regional,40
+5690,FOWLERS BAY,Regional,Very Remote Regional,40
+5690,KALANBI,Regional,Very Remote Regional,40
+5690,KOONIBBA,Regional,Very Remote Regional,40
+5690,MALTEE,Regional,Very Remote Regional,40
+5690,MERGHINY,Regional,Very Remote Regional,40
+5690,MITCHIDY MOOLA,Regional,Very Remote Regional,40
+5690,NADIA,Regional,Very Remote Regional,40
+5690,NANBONA,Regional,Very Remote Regional,40
+5690,NULLABOR,Regional,Very Remote Regional,40
+5690,NUNDROO,Regional,Very Remote Regional,40
+5690,PENONG,Regional,Very Remote Regional,40
+5690,THEVENARD,Regional,Very Remote Regional,40
+5690,UWORRA,Regional,Very Remote Regional,40
+5690,WANDANA,Regional,Very Remote Regional,40
+5690,WATNA SHED,Regional,Very Remote Regional,40
+5690,WATRABA,Regional,Very Remote Regional,40
+5690,WHITE WELL CORNER,Regional,Very Remote Regional,40
+5690,YALATA,Regional,Very Remote Regional,40
+5690,YELLABINNA,Regional,Very Remote Regional,40
+5690,YUMBARRA,Regional,Very Remote Regional,40
+5700,BLANCHE HARBOR,Regional,Accessible Regional,10
+5700,COMMISSARIAT POINT,Regional,Accessible Regional,10
+5700,DAVENPORT,Regional,Accessible Regional,10
+5700,MIRANDA,Regional,Accessible Regional,10
+5700,MUNDALLIO,Regional,Accessible Regional,10
+5700,PORT AUGUSTA,Regional,Accessible Regional,10
+5700,PORT AUGUSTA NORTH,Regional,Accessible Regional,10
+5700,PORT AUGUSTA WEST,Regional,Accessible Regional,10
+5700,PORT PATERSON,Regional,Accessible Regional,10
+5700,WAMI KATA,Regional,Accessible Regional,10
+5700,WILLSDEN,Regional,Accessible Regional,10
+5700,WINNINOWIE,Regional,Accessible Regional,10
+5701,ARKAROOLA VILLAGE,Regional,Very Remote Regional,40
+5701,COOK,Regional,Very Remote Regional,40
+5701,GLENDAMBO,Regional,Very Remote Regional,40
+5701,KINGOONYA,Regional,Very Remote Regional,40
+5701,PORT AUGUSTA,Regional,Accessible Regional,10
+5701,TARCOOLA,Regional,Very Remote Regional,40
+5701,WOOLUNDUNGA,Regional,Accessible Regional,10
+5710,ARKAROOLA VILLAGE,Regional,Very Remote Regional,40
+5710,COMMISSARIAT POINT,Regional,Accessible Regional,10
+5710,COOK,Regional,Very Remote Regional,40
+5710,GLENDAMBO,Regional,Very Remote Regional,40
+5710,KINGOONYA,Regional,Very Remote Regional,40
+5710,NONNING,Regional,Remote Regional,30
+5710,PORT AUGUSTA,Regional,Accessible Regional,10
+5710,STIRLING NORTH,Regional,Accessible Regional,10
+5710,TARCOOLA,Regional,Very Remote Regional,40
+5710,WINNINOWIE,Regional,Accessible Regional,10
+5710,WOOLUNDUNGA,Regional,Accessible Regional,10
+5713,EMEROO,Regional,Remote Regional,30
+5713,ISLAND LAGOON,Regional,Remote Regional,30
+5713,KOOTABERRA,Regional,Remote Regional,30
+5713,LAKE TORRENS,Regional,Remote Regional,30
+5713,LAKE TORRENS STATION,Regional,Remote Regional,30
+5713,MOUNT ARDEN,Regional,Remote Regional,30
+5713,OAKDEN HILLS,Regional,Remote Regional,30
+5713,PERNATTY,Regional,Remote Regional,30
+5713,SOUTH GAP,Regional,Remote Regional,30
+5713,WALLERBERDINA,Regional,Remote Regional,30
+5713,WILKATANA STATION,Regional,Remote Regional,30
+5713,WINTABATINYANA,Regional,Remote Regional,30
+5713,YADLAMALKA,Regional,Remote Regional,30
+5715,CARRIEWERLOO,Regional,Accessible Regional,10
+5715,ILLEROO,Regional,Accessible Regional,10
+5715,LINCOLN GAP,Regional,Accessible Regional,10
+5715,PANDURRA,Regional,Accessible Regional,10
+5715,WARTAKA,Regional,Accessible Regional,10
+5715,YALYMBOO,Regional,Accessible Regional,10
+5715,YUDNAPINNA,Regional,Accessible Regional,10
+5717,HILTABA,Regional,Remote Regional,30
+5717,KOKATHA,Regional,Remote Regional,30
+5717,KOLENDO,Regional,Remote Regional,30
+5717,KONDOOLKA,Regional,Remote Regional,30
+5717,LAKE EVERARD,Regional,Remote Regional,30
+5717,LAKE GAIRDNER,Regional,Remote Regional,30
+5717,LAKE MCFARLANE,Regional,Remote Regional,30
+5717,MAHANEWO,Regional,Remote Regional,30
+5717,MOONAREE,Regional,Remote Regional,30
+5717,MOUNT IVE,Regional,Remote Regional,30
+5717,NONNING,Regional,Remote Regional,30
+5717,SIAM,Regional,Remote Regional,30
+5717,THURLGA,Regional,Remote Regional,30
+5717,UNO,Regional,Remote Regional,30
+5717,YARDEA,Regional,Remote Regional,30
+5719,BON BON,Regional,Very Remote Regional,40
+5719,BULGUNNIA,Regional,Very Remote Regional,40
+5719,COMMONWEALTH HILL,Regional,Very Remote Regional,40
+5719,COONDAMBO,Regional,Very Remote Regional,40
+5719,GLENDAMBO,Regional,Very Remote Regional,40
+5719,KINGOONYA,Regional,Very Remote Regional,40
+5719,MULGATHING,Regional,Very Remote Regional,40
+5719,WILGENA,Regional,Very Remote Regional,40
+5719,WIRRAMINNA,Regional,Very Remote Regional,40
+5720,ARCOONA,Regional,Remote Regional,30
+5720,BILLA KALINA,Regional,Remote Regional,30
+5720,BOSWORTH,Regional,Remote Regional,30
+5720,MILLERS CREEK,Regional,Remote Regional,30
+5720,MOUNT EBA,Regional,Remote Regional,30
+5720,MOUNT VIVIAN,Regional,Remote Regional,30
+5720,PARAKYLIA,Regional,Remote Regional,30
+5720,PIMBA,Regional,Remote Regional,30
+5720,PURPLE DOWNS,Regional,Remote Regional,30
+5720,STUARTS CREEK,Regional,Remote Regional,30
+5720,WOOMERA,Regional,Remote Regional,30
+5722,ANDAMOOKA,Regional,Very Remote Regional,40
+5722,ANDAMOOKA STATION,Regional,Very Remote Regional,40
+5723,ALLANDALE STATION,Regional,Very Remote Regional,40
+5723,ANNA CREEK,Regional,Very Remote Regional,40
+5723,ARCKARINGA,Regional,Very Remote Regional,40
+5723,COOBER PEDY,Regional,Very Remote Regional,40
+5723,INGOMAR,Regional,Very Remote Regional,40
+5723,MCDOUALL PEAK,Regional,Very Remote Regional,40
+5723,NILPINNA STATION,Regional,Very Remote Regional,40
+5723,WILLIAM CREEK,Regional,Very Remote Regional,40
+5723,WINTINNA,Regional,Very Remote Regional,40
+5724,MARLA,Regional,Very Remote Regional,40
+5724,MINTABIE,Regional,Very Remote Regional,40
+5724,WELBOURN HILL,Regional,Very Remote Regional,40
+5725,OLYMPIC DAM,Regional,Remote Regional,30
+5725,ROXBY DOWNS,Regional,Remote Regional,30
+5725,ROXBY DOWNS STATION,Regional,Remote Regional,30
+5730,ALPANA,Regional,Remote Regional,30
+5730,ANGORIGINA,Regional,Remote Regional,30
+5730,BELTANA,Regional,Remote Regional,30
+5730,BELTANA STATION,Regional,Remote Regional,30
+5730,BLINMAN,Regional,Remote Regional,30
+5730,EDIACARA,Regional,Remote Regional,30
+5730,GUM CREEK STATION,Regional,Remote Regional,30
+5730,MOOLOOLOO,Regional,Remote Regional,30
+5730,MOORILLAH,Regional,Remote Regional,30
+5730,MOTPENA,Regional,Remote Regional,30
+5730,MOUNT FALKLAND,Regional,Remote Regional,30
+5730,NARRINA,Regional,Remote Regional,30
+5730,NILPENA,Regional,Remote Regional,30
+5730,ORATUNGA STATION,Regional,Remote Regional,30
+5730,PARACHILNA,Regional,Remote Regional,30
+5730,PUTTAPA,Regional,Remote Regional,30
+5730,WARRAWEENA,Regional,Remote Regional,30
+5730,WIRREALPA,Regional,Remote Regional,30
+5731,BOLLARDS LAGOON,Regional,Very Remote Regional,40
+5731,COOPERS CREEK,Regional,Very Remote Regional,40
+5731,CORDILLO DOWNS,Regional,Very Remote Regional,40
+5731,DURHAM DOWNS,Regional,Very Remote Regional,40
+5731,GIDGEALPA,Regional,Very Remote Regional,40
+5731,INNAMINCKA,Regional,Very Remote Regional,40
+5731,LEIGH CREEK,Regional,Remote Regional,30
+5731,LEIGH CREEK STATION,Regional,Very Remote Regional,40
+5731,LINDON,Regional,Very Remote Regional,40
+5731,LYNDHURST,Regional,Very Remote Regional,40
+5731,MERTY MERTY,Regional,Very Remote Regional,40
+5731,MOOLAWATANA,Regional,Very Remote Regional,40
+5731,MOUNT FREELING,Regional,Very Remote Regional,40
+5731,MOUNT LYNDHURST,Regional,Very Remote Regional,40
+5731,MULGARIA,Regional,Very Remote Regional,40
+5731,MURNPEOWIE,Regional,Very Remote Regional,40
+5731,MYRTLE SPRINGS,Regional,Very Remote Regional,40
+5731,STRZELECKI DESERT,Regional,Very Remote Regional,40
+5731,WITCHELINA,Regional,Very Remote Regional,40
+5732,ANGEPENA,Regional,Remote Regional,30
+5732,ARKAROOLA,Regional,Remote Regional,30
+5732,BURR WELL,Regional,Remote Regional,30
+5732,COPLEY,Regional,Remote Regional,30
+5732,GAMMON RANGES,Regional,Remote Regional,30
+5732,MANNERS WELL,Regional,Remote Regional,30
+5732,MOUNT SERLE,Regional,Remote Regional,30
+5732,MULGA VIEW,Regional,Remote Regional,30
+5732,NEPABUNNA,Regional,Remote Regional,30
+5732,NORTH MOOLOOLOO,Regional,Remote Regional,30
+5732,PINDA SPRINGS,Regional,Remote Regional,30
+5732,UMBERATANA,Regional,Remote Regional,30
+5732,WERTALOONA,Regional,Remote Regional,30
+5732,WOOLTANA,Regional,Remote Regional,30
+5732,YANKANINNA,Regional,Remote Regional,30
+5733,ALTON DOWNS STATION,Regional,Remote Regional,30
+5733,CALLANNA,Regional,Very Remote Regional,40
+5733,CLAYTON STATION,Regional,Remote Regional,30
+5733,CLIFTON HILLS STATION,Regional,Remote Regional,30
+5733,COWARIE,Regional,Remote Regional,30
+5733,DULKANINNA,Regional,Very Remote Regional,40
+5733,ETADUNNA,Regional,Very Remote Regional,40
+5733,FARINA,Regional,Very Remote Regional,40
+5733,FARINA STATION,Regional,Very Remote Regional,40
+5733,KALAMURINA,Regional,Very Remote Regional,40
+5733,LAKE EYRE,Regional,Very Remote Regional,40
+5733,MARREE,Regional,Very Remote Regional,40
+5733,MARREE STATION,Regional,Remote Regional,30
+5733,MULKA,Regional,Remote Regional,30
+5733,MULOORINA,Regional,Remote Regional,30
+5733,MUNDOWDNA,Regional,Remote Regional,30
+5733,MUNGERANIE,Regional,Remote Regional,30
+5733,PANDIE PANDIE,Regional,Remote Regional,30
+5733,TIRARI DESERT,Regional,Remote Regional,30
+5734,CROWN POINT,Regional,Very Remote Regional,40
+5734,ERINGA,Regional,Very Remote Regional,40
+5734,MACUMBA,Regional,Very Remote Regional,40
+5734,MOUNT SARAH,Regional,Very Remote Regional,40
+5734,OODNADATTA,Regional,Very Remote Regional,40
+5734,SIMPSON DESERT,Regional,Very Remote Regional,40
+5734,TODMORDEN,Regional,Very Remote Regional,40
+5734,WITJIRA,Regional,Very Remote Regional,40
+5800,ADELAIDE,Metro,Highly Accessible Metro,0
+5810,ADELAIDE,Metro,Highly Accessible Metro,0
+5839,ADELAIDE,Metro,Highly Accessible Metro,0
+5860,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5861,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5862,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5863,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5864,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5865,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5866,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5867,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5868,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5869,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5870,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5871,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5872,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5873,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5874,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5875,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5876,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5877,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5878,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5879,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5880,ADELAIDE,Metro,Highly Accessible Metro,0
+5880,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5881,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5881,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5882,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5882,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5883,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5883,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5884,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5884,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5885,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5885,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5886,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5886,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5887,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5887,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5888,ADELAIDE,Metro,Highly Accessible Metro,0
+5888,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5888,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5889,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5889,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5890,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5891,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5892,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5893,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5894,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5895,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5896,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5897,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5898,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5899,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5900,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5900,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5901,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5901,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5902,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5902,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5903,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5903,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5904,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5904,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5920,ADELAIDE,Metro,Highly Accessible Metro,0
+5920,ADELAIDE MAIL CENTRE,Metro,Highly Accessible Metro,0
+5920,ADELAIDE MC,Metro,Highly Accessible Metro,0
+5942,REGENCY PARK,Metro,Highly Accessible Metro,0
+5950,ADELAIDE AIRPORT,Metro,Highly Accessible Metro,0
+5950,EXPORT PARK,Metro,Highly Accessible Metro,0
+5960,GARDEN ISLAND,Metro,Highly Accessible Metro,0
+5960,TORRENS ISLAND,Metro,Highly Accessible Metro,0
