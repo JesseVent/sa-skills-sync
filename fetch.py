@@ -166,6 +166,82 @@ def framework_tables(text):
             "concession": {"minFee": float(m[1]) if m else 0.50, "maxReimb": float(m[2]) if m else 1.35}}
 
 
+STL_ROW = re.compile(r"^\s*([A-Z0-9]{5,12})\s{2,}(\S.*?)\s*$")
+STL_SECTIONS = {"Demand Driven Courses": "demand", "Managed Courses": "managed",
+                "VSS General": "general", "VSS Training Contract": "contract"}
+
+
+def parse_stl_list(text, list_name):
+    """TPL / STAL / VSS PDF text -> [[code, title, list, section]]. Wrapped titles are indented continuation lines."""
+    rows, section = [], None
+    for line in text.splitlines():
+        s = line.strip()
+        if s in STL_SECTIONS:
+            section = STL_SECTIONS[s]
+        elif section and (m := STL_ROW.match(line)):
+            rows.append([m[1], m[2], list_name, section])
+        elif section and rows and re.match(r"^\s{15,}\S", line):
+            rows[-1][1] += " " + s
+    return rows
+
+
+def parse_managed_limits(text):
+    """Managed Course List -> {(list, code): (limit, group)}. A limit printed on its own line between two
+    codes (e.g. CUA51120 / 10 / CUA51125) is one limit shared by both: same group."""
+    lines = [l for l in text.splitlines() if l.strip()]
+    out, section, pending, shared = {}, None, None, None
+    for i, line in enumerate(lines):
+        if "Training Priority List" in line and "Managed" in line:
+            section, pending, shared = "TPL", None, None
+            continue
+        if "Traineeship and Apprenticeship List" in line and "Managed" in line:
+            section, pending, shared = "STAL", None, None
+            continue
+        if not section:
+            continue
+        if (m := re.fullmatch(r"\s{20,}(\d+)\s*", line)) and pending:
+            out[(section, pending)] = (int(m[1]), pending)
+            shared, pending = (int(m[1]), pending), None
+            continue
+        m = re.match(r"^\s*([A-Z0-9]{5,12})\s{2,}(.+?)(?:\s{2,}(\d+))?\s*$", line)
+        if m and m[1] != "Course":
+            nxt = lines[i + 1] if i + 1 < len(lines) else ""
+            if m[3]:
+                out[(section, m[1])], pending = (int(m[3]), m[1]), None
+            elif shared and not re.fullmatch(r"\s{20,}\d+\s*", nxt) and STL_ROW.match(lines[i - 1]) is None:
+                out[(section, m[1])], pending = shared, None   # second code of a shared pair
+            else:
+                pending = m[1]
+            shared = None
+        elif not re.fullmatch(r"\s{20,}\d+\s*", line):
+            shared = None if not line.startswith(" " * 15) else shared
+    return out
+
+
+def write_stl(paths, ver):
+    """data/stl_courses.csv + data/stl.js from the STL PDFs (course status and managed limits)."""
+    text = lambda k: subprocess.run(["pdftotext", "-layout", str(paths[k]), "-"], capture_output=True, text=True, check=True).stdout
+    rows = parse_stl_list(text("stl_tpl"), "TPL") + parse_stl_list(text("stl_stal"), "STAL") + parse_stl_list(text("stl_vss-list"), "VSS")
+    limits = parse_managed_limits(text("managed_course_list"))
+    for r in rows:
+        limit, group = limits.get((r[2], r[0]), ("", ""))
+        r += [limit, group]
+    managed = {(r[2], r[0]) for r in rows if r[3] == "managed"}
+    for key in managed ^ set(limits):
+        print(f"  ! managed list mismatch: {key[0]} {key[1]} " + ("has no RTO limit" if key in managed else "has a limit but isn't in the list's Managed section"))
+    write_csv(DATA / "stl_courses.csv", ["course_code", "title", "list", "section", "rto_limit", "limit_group"], rows)
+    courses = {}
+    for code, title, lst, section, limit, group in rows:
+        c = courses.setdefault(code, {"title": title, "lists": {}})
+        c["lists"][lst] = {"section": section, **({"limit": limit, "group": group} if limit != "" else {})}
+    (DATA / "stl.js").write_text("window.SA_STL = " + json.dumps({"version": ver, "courses": courses}, separators=(",", ":")) + ";\n")
+    counts = {}
+    for r in rows:
+        counts[f"{r[2]} {r[3]}"] = counts.get(f"{r[2]} {r[3]}", 0) + 1
+    print(f"  -> stl_courses.csv / stl.js: {len(courses)} courses; " + ", ".join(f"{k} {v}" for k, v in sorted(counts.items())))
+    return rows
+
+
 def write_rates_js(parsed, framework_ver, index_year, index_factor, tables):
     """data/rates.js for calculator.html (a <script>, so it loads from file:// with no server)."""
     base = {r[0]: [r[1], float(r[2].replace(",", ""))] for r in parsed["base_rates"]}
@@ -226,7 +302,7 @@ def main():
     docs = [(k, u, "v%d.%d" % v) for k, u, v in framework_docs(html(FFW_PAGE))] + stl_docs(html(STL_PAGE))
 
     docs.sort(key=lambda d: d[0] != "framework")  # framework first: base rates need its indexation table
-    index_year, index_factor, tables, framework_ver, parsed = None, 1.0, None, None, {}
+    index_year, index_factor, tables, framework_ver, parsed, stl_paths, stl_ver = None, 1.0, None, None, {}, {}, None
     for kind, url, ver in docs:
         body = get(url)
         name = url.rsplit("/", 1)[1]
@@ -241,6 +317,8 @@ def main():
         manifest[name] = {"kind": kind, "version": ver, "url": url, "sha256": sha, "fetched_at": now}
         print(f"  {status:9} {kind:20} {ver:6} {name}")
 
+        if kind.startswith("stl_") or kind == "managed_course_list":
+            stl_paths[kind], stl_ver = path, ver
         if kind == "framework":
             text = subprocess.run(["pdftotext", "-layout", str(path), "-"], capture_output=True, text=True, check=True).stdout
             index_year, index_factor = indexation(text)
@@ -260,6 +338,8 @@ def main():
 
     if tables and all(k in parsed for k in ("base_rates", "course_adjustments", "postcode_loading")):
         write_rates_js(parsed, framework_ver, index_year, index_factor, tables)
+    if len(stl_paths) == 4:
+        write_stl(stl_paths, stl_ver)
 
     print("TAFE SA Fee Free courses...")
     links = sorted(set(u.replace("&amp;", "&").split("#")[0]
@@ -310,6 +390,18 @@ def self_test():
         "Training-Fee-Framework-Attachment-5-Concession-Eligible-Courses-v1.5.pdf"])
     got = {(k, v) for k, _, v in framework_docs(page)}
     assert got == {("framework", (5, 0)), ("postcode_loading", (5, 0))}, got
+    mcl = (DOCS / "managed-course-list-STL-12.0.pdf")
+    if mcl.exists():  # managed limits against the real STL 12.0 list
+        lim = parse_managed_limits(subprocess.run(["pdftotext", "-layout", str(mcl), "-"], capture_output=True, text=True).stdout)
+        assert lim[("TPL", "CHC32015")] == (50, "CHC32015"), lim.get(("TPL", "CHC32015"))
+        assert lim[("TPL", "CUA51120")] == lim[("TPL", "CUA51125")] == (10, "CUA51120")
+        assert lim[("TPL", "HLTSS00061")] == (100, "HLTSS00061") and lim[("TPL", "MAR10224")] == (50, "MAR10224")
+        assert lim[("STAL", "AHC42021")] == (20, "AHC42021") and lim[("TPL", "AHC42021")] == (5, "AHC42021")
+        assert lim[("STAL", "CUA41220")] == lim[("STAL", "CUA41225")] == (15, "CUA41220")
+    sample = "Demand Driven Courses\n    AHC30122   Certificate III in Agriculture\n    MAR10224   Certificate I in Maritime (Near\n                        Coastal)\nManaged Courses\n    CHC32015   Cert III\n"
+    assert parse_stl_list(sample, "TPL") == [["AHC30122", "Certificate III in Agriculture", "TPL", "demand"],
+                                             ["MAR10224", "Certificate I in Maritime (Near Coastal)", "TPL", "demand"],
+                                             ["CHC32015", "Cert III", "TPL", "managed"]]
     print("self-test ok")
 
 
