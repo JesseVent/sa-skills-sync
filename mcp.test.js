@@ -8,7 +8,7 @@ const XLSX = require("./vendor/xlsx.full.min.js");
 
 const dir = import.meta.dir;
 const client = new Client({ name: "smoke", version: "1" });
-await client.connect(new StdioClientTransport({ command: "bun", args: [dir + "/mcp.js"], cwd: dir }));
+await client.connect(new StdioClientTransport({ command: "bun", args: [dir + "/" + (process.env.MCP_SERVER || "mcp.js")], cwd: dir }));
 const call = async (name, args = {}) => {
   const r = await client.callTool({ name, arguments: args });
   if (r.isError) throw new Error(r.content[0].text);

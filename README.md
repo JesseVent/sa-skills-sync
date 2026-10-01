@@ -66,6 +66,12 @@ For Claude Desktop, add this to `claude_desktop_config.json`:
 { "mcpServers": { "sa-sim": { "command": "bun", "args": ["/path/to/sa-skills-sync/mcp.js"] } } }
 ```
 
+**No npm / can't `bun install`?** Use the prebuilt bundle in `dist/mcp.js`. It has the MCP SDK, zod and HiGHS baked in, so a plain clone runs with `node` or `bun` and needs no `node_modules`:
+```bash
+claude mcp add sa-sim -- node "$PWD/dist/mcp.js"     # or: bun "$PWD/dist/mcp.js"
+```
+After you change `mcp.js`, `calc.js` or `sim.js`, run `bun run build` to regenerate it. `bun run test` also checks the bundle.
+
 Then ask, for example: *"Load the samples, take CHC32015 off the list, keep every course at ≥ 50% of its current seats, and maximise completions and employment within the current budget. Save it as 'option-a' and compare it with a value-for-money plan that holds completions at 100%."*
 
 The tools are `load_data`, `list_courses`, `update_courses`, `set_objective`, `optimise`, `simulate`, `save_plan`, `load_plan`, `list_plans`, `compare_plans` and `export_plan`. The server runs on your machine and reads the files you point it at. It returns **course-level aggregates only**, never student rows, and writes only to `plans/` and `exports/` (both git-ignored). Claude translates goals into constraints and explains the results, and the solver does the maths. Plans saved by Claude open in the browser's *Courses & optimiser* tab and vice versa.

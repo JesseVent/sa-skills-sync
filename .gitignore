@@ -14,3 +14,5 @@ __pycache__/
 !samples/*.csv
 !templates/*.csv
 node_modules/
+# Global ignore excludes dist/; the prebuilt MCP bundle is for machines without npm
+!dist/

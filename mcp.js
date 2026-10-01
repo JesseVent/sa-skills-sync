@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 /* Local MCP server: lets Claude drive the course seat simulator / optimiser.
  *   claude mcp add sa-sim -- bun /path/to/sa-skills-sync/mcp.js
  * Reads files you point it at; returns course-level aggregates only (never student rows).
@@ -13,12 +13,17 @@ const XLSX = require("./vendor/xlsx.full.min.js");
 const C = require("./calc.js");
 const S = require("./sim.js");
 
-const ROOT = __dirname;
+const ROOT = path.basename(__dirname) === "dist" ? path.dirname(__dirname) : __dirname; // dist/mcp.js is the no-install bundle
 const readGlobal = (file, name) => JSON.parse(fs.readFileSync(path.join(ROOT, file), "utf8").replace(new RegExp(`^window\\.${name} = `), "").replace(/;\s*$/, ""));
 const RATES = readGlobal("data/rates.js", "SA_RATES");
 const STL = readGlobal("data/stl.js", "SA_STL");
 let highs = null;
-const solver = async () => (highs = highs || (await require("highs")()));
+// Vendored HiGHS + embedded wasm (same as calculator.html), so the bundle needs no node_modules.
+const solver = async () => (highs = highs || (await require("./vendor/highs.js")({ instantiateWasm: (imports, done) => {
+  const bin = Buffer.from(fs.readFileSync(path.join(ROOT, "vendor/highs-wasm.js"), "utf8").match(/"([A-Za-z0-9+/=]+)"/)[1], "base64");
+  WebAssembly.instantiate(bin, imports).then((r) => done(r.instance, r.module));
+  return {};
+} })));
 
 const state = { units: {}, files: {}, priced: null, profiles: [], outcomes: [], table: null, plan: S.newPlan(), planName: "untitled", last: null };
 
