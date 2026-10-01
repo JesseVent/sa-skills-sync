@@ -13,6 +13,7 @@
   --accent: #2a78d6; --accent-track: #d6e5f7; --accent-ink: #ffffff;
   --warning: #fab219; --critical: #d03b3b; --good-ink: #006300;
   --error-bg: #fbeaea; --error-ink: #9c2525;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948; --axis: #c3c2b7;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -22,6 +23,7 @@
     --line: #2c2c2a; --border: rgba(255,255,255,0.10);
     --accent: #3987e5; --accent-track: #1f3350; --accent-ink: #ffffff;
     --good-ink: #0ca30c; --error-bg: #3a1c1c; --error-ink: #ff9d9d;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767; --axis: #383835;
   }
 }
 :root[data-theme="dark"] {
@@ -31,6 +33,7 @@
   --line: #2c2c2a; --border: rgba(255,255,255,0.10);
   --accent: #3987e5; --accent-track: #1f3350; --accent-ink: #ffffff;
   --good-ink: #0ca30c; --error-bg: #3a1c1c; --error-ink: #ff9d9d;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767; --axis: #383835;
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
@@ -94,6 +97,21 @@ ul.plain { margin: 0; padding-left: 18px; }
 ul.plain li { margin: 3px 0; }
 code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; background: var(--surface-2); padding: 1px 4px; border-radius: 4px; }
 .fatal { background: var(--error-bg); color: var(--error-ink); padding: 14px; border-radius: 8px; }
+/* what-if */
+.wi-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+.wi-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; cursor: pointer; }
+.wi-item[aria-current="true"] { border-color: var(--accent); background: var(--accent-track); }
+.wi-item .sw { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.wi-item .nm { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+details.wi { margin-top: 10px; }
+details.wi summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.trig input, .trig select { padding: 3px 5px; }
+.charts { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart svg text { fill: var(--muted); font-size: 11px; font-family: inherit; }
+.chart .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink-2); margin: 0 0 6px; }
+.chart .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+#tip { position: fixed; pointer-events: none; z-index: 10; background: var(--surface); color: var(--ink); border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.12); white-space: pre; display: none; }
 </style>
 </head>
 <body>
@@ -106,6 +124,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1
     <button role="tab" data-tab="bulk">Bulk claims</button>
     <button role="tab" data-tab="budget">Budget &amp; scenarios</button>
     <button role="tab" data-tab="courses">Courses &amp; optimiser</button>
+    <button role="tab" data-tab="whatif">What-if</button>
     <button role="tab" data-tab="data">Data &amp; rules</button>
   </nav>
 </header>
@@ -257,6 +276,42 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1
   </div>
 </section>
 
+<!-- ============ WHAT-IF ============ -->
+<section id="tab-whatif" role="tabpanel" hidden>
+  <div id="wiEmpty" class="card">Load unit data and claims on the <b>Bulk claims</b> tab (or course profiles on <b>Courses &amp; optimiser</b>) first. The what-if simulator forecasts those courses over several years.</div>
+  <div id="wiBody" hidden>
+    <div class="cols">
+      <div class="card">
+        <h2>Scenarios <span class="sub">tick the ones to compare</span></h2>
+        <div class="wi-list" id="wiList"></div>
+        <div class="row">
+          <button class="btn ghost" id="wiNew">New</button>
+          <button class="btn ghost" id="wiDup">Duplicate</button>
+          <button class="btn ghost" id="wiDel">Delete</button>
+          <button class="btn ghost" id="wiFromBudget" title="Copy the levers on the Budget &amp; scenarios tab into a new scenario">From Budget levers</button>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <button class="btn ghost" id="wiSave">Save set (JSON)</button>
+          <button class="btn ghost" id="wiOpen">Open set (JSON)</button>
+          <input type="file" id="fileWhatif" accept=".json" hidden>
+          <button class="btn ghost" id="wiExport">Export (XLSX)</button>
+        </div>
+        <div class="hint">Sets saved by Claude through the local MCP tool (<code>scenarios/*.json</code>) open here too.</div>
+        <h3>How it works</h3>
+        <ul class="plain sub">
+          <li><b>Committed</b>: expected cost of accounts opened in the year, at prices when they open.</li>
+          <li><b>Cash</b>: claims paid in the year, including accounts opened earlier, at that year's index.</li>
+          <li>Course adjustment and AQF reduction lock when an account opens; base rate, indexation, loading, RPL and completion payments apply when claims are paid.</li>
+          <li>Seats come from the Courses &amp; optimiser tab: baseline, your planned seats, or re-optimised at the scenario's prices.</li>
+        </ul>
+      </div>
+      <div class="card" id="wiEditor"></div>
+    </div>
+    <div class="row" style="margin-bottom:16px"><button class="btn" id="wiRun">Run scenarios</button><span class="sub" id="wiStatus"></span></div>
+    <div id="wiOut"></div>
+  </div>
+</section>
+
 <!-- ============ DATA ============ -->
 <section id="tab-data" role="tabpanel" hidden>
   <div class="cols">
@@ -295,6 +350,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1
   </div>
 </section>
 </main>
+<div id="tip" role="tooltip"></div>
 
 <datalist id="courseList"></datalist>
 <script src="vendor/xlsx.full.min.js"></script>
@@ -302,6 +358,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1
 <script src="calc.js"></script>
 <script src="data/stl.js"></script>
 <script src="sim.js"></script>
+<script src="whatif.js"></script>
 <script>
 "use strict";
 const R = window.SA_RATES, C = window.SACalc;
@@ -321,8 +378,8 @@ const signed = (v) => (v > 0 ? "+" : v < 0 ? "−" : "±") + aud.format(Math.abs
 const pctChange = (a, b) => (a ? ((b - a) / a) * 100 : 0);
 const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
-if (!R || !C || !window.XLSX || !window.SASim || !window.SA_STL) {
-  document.querySelector("main").innerHTML = '<div class="fatal">Missing ' + [!R && "data/rates.js (run <code>python3 fetch.py</code>)", !C && "calc.js", !window.XLSX && "vendor/xlsx.full.min.js", !window.SASim && "sim.js", !window.SA_STL && "data/stl.js (run <code>python3 fetch.py</code>)"].filter(Boolean).join(", ") + ". Keep calculator.html in the sa-skills-sync folder.</div>";
+if (!R || !C || !window.XLSX || !window.SASim || !window.SA_STL || !window.SAWhatIf) {
+  document.querySelector("main").innerHTML = '<div class="fatal">Missing ' + [!R && "data/rates.js (run <code>python3 fetch.py</code>)", !C && "calc.js", !window.XLSX && "vendor/xlsx.full.min.js", !window.SASim && "sim.js", !window.SAWhatIf && "whatif.js", !window.SA_STL && "data/stl.js (run <code>python3 fetch.py</code>)"].filter(Boolean).join(", ") + ". Keep calculator.html in the sa-skills-sync folder.</div>";
   throw new Error("missing dependencies");
 }
 
@@ -337,6 +394,7 @@ function showTab(name) {
   if (name === "budget") renderBudget();
   if (name === "data") renderData();
   if (name === "courses") renderCourses();
+  if (name === "whatif") renderWhatif();
 }
 document.querySelectorAll("nav button").forEach((b) => b.addEventListener("click", () => showTab(b.dataset.tab)));
 
@@ -817,6 +875,350 @@ $("optExport").addEventListener("click", () => {
   XLSX.writeFile(wb, "course-plan.xlsx");
 });
 writeOptConfig();
+
+// ---------- WHAT-IF ----------
+const WI = window.SAWhatIf;
+const ACTIONS = { scale_intake: "Cut new intake", cut_price: "Cut price of new accounts", pause: "Pause new accounts" };
+const SCOPES = { managed: "Managed courses", demand: "Demand-driven courses", all: "All courses" };
+const SEATS = { baseline: "Baseline (current enrolments)", planned: "Planned seats (Courses tab)", optimised: "Re-optimise at scenario prices" };
+const SEAT_SHORT = { baseline: "baseline", planned: "planned seats", optimised: "re-optimised" };
+const SENS_METRICS = { cash: "Cash over the horizon", new_commitments: "Commitments over the horizon", end_liability: "Liability after the horizon", fy1_cash: "Cash, first year", fy1_commitments: "Commitments, first year" };
+const wi = { scenarios: [], sel: 0, out: null, seats: {}, sens: null, fy: 0, metric: "cash" };
+try { const saved = JSON.parse(store.get("sa-whatif") || "null"); if (Array.isArray(saved) && saved.length) wi.scenarios = saved.map(WI.normalise); } catch {}
+if (!wi.scenarios.length) wi.scenarios = [WI.normalise({ name: "Baseline" })];
+const wiStore = () => store.set("sa-whatif", JSON.stringify(wi.scenarios));
+const cur = () => wi.scenarios[wi.sel];
+const uniqueName = (base, skip) => { let n = base, i = 2; while (wi.scenarios.some((s, j) => j !== skip && s.name === n)) n = `${base} ${i++}`; return n; };
+const color = (i) => `var(--s${(i % 8) + 1})`;
+const colorOf = (name) => color(Math.max(0, wi.scenarios.findIndex((s) => s.name === name)));
+const options = (map, sel) => Object.entries(map).map(([k, l]) => `<option value="${k}"${k === sel ? " selected" : ""}>${esc(l)}</option>`).join("");
+const wiData = () => ({ rates: R, stl: STL, units: state.units, claims: state.claimRows, profiles: opt.profiles, outcomes: opt.outcomes, plan: opt.plan });
+const stale = () => { if (wi.out) $("wiStatus").textContent = "Scenarios changed; press Run scenarios to update the results."; };
+
+function renderWhatif() {
+  const has = !!(state.claimRows && state.claimRows.length) || opt.profiles.length > 0;
+  $("wiEmpty").hidden = has; $("wiBody").hidden = !has;
+  if (!has) return;
+  renderWiList(); renderWiEditor(); renderWiResults();
+}
+function renderWiList() {
+  $("wiList").innerHTML = wi.scenarios.map((s, i) => `<div class="wi-item" data-i="${i}" aria-current="${i === wi.sel}">
+    <input type="checkbox" data-cmp="${i}"${s.compare !== false ? " checked" : ""} aria-label="Compare ${esc(s.name)}" style="margin:0">
+    <span class="sw" style="background:${color(i)}"></span><span class="nm">${esc(s.name)}</span>
+    <span class="sub">${SEAT_SHORT[s.seats] || s.seats}${s.triggers.length ? ` · ${s.triggers.length} trigger${s.triggers.length > 1 ? "s" : ""}` : ""}</span></div>`).join("");
+  $("wiDel").disabled = wi.scenarios.length < 2;
+}
+function renderWiEditor() {
+  const s = cur(), f = s.forecast, L = s.levers, u = s.uncertainty, v = (x) => (x == null ? "" : esc(x));
+  const fys = [...Array(f.years)].map((_, y) => WI.fyLabel(f, y));
+  const n = (p, label, val, step = "any", extra = "") => `<div><label>${esc(label)}</label><input type="number" step="${step}" data-p="${p}" value="${v(val)}" ${extra}></div>`;
+  const other = [L.aqfReduction && Object.keys(L.aqfReduction).length && "AQF reductions", L.completion && Object.keys(L.completion).length && "completion payments",
+    L.locationLoading && Object.keys(L.locationLoading).length && "location loadings", L.courseAdj && Object.keys(L.courseAdj).length && `${Object.keys(L.courseAdj).length} course adjustment overrides`].filter(Boolean);
+  $("wiEditor").innerHTML = `<h2>Edit scenario <span class="sub" style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${color(wi.sel)}"></span></h2>
+    <div class="levers">
+      <div><label>Name</label><input data-p="name" value="${v(s.name)}"></div>
+      <div><label>Seats</label><select data-p="seats">${options(SEATS, s.seats)}</select></div>
+      <div><label>Price levers take effect</label><select data-p="effectiveFy" data-num>${fys.map((l, i) => `<option value="${i}"${i === s.effectiveFy ? " selected" : ""}>${l}</option>`).join("")}</select></div>
+      ${n("budget", "FY budget, committed ($)", s.budget, 1000, 'placeholder="baseline year 1"')}
+      ${n("budgetGrowthPct", "Budget growth (%/yr)", s.budgetGrowthPct, 0.5)}
+    </div>
+    <h3>Price levers</h3>
+    <div class="levers">
+      ${n("levers.indexExtraPct", "Extra indexation now (%)", L.indexExtraPct ?? 0, 0.1)}
+      ${n("levers.adjMultiplier", "Course adjustments (% of published)", Math.round((L.adjMultiplier ?? 1) * 1000) / 10, 1, 'data-scale="100"')}
+      ${n("levers.rplPct", "RPL payment, Cert III+ (%)", L.rplPct ?? 50, 5)}
+      ${n("levers.minFee", "Minimum student fee ($/hr)", L.minFee, 0.05, `placeholder="${R.concession.minFee}"`)}
+      ${n("levers.maxReimb", "Concession max reimb. ($/hr)", L.maxReimb, 0.05, `placeholder="${R.concession.maxReimb}"`)}
+    </div>
+    ${other.length ? `<div class="hint">Also carries ${esc(other.join(", "))} from the Budget tab.</div>` : `<div class="hint">For AQF reductions, completion payments, loadings and per-course adjustments, set them on the Budget tab and use <b>From Budget levers</b>.</div>`}
+    <h3>Forecast</h3>
+    <div class="levers">
+      <div><label>Start FY</label><input data-p="forecast.startFy" value="${v(f.startFy)}"></div>
+      ${n("forecast.years", "Years", f.years, 1, 'min="1" max="10"')}
+      <div><label>Future indexation (%/yr)</label><input data-p="forecast.indexPct" data-list value="${v([].concat(f.indexPct).join(", "))}" title="One value, or one per year after the first, comma-separated"></div>
+      ${n("forecast.intakePct", "Intake change (%)", f.intakePct, 1)}
+      ${n("forecast.growthPct", "Intake growth (%/yr)", f.growthPct, 0.5)}
+    </div>
+    <label class="check"><input type="checkbox" data-p="forecast.inFlight"${f.inFlight ? " checked" : ""}>Include claims from accounts opened before ${fys[0]}</label>
+    <details class="wi"><summary>Course duration by AQF level (months)</summary><div class="levers" style="margin-top:8px">${C.LEVELS.map((l) => n("forecast.durationMonths." + l, l, f.durationMonths[l], 1, 'min="1"')).join("")}</div></details>
+    <details class="wi"><summary>Commencements by month (relative weights)</summary><div class="levers" style="margin-top:8px">${WI.MONTHS.map((m, i) => n("forecast.seasonality." + i, m, f.seasonality[i], 0.1, 'min="0"')).join("")}</div></details>
+    <h3>Budget triggers <span class="sub">each fires once per FY when committed reaches its threshold</span></h3>
+    ${triggersTable(s)}
+    <button class="btn ghost" id="wiAddTrig" style="margin-top:6px">Add trigger</button>
+    <details class="wi"><summary>Uncertainty (Monte Carlo)</summary><div class="levers" style="margin-top:8px">
+      ${n("uncertainty.runs", "Runs", u.runs, 50, 'min="10" max="5000"')}${n("uncertainty.seed", "Seed", u.seed, 1)}
+      ${n("uncertainty.volumeSd", "Intake, yearly sd (%)", u.volumeSd, 1)}${n("uncertainty.courseVolumeSd", "Intake per course sd (%)", u.courseVolumeSd, 1)}
+      ${n("uncertainty.completionSd", "Completion rate sd (pts)", u.completionSd, 1)}${n("uncertainty.indexSd", "Indexation sd (pts/yr)", u.indexSd, 0.1)}
+    </div></details>`;
+}
+function triggersTable(s) {
+  if (!s.triggers.length) return `<p class="hint">None. Example: at 80% committed, cut managed-course intake by 20% after one month's notice.</p>`;
+  const cell = (i, k, val, w) => `<input type="number" data-t="${i}" data-k="${k}" value="${esc(val)}" style="width:${w}px">`;
+  return `<div class="table-wrap"><table class="trig"><thead><tr><th>Name</th><th class="n">At % committed</th><th>Action</th><th class="n">By %</th><th>Applies to</th><th class="n">Notice (months)</th><th></th></tr></thead><tbody>${s.triggers.map((t, i) => `<tr>
+    <td><input data-t="${i}" data-k="name" value="${esc(t.name)}" style="width:110px"></td><td class="n">${cell(i, "atPct", t.atPct, 64)}</td>
+    <td><select data-t="${i}" data-k="action" style="width:auto">${options(ACTIONS, t.action)}</select></td>
+    <td class="n">${t.action === "pause" ? "" : cell(i, "amountPct", t.amountPct, 56)}</td>
+    <td><select data-t="${i}" data-k="scope" style="width:auto">${options(SCOPES, t.scope)}</select></td>
+    <td class="n">${cell(i, "noticeMonths", t.noticeMonths, 56)}</td>
+    <td><button class="btn ghost" data-del="${i}" aria-label="Remove ${esc(t.name)}" style="padding:3px 8px">✕</button></td></tr>`).join("")}</tbody></table></div>`;
+}
+function setPath(o, path, val) {
+  const ks = path.split("."), last = ks.pop();
+  for (const k of ks) o = o[k] = o[k] == null ? (/^\d+$/.test(last) ? [] : {}) : o[k];
+  if (val === undefined) delete o[last]; else o[last] = val;
+}
+$("wiEditor").addEventListener("change", (e) => {
+  const el = e.target, s = cur();
+  if (el.dataset.t != null) {
+    const t = s.triggers[+el.dataset.t], k = el.dataset.k;
+    t[k] = el.type === "number" ? (el.value === "" ? 0 : +el.value) : el.value;
+    if (k === "action") renderWiEditor();
+  } else if (el.dataset.p) {
+    const p = el.dataset.p;
+    let val = el.type === "checkbox" ? el.checked : el.value;
+    if (el.dataset.list != null) { const xs = String(val).split(/[,\s]+/).filter(Boolean).map(Number).filter(Number.isFinite); val = xs.length > 1 ? xs : xs.length ? xs[0] : 0; }
+    else if (el.type === "number" || el.dataset.num != null) val = val === "" ? (p === "budget" ? null : undefined) : +val / (+el.dataset.scale || 1);
+    if (p === "name") val = uniqueName(String(val).trim() || "Scenario", wi.sel);
+    if (p === "seats" && val === "planned" && !Object.values(opt.plan.courses).some((c) => c.planned_seats != null)) $("wiStatus").textContent = "No planned seats on the Courses tab yet, so this uses baseline seats.";
+    setPath(s, p, val);
+  } else return;
+  wi.scenarios[wi.sel] = WI.normalise(s);
+  wiStore(); renderWiList(); stale();
+  if (["name", "forecast.years", "forecast.startFy"].includes(el.dataset.p)) renderWiEditor();
+});
+$("wiEditor").addEventListener("click", (e) => {
+  const s = cur();
+  if (e.target.id === "wiAddTrig") s.triggers.push({ name: `trigger ${s.triggers.length + 1}`, atPct: 80, action: "scale_intake", scope: "managed", amountPct: 20, noticeMonths: 1 });
+  else if (e.target.dataset.del != null) s.triggers.splice(+e.target.dataset.del, 1);
+  else return;
+  wi.scenarios[wi.sel] = WI.normalise(s); wiStore(); renderWiList(); renderWiEditor(); stale();
+});
+$("wiList").addEventListener("click", (e) => {
+  const item = e.target.closest(".wi-item");
+  if (!item) return;
+  if (e.target.dataset.cmp != null) { wi.scenarios[+e.target.dataset.cmp].compare = e.target.checked; wiStore(); stale(); return; }
+  wi.sel = +item.dataset.i; renderWiList(); renderWiEditor(); renderWiResults();
+});
+const addScenario = (s) => { wi.scenarios.push(WI.normalise(s)); wi.sel = wi.scenarios.length - 1; wiStore(); renderWiList(); renderWiEditor(); stale(); };
+$("wiNew").addEventListener("click", () => addScenario({ name: uniqueName("Scenario") }));
+$("wiDup").addEventListener("click", () => addScenario(Object.assign(JSON.parse(JSON.stringify(cur())), { name: uniqueName(cur().name + " copy") })));
+$("wiDel").addEventListener("click", () => {
+  if (wi.scenarios.length < 2) return;
+  wi.scenarios.splice(wi.sel, 1); wi.sel = Math.max(0, wi.sel - 1); wiStore(); renderWiList(); renderWiEditor(); renderWiResults();
+});
+$("wiFromBudget").addEventListener("click", () => {
+  const b = readScenario(), n = (v) => (v === "" || v == null ? undefined : +v), nonEmpty = (o) => (o && Object.keys(o).length ? o : undefined);
+  const levers = { indexExtraPct: n(b.indexExtraPct), adjMultiplier: n(b.adjMultiplier), rplPct: n(b.rplPct), minFee: n(b.minFee), maxReimb: n(b.maxReimb),
+    aqfReduction: nonEmpty(b.aqfReduction), completion: nonEmpty(b.completion), locationLoading: nonEmpty(b.locationLoading), courseAdj: nonEmpty(b.courseAdj), aqfOverride: nonEmpty(b.aqfOverride) };
+  Object.keys(levers).forEach((k) => levers[k] === undefined && delete levers[k]);
+  addScenario({ name: uniqueName("Budget levers"), levers, forecast: { intakePct: n(b.volumeGrowthPct) || 0 }, budget: n(b.cap) ?? null });
+});
+$("wiSave").addEventListener("click", () => download("whatif-scenarios.json", JSON.stringify({ version: 1, kind: "whatif", saved: new Date().toISOString(), scenarios: wi.scenarios }, null, 2), "application/json"));
+$("wiOpen").addEventListener("click", () => $("fileWhatif").click());
+$("fileWhatif").addEventListener("change", async () => {
+  const f = $("fileWhatif").files[0]; $("fileWhatif").value = ""; if (!f) return;
+  try {
+    const j = JSON.parse(await f.text()), list = Array.isArray(j) ? j : j.scenarios;
+    if (!Array.isArray(list) || !list.length) throw new Error("no scenarios in the file");
+    wi.scenarios = list.map(WI.normalise); wi.sel = 0; wi.out = null; wi.sens = null; wiStore();
+    $("wiStatus").textContent = `Opened ${f.name}: ${list.length} scenario(s). Press Run scenarios.`;
+    renderWhatif();
+  } catch (e) { $("wiStatus").innerHTML = `<span class="err-text">Could not open: ${esc(e.message)}</span>`; }
+});
+$("wiExport").addEventListener("click", () => {
+  if (!wi.out) { $("wiStatus").textContent = "Run the scenarios first, then export."; return; }
+  XLSX.writeFile(WI.workbook(XLSX, wi.out, wi.sens), "whatif.xlsx");
+});
+
+async function optimisedSeatsFor(s) { // re-optimise the Courses-tab plan at this scenario's prices
+  readOptConfig();
+  const levers = Object.assign({}, s.levers); delete levers.volumeGrowthPct;
+  const priced = state.claimRows ? C.priceRows(C.makeContext(R, levers), state.units, state.claimRows) : null;
+  const table = Sim.buildCourseTable({ rates: R, stl: STL, units: state.units, priced, profiles: opt.profiles, outcomes: opt.outcomes, cfg: opt.plan.config, scenario: levers });
+  const res = Sim.optimise(table, opt.plan, await getHighs());
+  if (!res.optimised) throw new Error(`${s.name}: optimiser ${res.status}${res.message ? " (" + res.message + ")" : ""}`);
+  return Object.fromEntries(res.courses.filter((c) => c.seats).map((c) => [c.course_code, c.seats]));
+}
+$("wiRun").addEventListener("click", async () => {
+  let list = wi.scenarios.filter((s) => s.compare !== false);
+  if (!list.length) list = [cur()];
+  if (list.length > 8) { $("wiStatus").innerHTML = `<span class="err-text">Compare at most 8 scenarios at once; untick some.</span>`; return; }
+  $("wiRun").disabled = true; $("wiStatus").textContent = "Running…";
+  await new Promise((r) => setTimeout(r, 20));
+  const t0 = performance.now();
+  try {
+    readOptConfig();
+    const seats = {};
+    for (const s of list) if (s.seats === "optimised") { $("wiStatus").textContent = `Optimising seats for ${s.name}…`; seats[s.name] = await optimisedSeatsFor(s); }
+    wi.out = WI.compare(wiData(), list, { mc: true, seats }); wi.seats = seats; wi.sens = null;
+    if (!wi.out.some((o) => o.name === cur().name)) wi.sel = wi.scenarios.findIndex((s) => s.name === wi.out[0].name);
+    const unc = wi.out.reduce((a, o) => a + (o.result.uncosted_seats || 0), 0);
+    $("wiStatus").textContent = `${list.length} scenario(s) · ${wi.out[0].mc.runs} Monte Carlo runs each · ${numf((performance.now() - t0) / 1000, 2)}s` + (unc ? ` · ${numf(unc)} seat(s) skipped: no cost` : "");
+  } catch (e) {
+    if (e.solverDead) opt.highs = null;
+    $("wiStatus").innerHTML = `<span class="err-text">${esc(e.message)}</span>`;
+  }
+  $("wiRun").disabled = false;
+  renderWiList(); renderWiResults();
+});
+
+// ---------- what-if charts (inline SVG, no libraries) ----------
+const CH = { W: 560, H: 230, L: 60, R: 14, T: 12, B: 30 };
+function niceMax(v) { if (!(v > 0)) return 1; const p = Math.pow(10, Math.floor(Math.log10(v))), m = v / p; return [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].find((s) => m <= s + 1e-9) * p; }
+function frame(max, h = CH.H) { // y scale + recessive grid
+  const top = niceMax(max), y = (v) => CH.T + (h - CH.T - CH.B) * (1 - v / top);
+  let g = "";
+  for (let i = 0; i <= 4; i++) { const v = (top * i) / 4, yy = y(v).toFixed(1); g += `<line x1="${CH.L}" x2="${CH.W - CH.R}" y1="${yy}" y2="${yy}" stroke="${i ? "var(--line)" : "var(--axis)"}" stroke-width="1"/><text x="${CH.L - 8}" y="${+yy + 4}" text-anchor="end">${esc(compact(v))}</text>`; }
+  return { y, g, base: y(0) };
+}
+const barPath = (x, y, w, h, r = 4) => { r = Math.max(0, Math.min(r, w / 2, h)); return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`; };
+const svg = (inner, label, h = CH.H) => `<svg viewBox="0 0 ${CH.W} ${h}" role="img" aria-label="${esc(label)}">${inner}</svg>`;
+const legend = (items) => `<div class="legend">${items.map(([name, c, dash]) => `<span>${dash ? `<i style="background:none;border-top:2px dashed ${c};height:0;border-radius:0;vertical-align:3px"></i>` : `<i style="background:${c}"></i>`}${esc(name)}</span>`).join("")}</div>`;
+const xLabel = (x, text, h = CH.H) => `<text x="${x}" y="${h - 10}" text-anchor="middle">${esc(text)}</text>`;
+function groupedBars(cats, series, label) { // series: [{name, color, values}]
+  const max = Math.max(0, ...series.flatMap((s) => s.values)), F = frame(max), band = (CH.W - CH.L - CH.R) / cats.length;
+  const bw = Math.min(26, (band * 0.72 - 2 * (series.length - 1)) / series.length), gw = series.length * bw + 2 * (series.length - 1);
+  let b = "";
+  cats.forEach((c, i) => {
+    const x0 = CH.L + band * i + (band - gw) / 2;
+    series.forEach((s, k) => { const v = s.values[i] || 0, y = F.y(v); b += `<path d="${barPath(x0 + k * (bw + 2), y, bw, F.base - y)}" fill="${s.color}" data-tip="${esc(`${s.name}\n${c}: ${compact(v)}`)}"/>`; });
+    b += xLabel(CH.L + band * (i + 0.5), c);
+  });
+  return (series.length > 1 ? legend(series.map((s) => [s.name, s.color])) : "") + svg(F.g + b, label);
+}
+function stackedBars(cats, series, label) {
+  const tot = cats.map((_, i) => series.reduce((a, s) => a + (s.values[i] || 0), 0)), F = frame(Math.max(...tot)), band = (CH.W - CH.L - CH.R) / cats.length, bw = Math.min(56, band * 0.55);
+  let b = "";
+  cats.forEach((c, i) => {
+    const x = CH.L + band * i + (band - bw) / 2; let acc = 0;
+    series.forEach((s, k) => {
+      const v = s.values[i] || 0; if (!v) return;
+      const y1 = F.y(acc), y2 = F.y(acc + v), last = series.slice(k + 1).every((t) => !(t.values[i] > 0)), h = Math.max(0, y1 - y2 - (acc ? 2 : 0));
+      b += `<path d="${last ? barPath(x, y2, bw, h) : `M${x},${y2}h${bw}v${h}h${-bw}Z`}" fill="${s.color}" data-tip="${esc(`${c} · ${s.name}: ${compact(v)}\nTotal ${compact(tot[i])}`)}"/>`;
+      acc += v;
+    });
+    b += xLabel(CH.L + band * (i + 0.5), c);
+  });
+  return legend(series.map((s) => [s.name, s.color])) + svg(F.g + b, label);
+}
+function monthLine(months, budget, fired, c, label) { // committed YTD vs budget, one FY
+  const F = frame(Math.max(budget, ...months.map((m) => m.committed_ytd)) * 1.02), step = (CH.W - CH.L - CH.R) / 12, x = (i) => CH.L + step * (i + 0.5);
+  const pts = months.map((m, i) => `${x(i).toFixed(1)},${F.y(m.committed_ytd).toFixed(1)}`).join(" ");
+  let b = `<line x1="${CH.L}" x2="${CH.W - CH.R}" y1="${F.y(budget)}" y2="${F.y(budget)}" stroke="var(--ink-2)" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+  fired.forEach((t) => { const i = months.findIndex((m) => m.month === t.month); if (i < 0) return; b += `<line x1="${x(i)}" x2="${x(i)}" y1="${CH.T}" y2="${F.base}" stroke="var(--muted)" stroke-dasharray="2 3"/><text x="${x(i) + 4}" y="${CH.T + 10}">${esc(t.name)}</text>`; });
+  b += `<polyline points="${pts}" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round"/>`;
+  months.forEach((m, i) => {
+    b += `<circle cx="${x(i)}" cy="${F.y(m.committed_ytd)}" r="4" fill="${c}" stroke="var(--surface)" stroke-width="2"/>`;
+    b += `<rect x="${x(i) - step / 2}" y="${CH.T}" width="${step}" height="${F.base - CH.T}" fill="transparent" data-tip="${esc(`${m.month}\nCommitted to date ${compact(m.committed_ytd)} (${numf((m.committed_ytd / budget) * 100, 0)}% of budget)\nOpened this month ${compact(m.committed)} · ${numf(m.intake, 1)} seats\nCash paid ${compact(m.cash)}`)}"/>`;
+    if (i % 2 === 0) b += xLabel(x(i), m.month.slice(0, 3));
+  });
+  return legend([["Committed to date", c], ["Budget", "var(--ink-2)", true]]) + svg(F.g + b, label);
+}
+function fan(years, c, label) {
+  const F = frame(Math.max(...years.map((y) => y.cash.p90))), band = (CH.W - CH.L - CH.R) / years.length, x = (i) => CH.L + band * (i + 0.5);
+  const up = years.map((y, i) => `${x(i)},${F.y(y.cash.p90)}`), dn = years.map((y, i) => `${x(i)},${F.y(y.cash.p10)}`).reverse();
+  let b = `<polygon points="${up.concat(dn).join(" ")}" fill="${c}" fill-opacity="0.18"/><polyline points="${years.map((y, i) => `${x(i)},${F.y(y.cash.p50)}`).join(" ")}" fill="none" stroke="${c}" stroke-width="2"/>`;
+  years.forEach((y, i) => {
+    b += `<circle cx="${x(i)}" cy="${F.y(y.cash.p50)}" r="4" fill="${c}" stroke="var(--surface)" stroke-width="2"/>${xLabel(x(i), y.fy)}`;
+    b += `<rect x="${x(i) - band / 2}" y="${CH.T}" width="${band}" height="${F.base - CH.T}" fill="transparent" data-tip="${esc(`${y.fy} cash\nP90 ${compact(y.cash.p90)}\nP50 ${compact(y.cash.p50)}\nP10 ${compact(y.cash.p10)}\nChance committed > budget: ${numf(y.p_over_budget * 100, 0)}%`)}"/>`;
+  });
+  return legend([["Median (P50)", c], ["P10–P90 range", c]]) + svg(F.g + b, label);
+}
+function tornado(sens) {
+  const rows = sens.rows, rowH = 26, h = rows.length * rowH + 24, L = 160, W = 640, pad = 64, half = (W - L - 2 * pad) / 2, mid = L + pad + half;
+  const span = Math.max(1, ...rows.flatMap((r) => [Math.abs(r.delta_low), Math.abs(r.delta_high)])), sx = (v) => (v / span) * half;
+  let b = `<line x1="${mid}" x2="${mid}" y1="0" y2="${h - 18}" stroke="var(--axis)"/>`;
+  rows.forEach((r, i) => {
+    const y = i * rowH + 4;
+    b += `<text x="${L - 8}" y="${y + 14}" text-anchor="end" style="fill:var(--ink-2)">${esc(r.lever)}</text>`;
+    if (Math.abs(r.delta_low) < 0.5 && Math.abs(r.delta_high) < 0.5) b += `<text x="${mid + 6}" y="${y + 14}">no change</text>`;
+    [[r.delta_low, r.low_label, "var(--s1)"], [r.delta_high, r.high_label, "var(--s2)"]].forEach(([d, lab, col], k) => {
+      if (Math.abs(d) < 0.5) return;
+      const w = Math.abs(sx(d)), x = d < 0 ? mid - w : mid, yy = y + k * 10;
+      b += `<rect x="${x}" y="${yy}" width="${Math.max(1, w)}" height="9" rx="2" fill="${col}" data-tip="${esc(`${r.lever}: ${lab}\n${d > 0 ? "+" : "−"}${compact(Math.abs(d))} (${SENS_METRICS[sens.metric]})`)}"/>`;
+      b += `<text x="${d < 0 ? x - 4 : x + w + 4}" y="${yy + 8}" text-anchor="${d < 0 ? "end" : "start"}">${esc((d > 0 ? "+" : "−") + compact(Math.abs(d)))}</text>`;
+    });
+  });
+  b += `<text x="${mid}" y="${h - 4}" text-anchor="middle">change from ${esc(compact(sens.base))}</text>`;
+  return `<div style="max-width:760px">${legend([["Low setting", "var(--s1)"], ["High setting", "var(--s2)"]])}<svg viewBox="0 0 ${W} ${h}" role="img" aria-label="${esc("Sensitivity of " + SENS_METRICS[sens.metric])}">${b}</svg></div>`;
+}
+
+function renderWiResults() {
+  const out = wi.out;
+  if (!out) { $("wiOut").innerHTML = ""; return; }
+  const sel = out.find((o) => o.name === cur().name) || out[0], r = sel.result, mc = sel.mc, t = r.totals, c = colorOf(sel.name);
+  const fys = r.years.map((y) => y.fy), first = r.years.find((y) => y.exhaust_month);
+  wi.fy = Math.min(wi.fy, fys.length - 1);
+  const tiles = `<div class="tiles">
+    ${tile(`Cash paid, ${fys[0]} to ${fys[fys.length - 1]}`, compact(t.cash), mc ? `P10–P90 ${compact(mc.totals.cash.p10)} to ${compact(mc.totals.cash.p90)}` : "", true)}
+    ${tile("New commitments", compact(t.new_commitments), `${numf(t.intake)} seats · ${money(t.expected_completions ? t.new_commitments / t.expected_completions : NaN)} per completion`)}
+    ${tile("Indexation uplift", compact(t.index_uplift), "paid above the price when accounts opened")}
+    ${tile("Liability after the horizon", compact(t.end_liability), `claims still due after ${fys[fys.length - 1]}`)}
+    ${tile("Budget runs out", first ? first.exhaust_month : "Not within horizon", first ? `${first.fy} · budget ${compact(first.budget)}` : `budget ${compact(r.budget)} a year`)}
+    ${mc ? tile(`Chance over budget, ${fys[0]}`, numf(mc.years[0].p_over_budget * 100, 0) + "%", `${mc.runs} Monte Carlo runs`) : ""}
+  </div>`;
+  const cmpCols = [
+    { key: "name", label: "Scenario", html: 1, fmt: (v) => `<span class="sw" style="display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;background:${colorOf(v)}"></span>${esc(v)}` },
+    ...fys.map((fy, i) => ({ key: "cash" + i, label: `Cash ${fy}`, n: 1, fmt: compact })),
+    { key: "cash", label: "Cash, total", n: 1, fmt: compact }, { key: "range", label: "P10–P90", n: 1 },
+    { key: "committed", label: "Committed", n: 1, fmt: compact }, { key: "uplift", label: "Index uplift", n: 1, fmt: compact },
+    { key: "end", label: "Liability after", n: 1, fmt: compact }, { key: "cpc", label: "Per completion", n: 1, fmt: money },
+    { key: "exhaust", label: "Budget runs out" }, { key: "saved", label: "Triggers saved", n: 1, fmt: (v) => (v ? compact(v) : "") },
+  ];
+  const cmpRows = out.map(({ name, result: x, mc: m }) => Object.assign({ name, cash: x.totals.cash, range: m ? `${compact(m.totals.cash.p10)} to ${compact(m.totals.cash.p90)}` : "",
+    committed: x.totals.new_commitments, uplift: x.totals.index_uplift, end: x.totals.end_liability, cpc: x.totals.expected_completions ? x.totals.new_commitments / x.totals.expected_completions : NaN,
+    exhaust: (x.years.find((y) => y.exhaust_month) || {}).exhaust_month || "—", saved: x.trigger_savings ? x.trigger_savings.all : 0 }, Object.fromEntries(x.years.map((y, i) => ["cash" + i, y.cash]))));
+  const months = r.months.slice(wi.fy * 12, wi.fy * 12 + 12), fired = r.triggers_fired.filter((x) => x.fy === fys[wi.fy]);
+  const yearCols = [{ key: "fy", label: "FY" }, { key: "budget", label: "Budget", n: 1, fmt: compact }, { key: "new_commitments", label: "Committed", n: 1, fmt: compact },
+    { key: "intake", label: "Seats opened", n: 1, fmt: (v) => numf(v) }, { key: "cash", label: "Cash paid", n: 1, fmt: compact }, { key: "cash_inflight", label: "…from earlier accounts", n: 1, fmt: compact },
+    { key: "index_uplift", label: "Index uplift", n: 1, fmt: compact }, { key: "expected_completions", label: "Expected completions", n: 1, fmt: (v) => numf(v, 1) },
+    { key: "cost_per_completion", label: "Per completion", n: 1, fmt: money }, { key: "exhaust_month", label: "Budget runs out", fmt: (v) => v || "—" }];
+  $("wiOut").innerHTML = `${tiles}
+    <div class="card"><h2>Scenarios compared</h2>${table(cmpCols, cmpRows)}</div>
+    <div class="charts">
+      <div class="card chart"><h2>Cash paid by financial year</h2>${groupedBars(fys, out.map((o) => ({ name: o.name, color: colorOf(o.name), values: o.result.years.map((y) => y.cash) })), "Cash paid by financial year, by scenario")}</div>
+      <div class="card chart"><h2>${esc(sel.name)}: committed through the year
+        <select id="wiFy" style="width:auto;padding:2px 6px;margin-left:6px">${fys.map((f, i) => `<option value="${i}"${i === wi.fy ? " selected" : ""}>${f}</option>`).join("")}</select></h2>
+        ${monthLine(months, r.years[wi.fy].budget, fired, c, `Committed to date by month, ${fys[wi.fy]}`)}</div>
+      <div class="card chart"><h2>${esc(sel.name)}: where the cash goes</h2>${stackedBars(fys, [
+        { name: "Accounts opened earlier", color: "var(--s1)", values: r.years.map((y) => y.cash_inflight) },
+        { name: "Accounts opened this horizon", color: "var(--s2)", values: r.years.map((y) => y.cash - y.cash_inflight) }], "Cash by financial year, split by when accounts opened")}
+        <div class="hint">"Earlier" means opened before ${esc(fys[0])}.</div></div>
+      ${mc ? `<div class="card chart"><h2>${esc(sel.name)}: range of cash outcomes</h2>${fan(mc.years, c, "Cash by year, P10 to P90")}</div>` : ""}
+    </div>
+    <div class="card"><h2>${esc(sel.name)} by year</h2>${table(yearCols, r.years)}</div>
+    ${r.triggers_fired.length || r.trigger_savings ? `<div class="card"><h2>${esc(sel.name)}: triggers</h2>
+      ${r.triggers_fired.length ? table([{ key: "name", label: "Trigger" }, { key: "fy", label: "FY" }, { key: "month", label: "Fired" }, { key: "effective", label: "Takes effect" }], r.triggers_fired) : `<p class="sub">No trigger reached its threshold.</p>`}
+      ${r.trigger_savings ? `<p class="sub" style="margin-top:8px">Commitments saved over the horizon: <b>${compact(r.trigger_savings.all)}</b>${r.trigger_savings.each.length > 1 ? " (" + r.trigger_savings.each.map((x) => `${esc(x.name)} ${compact(x.saved)}`).join(", ") + " on its own margin)" : ""}.</p>` : ""}</div>` : ""}
+    <div class="card chart"><h2>${esc(sel.name)}: what moves the numbers</h2>
+      <div class="row" style="margin-bottom:10px"><select id="wiMetric" style="width:auto">${options(SENS_METRICS, wi.metric)}</select><button class="btn ghost" id="wiSensRun">Run sensitivity</button><span class="sub" id="wiSensStatus"></span></div>
+      ${wi.sens && wi.sens.name === sel.name ? tornado(wi.sens) + table([{ key: "lever", label: "Lever" }, { key: "low_label", label: "Low" }, { key: "delta_low", label: "Change", n: 1, fmt: (v) => (Math.abs(v) < 0.5 ? "no change" : (v > 0 ? "+" : "−") + compact(Math.abs(v))) }, { key: "high_label", label: "High" }, { key: "delta_high", label: "Change", n: 1, fmt: (v) => (Math.abs(v) < 0.5 ? "no change" : (v > 0 ? "+" : "−") + compact(Math.abs(v))) }], wi.sens.rows) : `<p class="sub">Moves one lever at a time to a low and a high setting and shows how much the chosen measure changes.</p>`}
+    </div>`;
+}
+$("wiOut").addEventListener("change", (e) => {
+  if (e.target.id === "wiFy") { wi.fy = +e.target.value; renderWiResults(); }
+  if (e.target.id === "wiMetric") wi.metric = e.target.value;
+});
+$("wiOut").addEventListener("click", async (e) => {
+  if (e.target.id !== "wiSensRun") return;
+  const s = cur(); e.target.disabled = true; $("wiSensStatus").textContent = "Running…";
+  await new Promise((r) => setTimeout(r, 20));
+  try {
+    const seats = s.seats === "optimised" ? wi.seats[s.name] || (await optimisedSeatsFor(s)) : undefined;
+    wi.sens = WI.sensitivity(wiData(), s, { metric: wi.metric, seats });
+    renderWiResults();
+  } catch (err) { $("wiSensStatus").innerHTML = `<span class="err-text">${esc(err.message)}</span>`; e.target.disabled = false; }
+});
+// One tooltip for every chart mark with data-tip.
+$("wiOut").addEventListener("mousemove", (e) => {
+  const el = e.target.closest("[data-tip]"), tip = $("tip");
+  if (!el) { tip.style.display = "none"; return; }
+  tip.textContent = el.dataset.tip; tip.style.display = "block";
+  const w = tip.offsetWidth, x = e.clientX + 14 + w > innerWidth ? e.clientX - w - 14 : e.clientX + 14;
+  tip.style.left = x + "px"; tip.style.top = e.clientY + 14 + "px";
+});
+$("wiOut").addEventListener("mouseleave", () => ($("tip").style.display = "none"));
+
 
 showTab(store.get("sa-calc-tab") || "estimate");
 renderEstimate();

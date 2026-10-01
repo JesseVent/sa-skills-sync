@@ -73958,11 +73958,11 @@ var require_sim = __commonJS(function(exports2, module2) {
         title: rec.title
       };
     }
-    function buildCourseTable({ rates, stl, units = {}, priced = null, profiles = [], outcomes = [], cfg = {} }) {
-      const cf = config(cfg), rows = {};
+    function buildCourseTable({ rates, stl, units = {}, priced = null, profiles = [], outcomes = [], cfg = {}, scenario = null }) {
+      const cf = config(cfg), rows = {}, ctx = C.makeContext(rates, scenario);
       const row = (c) => rows[c] || (rows[c] = blank(c));
       const blank = (c) => {
-        const s = stlStatus(stl, c), info = C.courseInfo(C.makeContext(rates), c);
+        const s = stlStatus(stl, c), info = C.courseInfo(ctx, c);
         return {
           course_code: c,
           title: s.title || info.name,
@@ -73975,7 +73975,7 @@ var require_sim = __commonJS(function(exports2, module2) {
           rto_count: null,
           baseline_seats: 0,
           unit_cost: NaN,
-          completion_payment: info.aqf ? rates.completion[info.aqf] || 0 : 0,
+          completion_payment: info.aqf ? ctx.completion[info.aqf] || 0 : 0,
           completion_rate: NaN,
           employment_rate: NaN,
           priority_weight: NaN,
@@ -74031,7 +74031,7 @@ var require_sim = __commonJS(function(exports2, module2) {
         const r = row(c);
         if (r.source === "history" && isFinite(r.unit_cost))
           continue;
-        const out = C.priceRows(C.makeContext(rates), units, list.map((p) => ({ course_code: c, unit_code: p.unit_code, hours: p.hours, postcode: cf.profilePostcode, student_id: "PROFILE" })));
+        const out = C.priceRows(ctx, units, list.map((p) => ({ course_code: c, unit_code: p.unit_code, hours: p.hours, postcode: cf.profilePostcode, student_id: "PROFILE" })));
         r.unit_cost = out.totals.subsidy + out.totals.concession;
         r.source = "profile";
         if (out.errorCount)
@@ -74302,6 +74302,462 @@ var require_sim = __commonJS(function(exports2, module2) {
     }
     const newPlan = (cfg) => ({ version: 1, created: new Date().toISOString(), config: config(cfg), courses: {} });
     return { DEFAULT_CONFIG, EDITABLE, METRICS, buildCourseTable, resolve, evaluate, buildModel, optimise, newPlan, stlStatus };
+  });
+});
+
+// whatif.js
+var require_whatif = __commonJS(function(exports2, module2) {
+  (function(root, factory) {
+    if (typeof module2 === "object" && module2.exports)
+      module2.exports = factory(require_calc(), require_sim());
+    else
+      root.SAWhatIf = factory(root.SACalc, root.SASim);
+  })(typeof self !== "undefined" ? self : exports2, function(C, S) {
+    const MONTHS = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+    const LOCKED = ["adjMultiplier", "courseAdj", "aqfReduction"];
+    const DEFAULTS = {
+      name: "scenario",
+      levers: {},
+      effectiveFy: 0,
+      seats: "baseline",
+      forecast: {
+        startFy: "2026-27",
+        years: 4,
+        indexPct: 2.04,
+        pastIndexPct: 2.04,
+        growthPct: 0,
+        intakePct: 0,
+        durationMonths: { Bridging: 6, "Skill Set": 6, Course: 6, "Certificate I": 9, "Certificate II": 9, "Certificate III": 15, "Certificate IV": 15, Diploma: 24, "Advanced Diploma": 30 },
+        defaultDuration: 12,
+        seasonality: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        inFlight: true
+      },
+      budget: null,
+      budgetGrowthPct: 0,
+      triggers: [],
+      uncertainty: { runs: 500, seed: 1, volumeSd: 10, courseVolumeSd: 15, completionSd: 5, indexSd: 0.5 }
+    };
+    const TRIGGER = { name: "", atPct: 80, action: "scale_intake", scope: "managed", amountPct: 20, noticeMonths: 1 };
+    const num = (v, d) => {
+      const n = typeof v === "number" ? v : parseFloat(v);
+      return isFinite(n) ? n : d;
+    };
+    const clamp01 = (v) => Math.min(1, Math.max(0, v));
+    const clone = (o) => JSON.parse(JSON.stringify(o));
+    function normalise(s = {}) {
+      const f = Object.assign({}, DEFAULTS.forecast, s.forecast);
+      f.durationMonths = Object.assign({}, DEFAULTS.forecast.durationMonths, s.forecast && s.forecast.durationMonths);
+      f.years = Math.max(1, Math.min(10, Math.round(num(f.years, 4))));
+      return Object.assign({}, DEFAULTS, s, {
+        levers: Object.assign({}, s.levers),
+        forecast: f,
+        effectiveFy: Math.max(0, Math.round(num(s.effectiveFy, 0))),
+        triggers: (s.triggers || []).map((t, i) => Object.assign({}, TRIGGER, { name: "trigger " + (i + 1) }, t)),
+        uncertainty: Object.assign({}, DEFAULTS.uncertainty, s.uncertainty)
+      });
+    }
+    const startYear = (f) => parseInt(String(f.startFy), 10) || 2026;
+    const fyLabel = (f, y) => {
+      const a = startYear(f) + y;
+      return `${a}-${String(a + 1).slice(2)}`;
+    };
+    const monthLabel = (f, m) => `${MONTHS[(m % 12 + 12) % 12]} ${startYear(f) + Math.floor((m + 6) / 12)}`;
+    const fyOf = (m) => Math.floor(m / 12);
+    function costs(data, levers) {
+      const plan = data.plan || {};
+      const priced = data.claims && data.claims.length ? C.priceRows(C.makeContext(data.rates, levers), data.units || {}, data.claims) : null;
+      const table = S.buildCourseTable({ rates: data.rates, stl: data.stl, units: data.units || {}, priced, profiles: data.profiles || [], outcomes: data.outcomes || [], cfg: plan.config, scenario: levers });
+      const rows = S.resolve(table, plan.courses, plan.config);
+      const idx = {}, tot = {};
+      if (priced)
+        for (const r of priced.results) {
+          if (!r.ok)
+            continue;
+          const before = r.rate * (1 + (r.loading_pct || 0) / 100);
+          idx[r.course_code] = (idx[r.course_code] || 0) + (r.per_hour > 0 ? r.subsidy * before / r.per_hour : 0);
+          tot[r.course_code] = (tot[r.course_code] || 0) + r.subsidy + r.concession_reimb;
+        }
+      let a = 0, b = 0;
+      for (const c in tot) {
+        a += idx[c];
+        b += tot[c];
+      }
+      const fallback = b ? a / b : 1;
+      const out = {};
+      for (const r of rows) {
+        const override = isFinite(r.cost_override);
+        out[r.course_code] = {
+          row: r,
+          unit: override ? r.cost_override : r.unit_cost,
+          comp: override ? 0 : r.completion_payment,
+          share: tot[r.course_code] ? Math.min(1, idx[r.course_code] / tot[r.course_code]) : fallback
+        };
+      }
+      return out;
+    }
+    function prepare(data, scenario, opts = {}) {
+      const scn = normalise(scenario), f = scn.forecast;
+      const levers = Object.assign({}, scn.levers), shift = num(levers.volumeGrowthPct, 0);
+      delete levers.volumeGrowthPct;
+      const fix = levers.aqfOverride ? { aqfOverride: levers.aqfOverride } : {};
+      const hybrid = Object.assign({}, levers);
+      LOCKED.forEach((k) => delete hybrid[k]);
+      const P = { B: costs(data, fix), H: costs(data, hybrid), S: costs(data, levers) };
+      const mult = 1 + shift / 100;
+      const courses = [];
+      let uncosted = 0;
+      for (const code of Object.keys(P.S)) {
+        const s = P.S[code], r = s.row, base = P.B[code].row.baseline_seats || 0;
+        let seats;
+        if (scn.seats === "planned")
+          seats = r.planned_seats != null && !isNaN(r.planned_seats) ? r.planned_seats : base;
+        else if (scn.seats === "optimised") {
+          if (!opts.seats)
+            throw new Error(`${scn.name}: seat source "optimised" needs the optimiser's seats per course`);
+          seats = num(opts.seats[code], 0);
+        } else
+          seats = base;
+        if (!seats && !base)
+          continue;
+        const p = { B: P.B[code], H: P.H[code], S: s };
+        if (!["B", "H", "S"].every((k) => isFinite(p[k].unit))) {
+          uncosted += seats;
+          continue;
+        }
+        const cost = {};
+        for (const k of ["B", "H", "S"])
+          cost[k] = { idx: p[k].unit * p[k].share, fix: p[k].unit * (1 - p[k].share), comp: p[k].comp };
+        const dur = Math.max(1, Math.round(num(f.durationMonths[r.aqf], f.defaultDuration)));
+        courses.push({ code, title: r.title, status: r.status, aqf: r.aqf || "", dur, cr: clamp01(num(r.completion_rate, 0.5)), seats: seats * mult, inflight: base, cost });
+      }
+      return { scn, courses, uncosted };
+    }
+    function groups(courses, noise) {
+      const g = {};
+      for (const c of courses) {
+        const v = noise ? noise.courseVol(c.code) : 1, cr = noise ? clamp01(c.cr + noise.crShift) : c.cr;
+        const k = c.status + "|" + c.dur;
+        const G = g[k] || (g[k] = { status: c.status, dur: c.dur, seats: 0, inflight: 0, cr: 0, crIn: 0, B: z(), H: z(), S: z(), inB: z(), inH: z() });
+        const n = c.seats * v, m = c.inflight;
+        G.seats += n;
+        G.inflight += m;
+        G.cr += n * cr;
+        G.crIn += m * cr;
+        for (const p of ["B", "H", "S"])
+          add(G[p], c.cost[p], n, cr);
+        add(G.inB, c.cost.B, m, cr);
+        add(G.inH, c.cost.H, m, cr);
+      }
+      return Object.values(g).map((G) => {
+        const per = (o, n) => n ? { idx: o.idx / n, fix: o.fix / n, comp: o.comp / n } : z();
+        return {
+          status: G.status,
+          dur: G.dur,
+          seats: G.seats,
+          inflight: G.inflight,
+          cr: G.seats ? G.cr / G.seats : 0,
+          crIn: G.inflight ? G.crIn / G.inflight : 0,
+          B: per(G.B, G.seats),
+          H: per(G.H, G.seats),
+          S: per(G.S, G.seats),
+          inB: per(G.inB, G.inflight),
+          inH: per(G.inH, G.inflight)
+        };
+      });
+      function z() {
+        return { idx: 0, fix: 0, comp: 0 };
+      }
+      function add(t, c, n, cr) {
+        t.idx += n * c.idx;
+        t.fix += n * c.fix;
+        t.comp += n * c.comp * cr;
+      }
+    }
+    function indexer(f, shocks) {
+      const pct2 = (k) => (Array.isArray(f.indexPct) ? num(f.indexPct[Math.min(k - 1, f.indexPct.length - 1)], 0) : num(f.indexPct, 0)) + (shocks && shocks[k] || 0);
+      const cache = { 0: 1 };
+      return function I(y) {
+        if (y in cache)
+          return cache[y];
+        return cache[y] = y < 0 ? Math.pow(1 + num(f.pastIndexPct, 0) / 100, y) : I(y - 1) * (1 + pct2(y) / 100);
+      };
+    }
+    function engine(G, scn, budget, opt = {}) {
+      const f = scn.forecast, Y = f.years, H = Y * 12, eff = scn.effectiveFy, I = indexer(f, opt.indexShocks);
+      const w = f.seasonality.map((x) => Math.max(0, num(x, 0))), ws = w.reduce((a, b) => a + b, 0) || 1;
+      const share = (m) => w[(m % 12 + 12) % 12] / ws;
+      const growth = (y) => (1 + num(f.intakePct, 0) / 100) * Math.pow(1 + num(f.growthPct, 0) / 100, y) * (opt.yearVol && opt.yearVol[y] || 1);
+      const triggers = opt.triggers || scn.triggers;
+      const budgetOf = (y) => budget * Math.pow(1 + num(scn.budgetGrowthPct, 0) / 100, y);
+      const years = [...Array(Y)].map((_, y) => ({ fy: fyLabel(f, y), budget: budgetOf(y), intake: 0, new_commitments: 0, expected_completions: 0, cash: 0, cash_inflight: 0, index_uplift: 0, completions_paid: 0, exhaust_month: null }));
+      const months = [...Array(H)].map((_, m) => ({ month: monthLabel(f, m), fy: fyLabel(f, fyOf(m)), intake: 0, committed: 0, committed_ytd: 0, cash: 0 }));
+      const fired = [], active = [];
+      let endLiability = 0;
+      const ctxFor = (k, c, inflight) => fyOf(k) < eff ? inflight ? "inB" : "B" : c < eff ? inflight ? "inH" : "H" : "S";
+      const book = (g, m, n, pf, inflight) => {
+        const c = fyOf(m), cr = inflight ? g.crIn : g.cr;
+        for (let k = m;k <= m + g.dur; k++) {
+          if (k < 0)
+            continue;
+          const p = g[ctxFor(k, c, inflight)], y = fyOf(k);
+          const unit = k < m + g.dur ? n * pf * (p.idx * I(y) + p.fix) / g.dur : 0;
+          const comp = k === m + g.dur ? n * p.comp : 0, amt = unit + comp;
+          if (k >= H) {
+            endLiability += amt;
+            continue;
+          }
+          years[y].cash += amt;
+          months[k].cash += amt;
+          if (inflight)
+            years[y].cash_inflight += amt;
+          if (k < m + g.dur)
+            years[y].index_uplift += n * pf * p.idx * (I(y) - I(c)) / g.dur;
+          else
+            years[y].completions_paid += n * cr;
+        }
+      };
+      if (f.inFlight) {
+        const back = Math.max(0, ...G.map((g) => g.dur));
+        for (let m = -back;m < 0; m++)
+          for (const g of G)
+            if (g.inflight)
+              book(g, m, g.inflight * share(m), 1, true);
+      }
+      let ytd = 0;
+      for (let m = 0;m < H; m++) {
+        const y = fyOf(m);
+        if (m % 12 === 0)
+          ytd = 0;
+        for (const g of G) {
+          if (!g.seats)
+            continue;
+          let fi = 1, pf = 1;
+          for (const a of active) {
+            if (m < a.from || m > a.to || !(a.t.scope === "all" || a.t.scope === g.status))
+              continue;
+            const amt = clamp01(num(a.t.amountPct, 0) / 100);
+            if (a.t.action === "pause")
+              fi = 0;
+            else if (a.t.action === "cut_price")
+              pf *= 1 - amt;
+            else
+              fi *= 1 - amt;
+          }
+          const n = g.seats * growth(y) * share(m) * fi;
+          if (!n)
+            continue;
+          const p = g[y < eff ? "B" : "S"];
+          const commit = n * (pf * (p.idx * I(y) + p.fix) + p.comp);
+          months[m].intake += n;
+          months[m].committed += commit;
+          years[y].intake += n;
+          years[y].new_commitments += commit;
+          years[y].expected_completions += n * g.cr;
+          book(g, m, n, pf, false);
+        }
+        ytd += months[m].committed;
+        months[m].committed_ytd = ytd;
+        const bud = budgetOf(y);
+        if (years[y].exhaust_month == null && ytd > bud + 0.000001)
+          years[y].exhaust_month = months[m].month;
+        triggers.forEach((t, i) => {
+          if (fired.some((x) => x.i === i && x.y === y) || !(ytd >= num(t.atPct, 100) / 100 * bud))
+            return;
+          const from = m + 1 + Math.max(0, Math.round(num(t.noticeMonths, 0)));
+          fired.push({ i, y, name: t.name, fy: years[y].fy, month: months[m].month, effective: from < (y + 1) * 12 ? monthLabel(f, from) : "after FY end" });
+          active.push({ t, from, to: (y + 1) * 12 - 1 });
+        });
+      }
+      for (const r of years)
+        r.cost_per_completion = r.expected_completions ? r.new_commitments / r.expected_completions : null;
+      const sum = (k) => years.reduce((s, r) => s + r[k], 0);
+      return {
+        years,
+        months,
+        triggers_fired: fired.map(({ i, y, ...x }) => x),
+        totals: { cash: sum("cash"), new_commitments: sum("new_commitments"), index_uplift: sum("index_uplift"), intake: sum("intake"), expected_completions: sum("expected_completions"), end_liability: endLiability }
+      };
+    }
+    const baselineBudget = (courses) => courses.reduce((s, c) => s + c.inflight * (c.cost.B.idx + c.cost.B.fix + c.cost.B.comp * c.cr), 0);
+    function run(data, scenario, opts = {}) {
+      const prep = opts.prepared || prepare(data, scenario, opts), { scn, courses } = prep;
+      const budget = scn.budget != null && scn.budget !== "" ? num(scn.budget, 0) : baselineBudget(courses);
+      const G = groups(courses), res = engine(G, scn, budget, opts);
+      let trigger_savings = null;
+      if (scn.triggers.length && opts.attribution !== false) {
+        const none = engine(G, scn, budget, { triggers: [] }).totals.new_commitments;
+        trigger_savings = { all: none - res.totals.new_commitments, each: scn.triggers.map((t, i) => ({ name: t.name, saved: engine(G, scn, budget, { triggers: scn.triggers.filter((_, j) => j !== i) }).totals.new_commitments - res.totals.new_commitments })) };
+      }
+      return Object.assign({ name: scn.name, budget, courses: courses.length, uncosted_seats: prep.uncosted, trigger_savings }, res);
+    }
+    function rng(seed) {
+      let a = num(seed, 1) >>> 0 || 1;
+      const u = () => {
+        a = a + 1831565813 | 0;
+        let t = Math.imul(a ^ a >>> 15, 1 | a);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+      return { u, normal: () => Math.sqrt(-2 * Math.log(u() || 0.000000000001)) * Math.cos(2 * Math.PI * u()) };
+    }
+    const pct = (xs, p) => {
+      const s = xs.slice().sort((a, b) => a - b), i = (s.length - 1) * p, lo = Math.floor(i);
+      return s[lo] + (s[Math.ceil(i)] - s[lo]) * (i - lo);
+    };
+    const band = (xs) => ({ p10: pct(xs, 0.1), p50: pct(xs, 0.5), p90: pct(xs, 0.9) });
+    function monteCarlo(data, scenario, opts = {}) {
+      const prep = opts.prepared || prepare(data, scenario, opts), { scn, courses } = prep, u = scn.uncertainty, Y = scn.forecast.years;
+      const budget = scn.budget != null && scn.budget !== "" ? num(scn.budget, 0) : baselineBudget(courses);
+      const R = rng(u.seed), runs = Math.max(10, Math.min(5000, Math.round(num(opts.runs != null ? opts.runs : u.runs, 500))));
+      const pos = (x) => Math.max(0, x);
+      const out = { cash: [], commit: [], over: new Array(Y).fill(0), totalCash: [], totalCommit: [], end: [], exhaust: [] };
+      for (let r = 0;r < runs; r++) {
+        const cv = {};
+        courses.forEach((c) => {
+          cv[c.code] = pos(1 + R.normal() * num(u.courseVolumeSd, 0) / 100);
+        });
+        const noise = { courseVol: (code) => cv[code], crShift: R.normal() * num(u.completionSd, 0) / 100 };
+        const yearVol = [...Array(Y)].map(() => pos(1 + R.normal() * num(u.volumeSd, 0) / 100));
+        const indexShocks = [...Array(Y)].map((_, k) => k ? R.normal() * num(u.indexSd, 0) : 0);
+        const res = engine(groups(courses, noise), scn, budget, { yearVol, indexShocks });
+        res.years.forEach((y, i) => {
+          (out.cash[i] = out.cash[i] || []).push(y.cash);
+          (out.commit[i] = out.commit[i] || []).push(y.new_commitments);
+          if (y.new_commitments > y.budget)
+            out.over[i]++;
+        });
+        out.totalCash.push(res.totals.cash);
+        out.totalCommit.push(res.totals.new_commitments);
+        out.end.push(res.totals.end_liability);
+      }
+      return {
+        name: scn.name,
+        runs,
+        seed: u.seed,
+        years: out.cash.map((xs, i) => ({ fy: fyLabel(scn.forecast, i), cash: band(xs), new_commitments: band(out.commit[i]), p_over_budget: out.over[i] / runs })),
+        totals: { cash: band(out.totalCash), new_commitments: band(out.totalCommit), end_liability: band(out.end) }
+      };
+    }
+    const METRICS = {
+      cash: (r) => r.totals.cash,
+      new_commitments: (r) => r.totals.new_commitments,
+      end_liability: (r) => r.totals.end_liability,
+      fy1_cash: (r) => r.years[0].cash,
+      fy1_commitments: (r) => r.years[0].new_commitments
+    };
+    function sensitivity(data, scenario, opts = {}) {
+      const scn = normalise(scenario), metric = METRICS[opts.metric || "cash"];
+      if (!metric)
+        throw new Error(`metric must be one of ${Object.keys(METRICS).join(", ")}`);
+      const { levers: lv, forecast: f } = scn, mul = num(lv.adjMultiplier, 1), idx = (d) => Array.isArray(f.indexPct) ? f.indexPct.map((x) => num(x, 0) + d) : num(f.indexPct, 0) + d;
+      const ramp = (up) => [...Array(12)].map((_, i) => up ? i + 1 : 12 - i);
+      const V = [
+        ["Indexation this year (extra)", "−1 pt", "+1 pt", (s, d) => {
+          s.levers.indexExtraPct = num(lv.indexExtraPct, 0) + d;
+        }, true],
+        ["Future indexation", "−1 pt/yr", "+1 pt/yr", (s, d) => {
+          s.forecast.indexPct = idx(d);
+        }],
+        ["Intake volume", "−10%", "+10%", (s, d) => {
+          s.forecast.intakePct = num(f.intakePct, 0) + 10 * d;
+        }],
+        ["Intake growth", "−5 pt/yr", "+5 pt/yr", (s, d) => {
+          s.forecast.growthPct = num(f.growthPct, 0) + 5 * d;
+        }],
+        ["Course adjustments", "−10%", "+10%", (s, d) => {
+          s.levers.adjMultiplier = mul * (1 + 0.1 * d);
+        }, true],
+        ["Completion rate", "−10 pt", "+10 pt", (s, d) => {
+          s._cr = 0.1 * d;
+        }],
+        ["RPL payment (Cert III+)", "0%", "100%", (s, d) => {
+          s.levers.rplPct = d < 0 ? 0 : 100;
+        }, true],
+        ["Course duration", "−25%", "+25%", (s, d) => {
+          s.forecast.durationMonths = Object.fromEntries(Object.entries(f.durationMonths).map(([k, v]) => [k, Math.max(1, Math.round(v * (1 + 0.25 * d)))]));
+        }, true],
+        ["Seasonality", "back-loaded", "front-loaded", (s, d) => {
+          s.forecast.seasonality = ramp(d < 0);
+        }]
+      ];
+      const base = opts.prepared || prepare(data, scn, opts);
+      const evalScn = (s, reprice) => {
+        const prep = reprice ? prepare(data, s, opts) : Object.assign({}, base, { scn: normalise(s) });
+        if (s._cr)
+          prep.courses = prep.courses.map((c) => Object.assign({}, c, { cr: clamp01(c.cr + s._cr) }));
+        return metric(run(data, s, Object.assign({}, opts, { prepared: prep, attribution: false })));
+      };
+      const b = metric(run(data, scn, Object.assign({}, opts, { prepared: base, attribution: false })));
+      const rows = V.map(([lever, lowLabel, highLabel, fn, reprice]) => {
+        const vals = [-1, 1].map((d) => {
+          const s = clone(scn);
+          fn(s, d);
+          return evalScn(s, reprice);
+        });
+        return { lever, low_label: lowLabel, high_label: highLabel, low: vals[0], high: vals[1], delta_low: vals[0] - b, delta_high: vals[1] - b };
+      });
+      rows.sort((x, y) => Math.max(Math.abs(y.delta_low), Math.abs(y.delta_high)) - Math.max(Math.abs(x.delta_low), Math.abs(x.delta_high)));
+      return { name: scn.name, metric: opts.metric || "cash", base: b, rows };
+    }
+    function compare(data, scenarios, opts = {}) {
+      return scenarios.map((s) => {
+        const scn = normalise(s), prep = prepare(data, scn, { seats: opts.seats && opts.seats[scn.name] });
+        const r = run(data, scn, { prepared: prep });
+        const mc = opts.mc ? monteCarlo(data, scn, { prepared: prep, runs: opts.runs }) : null;
+        return { name: scn.name, result: r, mc };
+      });
+    }
+    function exportRows(compared, sens) {
+      const r2 = (v) => typeof v === "number" && isFinite(v) ? Math.round(v * 100) / 100 : v;
+      const flat = (o) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, r2(v)]));
+      const out = { Compare: [], Years: [], Months: [], Triggers: [], Ranges: [], Sensitivity: [] };
+      for (const { name, result: r, mc } of compared) {
+        const t = r.totals;
+        out.Compare.push(flat({
+          scenario: name,
+          budget: r.budget,
+          cash: t.cash,
+          new_commitments: t.new_commitments,
+          index_uplift: t.index_uplift,
+          end_liability: t.end_liability,
+          intake: t.intake,
+          expected_completions: t.expected_completions,
+          cost_per_completion: t.expected_completions ? t.new_commitments / t.expected_completions : null,
+          first_budget_exhausted: (r.years.find((y) => y.exhaust_month) || {}).exhaust_month || "",
+          triggers_fired: r.triggers_fired.length,
+          trigger_savings: r.trigger_savings ? r.trigger_savings.all : 0,
+          cash_p10: mc ? mc.totals.cash.p10 : "",
+          cash_p50: mc ? mc.totals.cash.p50 : "",
+          cash_p90: mc ? mc.totals.cash.p90 : ""
+        }));
+        r.years.forEach((y) => out.Years.push(flat(Object.assign({ scenario: name }, y))));
+        r.months.forEach((m) => out.Months.push(flat(Object.assign({ scenario: name }, m))));
+        r.triggers_fired.forEach((x) => out.Triggers.push(Object.assign({ scenario: name }, x)));
+        if (mc)
+          mc.years.forEach((y) => out.Ranges.push(flat({
+            scenario: name,
+            fy: y.fy,
+            cash_p10: y.cash.p10,
+            cash_p50: y.cash.p50,
+            cash_p90: y.cash.p90,
+            commitments_p10: y.new_commitments.p10,
+            commitments_p50: y.new_commitments.p50,
+            commitments_p90: y.new_commitments.p90,
+            p_over_budget: y.p_over_budget
+          })));
+      }
+      if (sens)
+        sens.rows.forEach((x) => out.Sensitivity.push(flat({ scenario: sens.name, metric: sens.metric, lever: x.lever, low: x.low_label, high: x.high_label, change_low: x.delta_low, change_high: x.delta_high })));
+      return out;
+    }
+    function workbook(XLSX, compared, sens) {
+      const wb = XLSX.utils.book_new();
+      for (const [sheet, rows] of Object.entries(exportRows(compared, sens)))
+        if (rows.length)
+          XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(rows), sheet);
+      return wb;
+    }
+    return { DEFAULTS, MONTHS, METRICS, normalise, prepare, run, monteCarlo, sensitivity, compare, exportRows, workbook, fyLabel, monthLabel };
   });
 });
 
@@ -79756,6 +80212,7 @@ var { z } = require_zod();
 var XLSX = require_xlsx_full_min();
 var C = require_calc();
 var S = require_sim();
+var W = require_whatif();
 var ROOT = path.basename(__dirname) === "dist" ? path.dirname(__dirname) : __dirname;
 var readGlobal = (file, name) => JSON.parse(fs.readFileSync(path.join(ROOT, file), "utf8").replace(new RegExp(`^window\\.${name} = `), "").replace(/;\s*$/, ""));
 var RATES = readGlobal("data/rates.js", "SA_RATES");
@@ -79766,7 +80223,7 @@ var solver = async () => highs = highs || await require_highs()({ instantiateWas
   WebAssembly.instantiate(bin, imports).then((r) => done(r.instance, r.module));
   return {};
 } });
-var state = { units: {}, files: {}, priced: null, profiles: [], outcomes: [], table: null, plan: S.newPlan(), planName: "untitled", last: null };
+var state = { units: {}, files: {}, claimRows: null, priced: null, profiles: [], outcomes: [], table: null, plan: S.newPlan(), planName: "untitled", last: null, scenarios: {}, whatif: null };
 function readTable(file) {
   const p = path.resolve(file);
   if (!fs.existsSync(p))
@@ -79855,7 +80312,8 @@ server.registerTool("load_data", {
     const rows2 = readTable(claims), { map, missing } = C.mapHeaders(Object.keys(rows2[0] || {}), "claims");
     if (missing.length)
       throw new Error(`claims file is missing ${missing.join(", ")}`);
-    state.priced = C.priceRows(C.makeContext(RATES), state.units, C.remap(rows2, map));
+    state.claimRows = C.remap(rows2, map);
+    state.priced = C.priceRows(C.makeContext(RATES), state.units, state.claimRows);
     state.files.claims = claims;
     notes.push(`claims: ${rows2.length} rows, ${state.priced.errorCount} with issues` + (map.provider_id ? "" : "; no provider_id column, so RTO counts are unknown"));
   }
@@ -80083,6 +80541,137 @@ server.registerTool("export_plan", {
   XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(Object.entries(r.config).map(([k, v]) => ({ setting: k, value: typeof v === "object" ? JSON.stringify(v) : v }))), "Config");
   const file = path.join(dir, safeName(name) + ".xlsx");
   fs.writeFileSync(file, XLSX.write(wb, { type: "buffer", bookType: "xlsx" }));
+  return reply({ exported: path.relative(ROOT, file) });
+}));
+var whatifData = () => ({ rates: RATES, stl: STL, units: state.units, claims: state.claimRows, profiles: state.profiles, outcomes: state.outcomes, plan: state.plan });
+async function optimisedSeats(scn) {
+  const levers = Object.assign({}, scn.levers);
+  delete levers.volumeGrowthPct;
+  const priced = state.claimRows ? C.priceRows(C.makeContext(RATES, levers), state.units, state.claimRows) : null;
+  const table = S.buildCourseTable({ rates: RATES, stl: STL, units: state.units, priced, profiles: state.profiles, outcomes: state.outcomes, cfg: state.plan.config, scenario: levers });
+  const res = S.optimise(table, state.plan, await solver());
+  if (!res.optimised)
+    throw new Error(`${scn.name}: optimiser ${res.status}${res.message ? " (" + res.message + ")" : ""}`);
+  return Object.fromEntries(res.courses.filter((c) => c.seats).map((c) => [c.course_code, c.seats]));
+}
+var pickScenarios = (names) => {
+  const list = names && names.length ? names : Object.keys(state.scenarios);
+  if (!list.length)
+    throw new Error("no scenarios yet; create one with whatif_set_scenario");
+  return list.map((n) => {
+    if (!state.scenarios[n])
+      throw new Error(`no scenario "${n}"`);
+    return state.scenarios[n];
+  });
+};
+var band = (b) => ({ p10: round(b.p10, 0), p50: round(b.p50, 0), p90: round(b.p90, 0) });
+var obj = z.record(z.string(), z.any());
+server.registerTool("whatif_set_scenario", {
+  description: "Create or update a what-if scenario (fields you pass replace those fields; forecast and uncertainty merge). levers = Budget-tab price levers: indexExtraPct, adjMultiplier (0.9 = 10% cut), courseAdj {code: pct}, aqfReduction {level: $/hr}, completion {level: $}, rplPct, locationLoading {label: %}, minFee, maxReimb, volumeGrowthPct. Course adjustment and AQF reduction lock when an account opens; the rest apply when claims are paid. effective_fy = years from the start FY until the levers apply (0 = now). seats = baseline | planned (the plan's planned_seats) | optimised (re-optimise the current plan at this scenario's prices). forecast: startFy, years, indexPct (number or array per future year), pastIndexPct, growthPct, intakePct, durationMonths {AQF level: months}, seasonality (12 Jul..Jun weights), inFlight. budget = FY commitment budget (default: baseline year-0 commitments). triggers: [{name, atPct, action: scale_intake|cut_price|pause, scope: managed|demand|all, amountPct, noticeMonths}], each fires once per FY when committed reaches atPct% of budget. uncertainty: runs, seed, volumeSd, courseVolumeSd, completionSd, indexSd. copy_from copies another scenario first; delete removes it.",
+  inputSchema: {
+    name: z.string(),
+    copy_from: z.string().optional(),
+    delete: z.boolean().optional(),
+    levers: obj.optional(),
+    effective_fy: z.number().int().min(0).optional(),
+    seats: z.enum(["baseline", "planned", "optimised"]).optional(),
+    forecast: obj.optional(),
+    budget: z.number().nullable().optional(),
+    budget_growth_pct: z.number().optional(),
+    triggers: z.array(obj).optional(),
+    uncertainty: obj.optional()
+  }
+}, guard(async (a) => {
+  if (a.delete) {
+    delete state.scenarios[a.name];
+    return reply({ deleted: a.name, scenarios: Object.keys(state.scenarios) });
+  }
+  const prev = a.copy_from ? state.scenarios[a.copy_from] : state.scenarios[a.name];
+  if (a.copy_from && !prev)
+    throw new Error(`no scenario "${a.copy_from}"`);
+  const s = JSON.parse(JSON.stringify(prev || {}));
+  s.name = a.name;
+  if (a.levers)
+    s.levers = a.levers;
+  if (a.effective_fy != null)
+    s.effectiveFy = a.effective_fy;
+  if (a.seats)
+    s.seats = a.seats;
+  if (a.forecast)
+    s.forecast = Object.assign(s.forecast || {}, a.forecast);
+  if (a.budget !== undefined)
+    s.budget = a.budget;
+  if (a.budget_growth_pct != null)
+    s.budgetGrowthPct = a.budget_growth_pct;
+  if (a.triggers)
+    s.triggers = a.triggers;
+  if (a.uncertainty)
+    s.uncertainty = Object.assign(s.uncertainty || {}, a.uncertainty);
+  state.scenarios[a.name] = W.normalise(s);
+  return reply({ saved: a.name, scenario: state.scenarios[a.name] });
+}));
+server.registerTool("whatif_list", { description: "List what-if scenarios in this session with their main settings.", inputSchema: {} }, guard(async () => reply({ scenarios: Object.values(state.scenarios).map((s) => ({ name: s.name, seats: s.seats, levers: s.levers, effective_fy: s.effectiveFy, years: s.forecast.years, growth_pct: s.forecast.growthPct, budget: s.budget, triggers: s.triggers.length })) })));
+server.registerTool("whatif_run", {
+  description: "Run what-if scenarios over the forecast years: per FY new commitments (accounts opened, at prices when opened), cash (claims paid, incl. accounts opened in earlier years), indexation uplift, intake, expected completions, cost per completion, month the budget runs out, triggers fired and what they saved, and liability left after the horizon. With monte_carlo (default on) also P10/P50/P90 per FY and the chance commitments exceed budget. months: true adds the month-by-month series.",
+  inputSchema: { names: z.array(z.string()).optional(), monte_carlo: z.boolean().optional(), runs: z.number().int().min(10).max(5000).optional(), months: z.boolean().optional() }
+}, guard(async ({ names, monte_carlo, runs, months }) => {
+  const scns = pickScenarios(names), seats = {};
+  for (const s of scns)
+    if (s.seats === "optimised")
+      seats[s.name] = await optimisedSeats(s);
+  const out = W.compare(whatifData(), scns, { mc: monte_carlo !== false, runs, seats });
+  state.whatif = out;
+  return reply({ scenarios: out.map(({ name, result: r, mc }) => ({
+    name,
+    budget: round(r.budget, 0),
+    courses: r.courses,
+    uncosted_seats: r.uncosted_seats || undefined,
+    totals: roundObj(r.totals),
+    years: r.years.map((y) => Object.fromEntries(Object.entries(y).map(([k, v]) => [k, round(v, k.includes("completion") ? 1 : 0)]))),
+    triggers_fired: r.triggers_fired.length ? r.triggers_fired : undefined,
+    trigger_savings: r.trigger_savings ? { all: round(r.trigger_savings.all, 0), each: r.trigger_savings.each.map((t) => ({ name: t.name, saved: round(t.saved, 0) })) } : undefined,
+    ranges: mc ? { runs: mc.runs, years: mc.years.map((y) => ({ fy: y.fy, cash: band(y.cash), new_commitments: band(y.new_commitments), p_over_budget: round(y.p_over_budget) })), totals: { cash: band(mc.totals.cash), end_liability: band(mc.totals.end_liability) } } : undefined,
+    months: months ? r.months.map((m) => roundObj(m)) : undefined
+  })) });
+}));
+server.registerTool("whatif_sensitivity", {
+  description: "Tornado for one scenario: move one lever at a time to a low and high value (indexation, future indexation, intake volume and growth, course adjustments, completion rate, RPL, duration, seasonality) and report the change in the metric. Metrics: cash (default, total over the horizon), new_commitments, end_liability, fy1_cash, fy1_commitments.",
+  inputSchema: { name: z.string(), metric: z.enum(Object.keys(W.METRICS)).optional() }
+}, guard(async ({ name, metric }) => {
+  const [s] = pickScenarios([name]);
+  const seats = s.seats === "optimised" ? await optimisedSeats(s) : undefined;
+  const r = W.sensitivity(whatifData(), s, { metric, seats });
+  state.whatifSensitivity = r;
+  return reply({ scenario: r.name, metric: r.metric, base: round(r.base, 0), rows: r.rows.map((x) => ({ lever: x.lever, low: x.low_label, high: x.high_label, change_low: round(x.delta_low, 0), change_high: round(x.delta_high, 0) })) });
+}));
+server.registerTool("whatif_save", {
+  description: "Save all what-if scenarios to scenarios/<name>.json. The browser calculator's What-if tab can open the file.",
+  inputSchema: { name: z.string() }
+}, guard(async ({ name }) => {
+  const dir = path.join(ROOT, "scenarios");
+  fs.mkdirSync(dir, { recursive: true });
+  const file = path.join(dir, safeName(name) + ".json");
+  fs.writeFileSync(file, JSON.stringify({ version: 1, kind: "whatif", saved: new Date().toISOString(), scenarios: Object.values(state.scenarios) }, null, 2));
+  return reply({ saved: path.relative(ROOT, file), scenarios: Object.keys(state.scenarios) });
+}));
+server.registerTool("whatif_load", {
+  description: "Load scenarios/<name>.json (saved here or from the browser), replacing this session's what-if scenarios.",
+  inputSchema: { name: z.string() }
+}, guard(async ({ name }) => {
+  const set = JSON.parse(fs.readFileSync(path.join(ROOT, "scenarios", safeName(name) + ".json"), "utf8"));
+  state.scenarios = Object.fromEntries((set.scenarios || []).map((s) => [s.name, W.normalise(s)]));
+  return reply({ loaded: Object.keys(state.scenarios) });
+}));
+server.registerTool("whatif_export", {
+  description: "Write the last whatif_run (and whatif_sensitivity if run) to exports/<name>.xlsx: Compare, Years, Months, Triggers, Ranges, Sensitivity.",
+  inputSchema: { name: z.string() }
+}, guard(async ({ name }) => {
+  if (!state.whatif)
+    throw new Error("run whatif_run first");
+  const dir = path.join(ROOT, "exports");
+  fs.mkdirSync(dir, { recursive: true });
+  const file = path.join(dir, safeName(name) + ".xlsx");
+  fs.writeFileSync(file, XLSX.write(W.workbook(XLSX, state.whatif, state.whatifSensitivity), { type: "buffer", bookType: "xlsx" }));
   return reply({ exported: path.relative(ROOT, file) });
 }));
 server.connect(new StdioServerTransport);

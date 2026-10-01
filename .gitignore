@@ -6,6 +6,7 @@ docs/
 uploads/
 # Plans and exports can hold internal course-level figures
 plans/
+scenarios/
 exports/
 __pycache__/
 .DS_Store

@@ -39,6 +39,13 @@ Each run prints **NEW / CHANGED / unchanged** for every document, and `manifest.
   - *Value for money*: the cheapest allocation that keeps chosen outcomes at ≥ X% of baseline.
   - Guardrails: max growth per course, a floor (% of baseline), AQF-mix shares, per-course min/max seats and budget caps, and shared limits for superseded/new course versions.
   - Reports the change against baseline, which constraints bind, and shadow prices (outcome per extra $1M, or marginal cost per extra completion).
+- **What-if**: forecast the courses over several financial years and compare up to 8 scenarios side by side.
+  - *Multi-year liability*: each year's **commitments** (accounts opened, at prices when opened) and **cash** (claims paid, including accounts opened in earlier years). Course adjustment and AQF reduction lock when an account opens. Base rate, indexation, loading, RPL and completion payments apply when the claim is paid. So a price cut only reaches new accounts, and later indexation shows as a separate uplift. Claims still due after the horizon are reported as a liability.
+  - *Scenarios*: price levers (or copy them from the Budget tab), the year they take effect, the seat source (baseline, planned seats, or re-optimised at the scenario's prices), intake change and growth, future indexation, course duration by AQF level, and monthly commencement pattern.
+  - *Budget triggers*: rules like "at 80% committed, cut managed-course intake 20% after one month's notice", or cut new-account prices, or pause. Shows the month each fires, the month the budget runs out, and what each trigger saves.
+  - *Uncertainty*: Monte Carlo on intake (yearly and per course), completion rates and indexation gives P10/P50/P90 per year and the chance commitments exceed the budget.
+  - *Sensitivity*: a tornado chart of which lever moves cash, commitments or the end liability most.
+  - Scenario sets save and load as JSON. Export to XLSX gives sheets for Compare, Years, Months, Triggers, Ranges and Sensitivity.
 
 ### Uploads
 
@@ -46,7 +53,6 @@ Each run prints **NEW / CHANGED / unchanged** for every document, and `manifest.
 |---|---|---|
 | Units | `unit_code`, `foe_code`, `payment_hours` | `unit_name` |
 | Claims / forecast | `course_code`, `unit_code`, `postcode` | `student_id`, `provider_id` (RTO counts for managed caps), `suburb`, `result_code`, `hours`, `concession`, `fee_exempt`, `std_fee_per_hour`, `qualification_issued`, `volume`, `aqf_level` |
-
 | Course profiles | `course_code`, `unit_code` | `hours`: costs courses with no claims history |
 | Course outcomes | `course_code` | `completion_rate`, `employment_rate` (0–1 or %), `priority_weight` |
 
@@ -70,11 +76,11 @@ For Claude Desktop, add this to `claude_desktop_config.json`:
 ```bash
 claude mcp add sa-sim -- node "$PWD/dist/mcp.js"     # or: bun "$PWD/dist/mcp.js"
 ```
-After you change `mcp.js`, `calc.js` or `sim.js`, run `bun run build` to regenerate it. `bun run test` also checks the bundle.
+After you change `mcp.js`, `calc.js`, `sim.js` or `whatif.js`, run `bun run build` to regenerate it. `bun run test` also checks the bundle.
 
 Then ask, for example: *"Load the samples, take CHC32015 off the list, keep every course at ≥ 50% of its current seats, and maximise completions and employment within the current budget. Save it as 'option-a' and compare it with a value-for-money plan that holds completions at 100%."*
 
-The tools are `load_data`, `list_courses`, `update_courses`, `set_objective`, `optimise`, `simulate`, `save_plan`, `load_plan`, `list_plans`, `compare_plans` and `export_plan`. The server runs on your machine and reads the files you point it at. It returns **course-level aggregates only**, never student rows, and writes only to `plans/` and `exports/` (both git-ignored). Claude translates goals into constraints and explains the results, and the solver does the maths. Plans saved by Claude open in the browser's *Courses & optimiser* tab and vice versa.
+The tools are `load_data`, `list_courses`, `update_courses`, `set_objective`, `optimise`, `simulate`, `save_plan`, `load_plan`, `list_plans`, `compare_plans` and `export_plan`, plus the what-if tools `whatif_set_scenario`, `whatif_list`, `whatif_run`, `whatif_sensitivity`, `whatif_save`, `whatif_load` and `whatif_export`. The server runs on your machine and reads the files you point it at. It returns **course-level aggregates only**, never student rows, and writes only to `plans/`, `scenarios/` and `exports/` (all git-ignored). Claude translates goals into constraints and explains the results, and the solver does the maths. Plans saved by Claude open in the browser's *Courses & optimiser* tab, and scenario sets open in the *What-if* tab, and vice versa.
 
 ### Formula (Training Fee Framework v5.0 §2–11)
 

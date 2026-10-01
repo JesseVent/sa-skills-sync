@@ -36,4 +36,4 @@ Use the Framework alongside Attachments 1–3, the STL (for hours), the Managed 
 
 The most useful missing rule: tie Managed Course Limit and course adjustment changes to budget-consumption thresholds. Today both are applied case by case with no stated triggers.
 
-The calculator's **Budget & scenarios** and **Courses & optimiser** tabs model most of the levers above (indexation, AQF reductions, completion payments, loadings, RPL %, concession limits, course adjustment overrides, managed caps). They don't yet split rates by claim-time vs creation-time locking (gap 1).
+The calculator's **Budget & scenarios** and **Courses & optimiser** tabs model most of the levers above (indexation, AQF reductions, completion payments, loadings, RPL %, concession limits, course adjustment overrides, managed caps). The **What-if** tab (and the MCP `whatif_*` tools) covers gaps 1, 3 and 5 as a model: it prices each claim by when its rate locks, tracks commitments against cash and the indexation uplift over several years, simulates budget-consumption triggers with notice periods, and adds Monte Carlo ranges. It's a forecast, not a rule. The Framework still has no stated triggers.

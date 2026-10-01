@@ -2,7 +2,7 @@
 /* Local MCP server: lets Claude drive the course seat simulator / optimiser.
  *   claude mcp add sa-sim -- bun /path/to/sa-skills-sync/mcp.js
  * Reads files you point it at; returns course-level aggregates only (never student rows).
- * Writes only inside ./plans and ./exports.
+ * Writes only inside ./plans, ./scenarios and ./exports.
  */
 const fs = require("node:fs");
 const path = require("node:path");
@@ -12,6 +12,7 @@ const { z } = require("zod");
 const XLSX = require("./vendor/xlsx.full.min.js");
 const C = require("./calc.js");
 const S = require("./sim.js");
+const W = require("./whatif.js");
 
 const ROOT = path.basename(__dirname) === "dist" ? path.dirname(__dirname) : __dirname; // dist/mcp.js is the no-install bundle
 const readGlobal = (file, name) => JSON.parse(fs.readFileSync(path.join(ROOT, file), "utf8").replace(new RegExp(`^window\\.${name} = `), "").replace(/;\s*$/, ""));
@@ -25,7 +26,7 @@ const solver = async () => (highs = highs || (await require("./vendor/highs.js")
   return {};
 } })));
 
-const state = { units: {}, files: {}, priced: null, profiles: [], outcomes: [], table: null, plan: S.newPlan(), planName: "untitled", last: null };
+const state = { units: {}, files: {}, claimRows: null, priced: null, profiles: [], outcomes: [], table: null, plan: S.newPlan(), planName: "untitled", last: null, scenarios: {}, whatif: null };
 
 // ---------- helpers ----------
 function readTable(file) {
@@ -83,7 +84,8 @@ server.registerTool("load_data", {
   if (claims) {
     const rows = readTable(claims), { map, missing } = C.mapHeaders(Object.keys(rows[0] || {}), "claims");
     if (missing.length) throw new Error(`claims file is missing ${missing.join(", ")}`);
-    state.priced = C.priceRows(C.makeContext(RATES), state.units, C.remap(rows, map)); state.files.claims = claims;
+    state.claimRows = C.remap(rows, map);
+    state.priced = C.priceRows(C.makeContext(RATES), state.units, state.claimRows); state.files.claims = claims;
     notes.push(`claims: ${rows.length} rows, ${state.priced.errorCount} with issues` + (map.provider_id ? "" : "; no provider_id column, so RTO counts are unknown"));
   }
   if (profiles) { state.profiles = pickCols(readTable(profiles), { course_code: ["course", "qualificationcode"], unit_code: ["unit"], hours: ["paymenthours", "nominalhours"] }); state.files.profiles = profiles; notes.push(`profiles: ${state.profiles.length} rows`); }
@@ -230,6 +232,110 @@ server.registerTool("export_plan", {
   XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(Object.entries(r.config).map(([k, v]) => ({ setting: k, value: typeof v === "object" ? JSON.stringify(v) : v }))), "Config");
   const file = path.join(dir, safeName(name) + ".xlsx");
   fs.writeFileSync(file, XLSX.write(wb, { type: "buffer", bookType: "xlsx" }));
+  return reply({ exported: path.relative(ROOT, file) });
+}));
+
+// ---------- what-if ----------
+const whatifData = () => ({ rates: RATES, stl: STL, units: state.units, claims: state.claimRows, profiles: state.profiles, outcomes: state.outcomes, plan: state.plan });
+async function optimisedSeats(scn) { // re-optimise the current plan at this scenario's prices
+  const levers = Object.assign({}, scn.levers); delete levers.volumeGrowthPct;
+  const priced = state.claimRows ? C.priceRows(C.makeContext(RATES, levers), state.units, state.claimRows) : null;
+  const table = S.buildCourseTable({ rates: RATES, stl: STL, units: state.units, priced, profiles: state.profiles, outcomes: state.outcomes, cfg: state.plan.config, scenario: levers });
+  const res = S.optimise(table, state.plan, await solver());
+  if (!res.optimised) throw new Error(`${scn.name}: optimiser ${res.status}${res.message ? " (" + res.message + ")" : ""}`);
+  return Object.fromEntries(res.courses.filter((c) => c.seats).map((c) => [c.course_code, c.seats]));
+}
+const pickScenarios = (names) => {
+  const list = names && names.length ? names : Object.keys(state.scenarios);
+  if (!list.length) throw new Error("no scenarios yet; create one with whatif_set_scenario");
+  return list.map((n) => { if (!state.scenarios[n]) throw new Error(`no scenario "${n}"`); return state.scenarios[n]; });
+};
+const band = (b) => ({ p10: round(b.p10, 0), p50: round(b.p50, 0), p90: round(b.p90, 0) });
+const obj = z.record(z.string(), z.any());
+
+server.registerTool("whatif_set_scenario", {
+  description: "Create or update a what-if scenario (fields you pass replace those fields; forecast and uncertainty merge). levers = Budget-tab price levers: indexExtraPct, adjMultiplier (0.9 = 10% cut), courseAdj {code: pct}, aqfReduction {level: $/hr}, completion {level: $}, rplPct, locationLoading {label: %}, minFee, maxReimb, volumeGrowthPct. Course adjustment and AQF reduction lock when an account opens; the rest apply when claims are paid. effective_fy = years from the start FY until the levers apply (0 = now). seats = baseline | planned (the plan's planned_seats) | optimised (re-optimise the current plan at this scenario's prices). forecast: startFy, years, indexPct (number or array per future year), pastIndexPct, growthPct, intakePct, durationMonths {AQF level: months}, seasonality (12 Jul..Jun weights), inFlight. budget = FY commitment budget (default: baseline year-0 commitments). triggers: [{name, atPct, action: scale_intake|cut_price|pause, scope: managed|demand|all, amountPct, noticeMonths}], each fires once per FY when committed reaches atPct% of budget. uncertainty: runs, seed, volumeSd, courseVolumeSd, completionSd, indexSd. copy_from copies another scenario first; delete removes it.",
+  inputSchema: { name: z.string(), copy_from: z.string().optional(), delete: z.boolean().optional(), levers: obj.optional(), effective_fy: z.number().int().min(0).optional(),
+    seats: z.enum(["baseline", "planned", "optimised"]).optional(), forecast: obj.optional(), budget: z.number().nullable().optional(), budget_growth_pct: z.number().optional(),
+    triggers: z.array(obj).optional(), uncertainty: obj.optional() },
+}, guard(async (a) => {
+  if (a.delete) { delete state.scenarios[a.name]; return reply({ deleted: a.name, scenarios: Object.keys(state.scenarios) }); }
+  const prev = a.copy_from ? state.scenarios[a.copy_from] : state.scenarios[a.name];
+  if (a.copy_from && !prev) throw new Error(`no scenario "${a.copy_from}"`);
+  const s = JSON.parse(JSON.stringify(prev || {}));
+  s.name = a.name;
+  if (a.levers) s.levers = a.levers;
+  if (a.effective_fy != null) s.effectiveFy = a.effective_fy;
+  if (a.seats) s.seats = a.seats;
+  if (a.forecast) s.forecast = Object.assign(s.forecast || {}, a.forecast);
+  if (a.budget !== undefined) s.budget = a.budget;
+  if (a.budget_growth_pct != null) s.budgetGrowthPct = a.budget_growth_pct;
+  if (a.triggers) s.triggers = a.triggers;
+  if (a.uncertainty) s.uncertainty = Object.assign(s.uncertainty || {}, a.uncertainty);
+  state.scenarios[a.name] = W.normalise(s);
+  return reply({ saved: a.name, scenario: state.scenarios[a.name] });
+}));
+
+server.registerTool("whatif_list", { description: "List what-if scenarios in this session with their main settings.", inputSchema: {} }, guard(async () =>
+  reply({ scenarios: Object.values(state.scenarios).map((s) => ({ name: s.name, seats: s.seats, levers: s.levers, effective_fy: s.effectiveFy, years: s.forecast.years, growth_pct: s.forecast.growthPct, budget: s.budget, triggers: s.triggers.length })) })));
+
+server.registerTool("whatif_run", {
+  description: "Run what-if scenarios over the forecast years: per FY new commitments (accounts opened, at prices when opened), cash (claims paid, incl. accounts opened in earlier years), indexation uplift, intake, expected completions, cost per completion, month the budget runs out, triggers fired and what they saved, and liability left after the horizon. With monte_carlo (default on) also P10/P50/P90 per FY and the chance commitments exceed budget. months: true adds the month-by-month series.",
+  inputSchema: { names: z.array(z.string()).optional(), monte_carlo: z.boolean().optional(), runs: z.number().int().min(10).max(5000).optional(), months: z.boolean().optional() },
+}, guard(async ({ names, monte_carlo, runs, months }) => {
+  const scns = pickScenarios(names), seats = {};
+  for (const s of scns) if (s.seats === "optimised") seats[s.name] = await optimisedSeats(s);
+  const out = W.compare(whatifData(), scns, { mc: monte_carlo !== false, runs, seats });
+  state.whatif = out;
+  return reply({ scenarios: out.map(({ name, result: r, mc }) => ({
+    name, budget: round(r.budget, 0), courses: r.courses, uncosted_seats: r.uncosted_seats || undefined,
+    totals: roundObj(r.totals),
+    years: r.years.map((y) => Object.fromEntries(Object.entries(y).map(([k, v]) => [k, round(v, k.includes("completion") ? 1 : 0)]))),
+    triggers_fired: r.triggers_fired.length ? r.triggers_fired : undefined,
+    trigger_savings: r.trigger_savings ? { all: round(r.trigger_savings.all, 0), each: r.trigger_savings.each.map((t) => ({ name: t.name, saved: round(t.saved, 0) })) } : undefined,
+    ranges: mc ? { runs: mc.runs, years: mc.years.map((y) => ({ fy: y.fy, cash: band(y.cash), new_commitments: band(y.new_commitments), p_over_budget: round(y.p_over_budget) })), totals: { cash: band(mc.totals.cash), end_liability: band(mc.totals.end_liability) } } : undefined,
+    months: months ? r.months.map((m) => roundObj(m)) : undefined,
+  })) });
+}));
+
+server.registerTool("whatif_sensitivity", {
+  description: "Tornado for one scenario: move one lever at a time to a low and high value (indexation, future indexation, intake volume and growth, course adjustments, completion rate, RPL, duration, seasonality) and report the change in the metric. Metrics: cash (default, total over the horizon), new_commitments, end_liability, fy1_cash, fy1_commitments.",
+  inputSchema: { name: z.string(), metric: z.enum(Object.keys(W.METRICS)).optional() },
+}, guard(async ({ name, metric }) => {
+  const [s] = pickScenarios([name]);
+  const seats = s.seats === "optimised" ? await optimisedSeats(s) : undefined;
+  const r = W.sensitivity(whatifData(), s, { metric, seats });
+  state.whatifSensitivity = r;
+  return reply({ scenario: r.name, metric: r.metric, base: round(r.base, 0), rows: r.rows.map((x) => ({ lever: x.lever, low: x.low_label, high: x.high_label, change_low: round(x.delta_low, 0), change_high: round(x.delta_high, 0) })) });
+}));
+
+server.registerTool("whatif_save", {
+  description: "Save all what-if scenarios to scenarios/<name>.json. The browser calculator's What-if tab can open the file.",
+  inputSchema: { name: z.string() },
+}, guard(async ({ name }) => {
+  const dir = path.join(ROOT, "scenarios"); fs.mkdirSync(dir, { recursive: true });
+  const file = path.join(dir, safeName(name) + ".json");
+  fs.writeFileSync(file, JSON.stringify({ version: 1, kind: "whatif", saved: new Date().toISOString(), scenarios: Object.values(state.scenarios) }, null, 2));
+  return reply({ saved: path.relative(ROOT, file), scenarios: Object.keys(state.scenarios) });
+}));
+
+server.registerTool("whatif_load", {
+  description: "Load scenarios/<name>.json (saved here or from the browser), replacing this session's what-if scenarios.",
+  inputSchema: { name: z.string() },
+}, guard(async ({ name }) => {
+  const set = JSON.parse(fs.readFileSync(path.join(ROOT, "scenarios", safeName(name) + ".json"), "utf8"));
+  state.scenarios = Object.fromEntries((set.scenarios || []).map((s) => [s.name, W.normalise(s)]));
+  return reply({ loaded: Object.keys(state.scenarios) });
+}));
+
+server.registerTool("whatif_export", {
+  description: "Write the last whatif_run (and whatif_sensitivity if run) to exports/<name>.xlsx: Compare, Years, Months, Triggers, Ranges, Sensitivity.",
+  inputSchema: { name: z.string() },
+}, guard(async ({ name }) => {
+  if (!state.whatif) throw new Error("run whatif_run first");
+  const dir = path.join(ROOT, "exports"); fs.mkdirSync(dir, { recursive: true });
+  const file = path.join(dir, safeName(name) + ".xlsx");
+  fs.writeFileSync(file, XLSX.write(W.workbook(XLSX, state.whatif, state.whatifSensitivity), { type: "buffer", bookType: "xlsx" }));
   return reply({ exported: path.relative(ROOT, file) });
 }));
 
