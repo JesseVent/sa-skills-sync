@@ -3,7 +3,8 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "test": "bun test",
+    "test": "bun test && MCP_SERVER=dist/mcp.js bun test mcp.test.js",
+    "build": "bun build mcp.js --target=node --format=cjs --outfile dist/mcp.js",
     "mcp": "bun mcp.js"
   },
   "dependencies": {

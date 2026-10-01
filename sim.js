@@ -57,15 +57,16 @@
    *  priced:   SACalc.priceRows output for historical claims (optional)
    *  profiles: [{course_code, unit_code, hours?}] typical packaging per course (optional)
    *  outcomes: [{course_code, completion_rate?, employment_rate?, priority_weight?}] (optional)
+   *  scenario: calc.js levers used to price profiles and completion payments (optional; what-if)
    */
-  function buildCourseTable({ rates, stl, units = {}, priced = null, profiles = [], outcomes = [], cfg = {} }) {
-    const cf = config(cfg), rows = {};
+  function buildCourseTable({ rates, stl, units = {}, priced = null, profiles = [], outcomes = [], cfg = {}, scenario = null }) {
+    const cf = config(cfg), rows = {}, ctx = C.makeContext(rates, scenario);
     const row = (c) => rows[c] || (rows[c] = blank(c));
     const blank = (c) => {
-      const s = stlStatus(stl, c), info = C.courseInfo(C.makeContext(rates), c);
+      const s = stlStatus(stl, c), info = C.courseInfo(ctx, c);
       return { course_code: c, title: s.title || info.name, aqf: info.aqf || "", lists: s.lists, status: s.status,
                stl_status: s.status, rto_limit: s.limit, limit_group: s.group, rto_count: null,
-               baseline_seats: 0, unit_cost: NaN, completion_payment: info.aqf ? rates.completion[info.aqf] || 0 : 0,
+               baseline_seats: 0, unit_cost: NaN, completion_payment: info.aqf ? ctx.completion[info.aqf] || 0 : 0,
                completion_rate: NaN, employment_rate: NaN, priority_weight: NaN,
                min_seats: 0, max_seats: null, budget_cap: null, planned_seats: null, cost_override: NaN, source: "", flags: [] };
     };
@@ -101,7 +102,7 @@
     for (const [c, list] of Object.entries(byCourse)) {
       const r = row(c);
       if (r.source === "history" && isFinite(r.unit_cost)) continue;
-      const out = C.priceRows(C.makeContext(rates), units, list.map((p) => ({ course_code: c, unit_code: p.unit_code, hours: p.hours, postcode: cf.profilePostcode, student_id: "PROFILE" })));
+      const out = C.priceRows(ctx, units, list.map((p) => ({ course_code: c, unit_code: p.unit_code, hours: p.hours, postcode: cf.profilePostcode, student_id: "PROFILE" })));
       r.unit_cost = out.totals.subsidy + out.totals.concession;
       r.source = "profile";
       if (out.errorCount) r.flags.push(`profile: ${out.errorCount} unit(s) not priced`);

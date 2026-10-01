@@ -8,17 +8,17 @@ const XLSX = require("./vendor/xlsx.full.min.js");
 
 const dir = import.meta.dir;
 const client = new Client({ name: "smoke", version: "1" });
-await client.connect(new StdioClientTransport({ command: "bun", args: [dir + "/mcp.js"], cwd: dir }));
+await client.connect(new StdioClientTransport({ command: "bun", args: [dir + "/" + (process.env.MCP_SERVER || "mcp.js")], cwd: dir }));
 const call = async (name, args = {}) => {
   const r = await client.callTool({ name, arguments: args });
   if (r.isError) throw new Error(r.content[0].text);
   return JSON.parse(r.content[0].text);
 };
-afterAll(async () => { await client.close(); fs.rmSync(dir + "/plans/smoke-test.json", { force: true }); fs.rmSync(dir + "/exports/smoke-test.xlsx", { force: true }); });
+afterAll(async () => { await client.close(); fs.rmSync(dir + "/plans/smoke-test.json", { force: true }); fs.rmSync(dir + "/exports/smoke-test.xlsx", { force: true }); fs.rmSync(dir + "/scenarios/smoke-test.json", { force: true }); fs.rmSync(dir + "/exports/whatif-smoke.xlsx", { force: true }); });
 
 test("tools are listed", async () => {
   const names = (await client.listTools()).tools.map((t) => t.name).sort();
-  expect(names).toEqual(["compare_plans", "export_plan", "list_courses", "list_plans", "load_data", "load_plan", "optimise", "save_plan", "set_objective", "simulate", "update_courses"]);
+  expect(names).toEqual(["compare_plans", "export_plan", "list_courses", "list_plans", "load_data", "load_plan", "optimise", "save_plan", "set_objective", "simulate", "update_courses", "whatif_export", "whatif_list", "whatif_load", "whatif_run", "whatif_save", "whatif_sensitivity", "whatif_set_scenario"]);
 });
 
 test("load → edit → optimise → save matches sim.js run directly", async () => {
@@ -69,4 +69,39 @@ test("value-for-money mode and errors come back as tool errors, not crashes", as
   await expect(call("load_data", { units: "/nope.csv" })).rejects.toThrow("file not found");
   await expect(call("save_plan", { name: "../../etc" })).resolves.toEqual({ saved: "plans/------etc.json" });
   fs.rmSync(dir + "/plans/------etc.json", { force: true });
+});
+
+test("what-if: scenarios run through the tool match whatif.js run directly", async () => {
+  const W = require("./whatif.js");
+  await call("whatif_set_scenario", { name: "base" });
+  await call("whatif_set_scenario", { name: "cut", copy_from: "base", levers: { adjMultiplier: 0.9 }, effective_fy: 1 });
+  await call("whatif_set_scenario", { name: "opt", seats: "optimised", triggers: [{ name: "cap", atPct: 50, action: "pause", scope: "all", noticeMonths: 0 }] });
+  expect((await call("whatif_list")).scenarios.map((s) => s.name)).toEqual(["base", "cut", "opt"]);
+
+  const r = await call("whatif_run", { runs: 50 });
+  const [base, cut, opt] = r.scenarios;
+  expect(cut.years[0].new_commitments).toBe(base.years[0].new_commitments);   // cut starts in FY+1
+  expect(cut.years[1].new_commitments).toBeLessThan(base.years[1].new_commitments);
+  expect(base.ranges.years[0].cash.p10).toBeLessThanOrEqual(base.ranges.years[0].cash.p90);
+  expect(opt.totals.intake).toBeGreaterThan(0);
+  expect(opt.triggers_fired[0]).toMatchObject({ name: "cap", fy: "2026-27" });
+  expect(opt.trigger_savings.all).toBeGreaterThan(0);
+
+  const s = dir + "/samples/", read = (f) => { const wb = XLSX.read(fs.readFileSync(s + f), { type: "buffer", raw: true }); return XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { defval: "", raw: false }); };
+  const glob = (f, n) => JSON.parse(fs.readFileSync(dir + "/data/" + f, "utf8").replace(`window.${n} = `, "").replace(/;\s*$/, ""));
+  const ur = read("units_2019.csv"), cr = read("claims_demo.csv");
+  const saved = JSON.parse(fs.readFileSync(dir + "/plans/smoke-test.json", "utf8"));
+  const direct = W.run({ rates: glob("rates.js", "SA_RATES"), stl: glob("stl.js", "SA_STL"), units: C.buildUnits(ur, C.mapHeaders(Object.keys(ur[0]), "units").map).units,
+    claims: C.remap(cr, C.mapHeaders(Object.keys(cr[0]), "claims").map), profiles: read("course_profiles_demo.csv"), outcomes: read("course_outcomes_demo.csv"),
+    plan: { courses: saved.courses } }, { name: "base" });
+  expect(base.totals.cash).toBeCloseTo(direct.totals.cash, 0);
+
+  const sens = await call("whatif_sensitivity", { name: "cut", metric: "fy1_commitments" });
+  expect(sens.rows.find((x) => x.lever === "Intake volume").change_high).toBeGreaterThan(0);
+  expect((await call("whatif_save", { name: "smoke-test" })).saved).toBe("scenarios/smoke-test.json");
+  await call("whatif_set_scenario", { name: "opt", delete: true });
+  expect((await call("whatif_load", { name: "smoke-test" })).loaded).toEqual(["base", "cut", "opt"]);
+  expect((await call("whatif_export", { name: "whatif-smoke" })).exported).toBe("exports/whatif-smoke.xlsx");
+  const wb = XLSX.read(fs.readFileSync(dir + "/exports/whatif-smoke.xlsx"), { type: "buffer" });
+  expect(wb.SheetNames).toEqual(["Compare", "Years", "Months", "Triggers", "Ranges", "Sensitivity"]);
 });
